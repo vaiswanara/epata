@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Custom YouTube Playlist Player</title>
+    <title>e-PATA Videos</title>
+    <link rel="icon" href="logo.jpeg" type="image/jpeg">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/plyr@3.7.8/dist/plyr.css">
     <style>
         body {
@@ -11,6 +12,7 @@
             background-color: #f4f4f4;
             display: flex;
             height: 100vh;
+            margin: 0;
         }
         .sidebar {
             width: 300px;
@@ -18,6 +20,15 @@
             padding: 20px;
             box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
             overflow-y: auto;
+            text-align: left;
+        }
+        .sidebar img {
+            display: block;
+            margin: 0 auto;
+        }
+        .sidebar h1 {
+            margin: 10px 0;
+            text-align: center;
         }
         .player-container {
             flex-grow: 1;
@@ -26,6 +37,7 @@
             align-items: center;
             justify-content: center;
             padding: 20px;
+            height: 100vh;
         }
         h2 {
             margin-bottom: 10px;
@@ -48,8 +60,15 @@
             background: #eee;
         }
         .player-wrapper {
-            width: 90%;
-            max-width: 800px;
+            width: 100%;
+            height: 100%;
+            max-width: none;
+            border: none; /* Remove border */
+        }
+        #player {
+            width: 100%;
+            height: 100%;
+            border: none; /* Remove border */
         }
     </style>
 </head>
@@ -57,6 +76,8 @@
 
     <!-- Sidebar: Playlist Dropdown & Video List -->
     <div class="sidebar">
+        <img src="logo.jpeg" alt="Logo" style="width: 100px; height: 100px;">
+        <h1><a href="https://vaiswanara.com" target="_blank">e-PATA</a></h1>
         <h2>Select Playlist</h2>
         <select id="playlistDropdown"></select>
         <ul id="videoList" class="video-list"></ul>
@@ -64,86 +85,98 @@
 
     <!-- Plyr Player -->
     <div class="player-container">
-        <h2>Now Playing</h2>
         <div class="player-wrapper">
             <div id="player" data-plyr-provider="youtube" data-plyr-embed-id=""></div>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/plyr@3.7.8/dist/plyr.polyfilled.min.js"></script>
-   <script>
-    let player = new Plyr('#player', {
-        controls: ['play', 'progress', 'current-time', 'mute', 'volume', 'fullscreen'],
-        autoplay: false
-    });
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const player = new Plyr('#player', {
+                controls: ['play', 'progress', 'current-time', 'mute', 'volume', 'fullscreen'],
+                autoplay: false
+            });
 
-    let videoData = {};
-    const playlistDropdown = document.getElementById("playlistDropdown");
-    const videoList = document.getElementById("videoList");
+            const videoData = {};
+            const playlistDropdown = document.getElementById("playlistDropdown");
+            const videoList = document.getElementById("videoList");
 
-    // Load JSON Data
-    fetch("videos.json")
-        .then(response => response.json())
-        .then(data => {
-            videoData = data;
-            populatePlaylists();
-        });
+            // Play Selected Video
+            function playVideo(videoId) {
+                player.source = {
+                    type: "video",
+                    sources: [{ src: videoId, provider: "youtube" }]
+                };
+                document.getElementById('player').setAttribute('data-plyr-embed-id', videoId);
+                player.play(); // Automatically play the video
+            }
 
-    // Populate Playlist Dropdown
-    function populatePlaylists() {
-        playlistDropdown.innerHTML = "";
-        Object.keys(videoData).forEach(playlist => {
-            let option = document.createElement("option");
-            option.value = playlist;
-            option.textContent = playlist;
-            playlistDropdown.appendChild(option);
-        });
-        loadVideos(Object.keys(videoData)[0]); // Load first playlist
-    }
+            // Set initial video ID
+            const initialVideoId = "MoM3IQBSCrA";
+            playVideo(initialVideoId);
 
-    // Load Videos for Selected Playlist
-    function loadVideos(playlist) {
-        videoList.innerHTML = "";
-        videoData[playlist].forEach(video => {
-            let li = document.createElement("li");
-            li.textContent = video.name;
-            li.dataset.videoId = video.id;
-            li.addEventListener("click", () => playVideo(video.id)); // Play on click
-            videoList.appendChild(li);
-        });
+            // Load Text Data
+            fetch("links.txt")
+                .then(response => response.text())
+                .then(data => {
+                    parseTextData(data);
+                    populatePlaylists();
+                    playVideo(initialVideoId); // Ensure initial video is played after data is loaded
+                })
+                .catch(error => console.error('Error loading video data:', error));
 
-        // Play first video automatically
-        if (videoData[playlist].length > 0) {
-            playVideo(videoData[playlist][0].id);
-        }
-    }
-
-    // Play Selected Video
-    function playVideo(videoId) {
-        player.source = {
-            type: "video",
-            sources: [
-                {
-                    src: videoId,           // YouTube video ID
-                    provider: "youtube",    // Plyr provider
-                    // YouTube specific options:
-                    options: { 
-                        modestbranding: 1,  // Hide YouTube branding
-                        rel: 0,              // Disable related videos at the end
-                        autoplay: 1          // Autoplay video
+            // Parse Text Data
+            function parseTextData(data) {
+                const lines = data.split('\n');
+                lines.forEach(line => {
+                    const [playlist, title, videoId] = line.split(',').map(item => item.trim());
+                    if (!videoData[playlist]) {
+                        videoData[playlist] = [];
                     }
+                    videoData[playlist].push({ name: title, id: videoId });
+                });
+            }
+
+            // Populate Playlist Dropdown
+            function populatePlaylists() {
+                playlistDropdown.innerHTML = "";
+                Object.keys(videoData).forEach(playlist => {
+                    const option = document.createElement("option");
+                    option.value = playlist;
+                    option.textContent = playlist;
+                    playlistDropdown.appendChild(option);
+                });
+                if (Object.keys(videoData).length > 0) {
+                    loadVideos(Object.keys(videoData)[0]); // Load first playlist
                 }
-            ]
-        };
-    }
+            }
 
-    // Event: Change Playlist
-    playlistDropdown.addEventListener("change", (e) => {
-        loadVideos(e.target.value);
-    });
+            // Load Videos for Selected Playlist
+            function loadVideos(playlist) {
+                videoList.innerHTML = "";
+                videoData[playlist].forEach(video => {
+                    const li = document.createElement("li");
+                    li.textContent = video.name;
+                    li.dataset.videoId = video.id;
+                    li.addEventListener("click", () => {
+                        playVideo(video.id);
+                    });
+                    videoList.appendChild(li);
+                });
 
-</script>
+                // Play first video automatically
+                if (videoData[playlist].length > 0) {
+                    playVideo(videoData[playlist][0].id);
+                }
+            }
 
+            // Event: Change Playlist
+            playlistDropdown.addEventListener("change", (e) => {
+                loadVideos(e.target.value);
+            });
+        });
+    </script>
 
 </body>
 </html>
