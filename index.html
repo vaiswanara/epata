@@ -3,38 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Custom YouTube Playlist Player with Plyr</title>
+    <title>Custom YouTube Playlist Player</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/plyr@3.7.8/dist/plyr.css">
     <style>
         body {
             font-family: Arial, sans-serif;
-            text-align: center;
             background-color: #f4f4f4;
+            display: flex;
+            height: 100vh;
+        }
+        .sidebar {
+            width: 300px;
+            background: white;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
+        }
+        .player-container {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             padding: 20px;
         }
+        h2 {
+            margin-bottom: 10px;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+        }
+        .video-list {
+            list-style: none;
+            padding: 0;
+        }
+        .video-list li {
+            padding: 10px;
+            cursor: pointer;
+            border-bottom: 1px solid #ddd;
+        }
+        .video-list li:hover {
+            background: #eee;
+        }
         .player-wrapper {
+            width: 90%;
             max-width: 800px;
-            margin: auto;
-            background: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
 <body>
-    <h2>My Custom YouTube Playlist Player</h2>
-    <div class="player-wrapper">
-        <div id="player" data-plyr-provider="youtube" data-plyr-embed-id="PLnj8XCjLwvJB-8GHwstew7SRyuYSxiiX1"></div>
+
+    <!-- Sidebar: Playlist Dropdown & Video List -->
+    <div class="sidebar">
+        <h2>Select Playlist</h2>
+        <select id="playlistDropdown"></select>
+        <ul id="videoList" class="video-list"></ul>
+    </div>
+
+    <!-- Plyr Player -->
+    <div class="player-container">
+        <h2>Now Playing</h2>
+        <div class="player-wrapper">
+            <div id="player" data-plyr-provider="youtube" data-plyr-embed-id=""></div>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/plyr@3.7.8/dist/plyr.polyfilled.min.js"></script>
     <script>
-        const player = new Plyr('#player', {
+        let player = new Plyr('#player', {
             controls: ['play', 'progress', 'current-time', 'mute', 'volume', 'fullscreen'],
-            autoplay: false,
-            hideControls: false
+            autoplay: false
         });
+
+        let videoData = {};
+        const playlistDropdown = document.getElementById("playlistDropdown");
+        const videoList = document.getElementById("videoList");
+
+        // Load JSON Data
+        fetch("videos.json")
+            .then(response => response.json())
+            .then(data => {
+                videoData = data;
+                populatePlaylists();
+            });
+
+        // Populate Playlist Dropdown
+        function populatePlaylists() {
+            playlistDropdown.innerHTML = "";
+            Object.keys(videoData).forEach(playlist => {
+                let option = document.createElement("option");
+                option.value = playlist;
+                option.textContent = playlist;
+                playlistDropdown.appendChild(option);
+            });
+            loadVideos(Object.keys(videoData)[0]); // Load first playlist
+        }
+
+        // Load Videos for Selected Playlist
+        function loadVideos(playlist) {
+            videoList.innerHTML = "";
+            videoData[playlist].forEach(video => {
+                let li = document.createElement("li");
+                li.textContent = video.name;
+                li.dataset.videoId = video.id;
+                li.addEventListener("click", () => playVideo(video.id));
+                videoList.appendChild(li);
+            });
+
+            // Play first video automatically
+            if (videoData[playlist].length > 0) {
+                playVideo(videoData[playlist][0].id);
+            }
+        }
+
+        // Play Selected Video
+        function playVideo(videoId) {
+            player.source = {
+                type: "video",
+                sources: [{ src: videoId, provider: "youtube" }]
+            };
+        }
+
+        // Event: Change Playlist
+        playlistDropdown.addEventListener("change", (e) => {
+            loadVideos(e.target.value);
+        });
+
     </script>
+
 </body>
 </html>
