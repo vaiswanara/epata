@@ -1,4 +1,7 @@
 Playlist, Tittle, YouTube_Vidoe_ID
-JYOTISHA-2025, KA01: Course Introduction & Syllabus, QSoXOqu8Z8E
-JYOTISHA-2025, KA02: Introduction to Vedic Astrology, sLimesWCFNk
-JYOTISHA-2025, KA03: Astronomy relavent to Astrology, Ewo5H_rRaQ8
+JYOTISHA(KAN)-2025, KA01: Course Introduction & Syllabus, QSoXOqu8Z8E
+JYOTISHA(KAN)-2025, KA02: Introduction to Vedic Astrology, sLimesWCFNk
+JYOTISHA(KAN)-2025, KA03: Astronomy relavent to Astrology, Ewo5H_rRaQ8
+JYOTISHA(TEL)-2025, TE01: Course Introduction & Syllabus, DzT7dy5N6f4
+JYOTISHA(TEL)-2025, TE02: Introduction to Vedic Astrology, Pt9YbZzct14
+JYOTISHA(TEL)-2025, TE03: Astronomy relavent to Astrology, 7kTGrYINHiw
