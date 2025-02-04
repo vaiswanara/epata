@@ -71,67 +71,79 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/plyr@3.7.8/dist/plyr.polyfilled.min.js"></script>
-    <script>
-        let player = new Plyr('#player', {
-            controls: ['play', 'progress', 'current-time', 'mute', 'volume', 'fullscreen'],
-            autoplay: false
+   <script>
+    let player = new Plyr('#player', {
+        controls: ['play', 'progress', 'current-time', 'mute', 'volume', 'fullscreen'],
+        autoplay: false
+    });
+
+    let videoData = {};
+    const playlistDropdown = document.getElementById("playlistDropdown");
+    const videoList = document.getElementById("videoList");
+
+    // Load JSON Data
+    fetch("videos.json")
+        .then(response => response.json())
+        .then(data => {
+            videoData = data;
+            populatePlaylists();
         });
 
-        let videoData = {};
-        const playlistDropdown = document.getElementById("playlistDropdown");
-        const videoList = document.getElementById("videoList");
+    // Populate Playlist Dropdown
+    function populatePlaylists() {
+        playlistDropdown.innerHTML = "";
+        Object.keys(videoData).forEach(playlist => {
+            let option = document.createElement("option");
+            option.value = playlist;
+            option.textContent = playlist;
+            playlistDropdown.appendChild(option);
+        });
+        loadVideos(Object.keys(videoData)[0]); // Load first playlist
+    }
 
-        // Load JSON Data
-        fetch("videos.json")
-            .then(response => response.json())
-            .then(data => {
-                videoData = data;
-                populatePlaylists();
-            });
-
-        // Populate Playlist Dropdown
-        function populatePlaylists() {
-            playlistDropdown.innerHTML = "";
-            Object.keys(videoData).forEach(playlist => {
-                let option = document.createElement("option");
-                option.value = playlist;
-                option.textContent = playlist;
-                playlistDropdown.appendChild(option);
-            });
-            loadVideos(Object.keys(videoData)[0]); // Load first playlist
-        }
-
-        // Load Videos for Selected Playlist
-        function loadVideos(playlist) {
-            videoList.innerHTML = "";
-            videoData[playlist].forEach(video => {
-                let li = document.createElement("li");
-                li.textContent = video.name;
-                li.dataset.videoId = video.id;
-                li.addEventListener("click", () => playVideo(video.id));
-                videoList.appendChild(li);
-            });
-
-            // Play first video automatically
-            if (videoData[playlist].length > 0) {
-                playVideo(videoData[playlist][0].id);
-            }
-        }
-
-        // Play Selected Video
-        function playVideo(videoId) {
-            player.source = {
-                type: "video",
-                sources: [{ src: videoId, provider: "youtube" }]
-            };
-        }
-
-        // Event: Change Playlist
-        playlistDropdown.addEventListener("change", (e) => {
-            loadVideos(e.target.value);
+    // Load Videos for Selected Playlist
+    function loadVideos(playlist) {
+        videoList.innerHTML = "";
+        videoData[playlist].forEach(video => {
+            let li = document.createElement("li");
+            li.textContent = video.name;
+            li.dataset.videoId = video.id;
+            li.addEventListener("click", () => playVideo(video.id)); // Play on click
+            videoList.appendChild(li);
         });
 
-    </script>
+        // Play first video automatically
+        if (videoData[playlist].length > 0) {
+            playVideo(videoData[playlist][0].id);
+        }
+    }
+
+    // Play Selected Video
+    function playVideo(videoId) {
+        player.source = {
+            type: "video",
+            sources: [
+                {
+                    src: videoId,           // YouTube video ID
+                    provider: "youtube",    // Plyr provider
+                    // YouTube specific options:
+                    options: { 
+                        modestbranding: 1,  // Hide YouTube branding
+                        rel: 0,              // Disable related videos at the end
+                        autoplay: 1          // Autoplay video
+                    }
+                }
+            ]
+        };
+    }
+
+    // Event: Change Playlist
+    playlistDropdown.addEventListener("change", (e) => {
+        loadVideos(e.target.value);
+    });
+
+</script>
+
 
 </body>
 </html>
