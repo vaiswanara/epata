@@ -5,3 +5,70 @@ JYOTISHA(KAN)-2025, KA03: Astronomy relavent to Astrology, Ewo5H_rRaQ8
 JYOTISHA(TEL)-2025, TE01: Course Introduction & Syllabus, DzT7dy5N6f4
 JYOTISHA(TEL)-2025, TE02: Introduction to Vedic Astrology, Pt9YbZzct14
 JYOTISHA(TEL)-2025, TE03: Astronomy relavent to Astrology, 7kTGrYINHiw
+
+MANA: SHASTRA, MS01: Introduction, KIHKpK9nzNM
+MANA: SHASTRA, MS02: Vidura Neethi, ojuhNT5YVp8
+MANA: SHASTRA, MS03: ADHYATMA VIJNAANA - Introduction, sdomJ4l_SaE
+MANA: SHASTRA, MS04: About MANASSU & BUDHI(Part-1), f72gyGPsf4w
+MANA: SHASTRA, MS05: About MANASSU & BUDHI(Part-2), r41xM4hzNBg
+MANA: SHASTRA, MS06: BHAGAWADGEETHA-IMPORTANCE(Part-01), wN_1JrH9BkI
+MANA: SHASTRA, MS07: BHAGAWADGEETHA-IMPORTANCE(Part-02), NC4dSAW2sH4
+MANA: SHASTRA, MS08: BHAGAWADGEETHA-PREFACE(Part-01), xA478uZYCjk
+MANA: SHASTRA, MS09: BHAGAWADGEETHA-PREFACE(Part-02), D6UNzOeD5k8
+MANA: SHASTRA, MS10: Vishaada Yoga(Drutarastra-Dhuryodhana-Arjuna)-01, Zwv5IKGcbm0
+MANA: SHASTRA, MS11: Duryodhana Vishaada-02, IQhRe-Uesag
+MANA: SHASTRA, MS12: ಶಂಖನಾದ ಕ್ರಮ ಮತ್ತು ಶಿಸ್ತು, 0-1LhyJ4KyE
+MANA: SHASTRA, MS13: ಯುದ್ಧ ಜಿಹಾಸೆ  - ಅರ್ಜುನ ಹೇಳುವ ಕಾರಣಗಳು, e93OvRPRZ90
+MANA: SHASTRA, MS14: ಯುದ್ಧ ಪುಣ್ಯದ ಕೆಲಸವೋ/ಪಾಪದ ಕೆಲಸವೋ...?, 5l1a5mLUoSY
+MANA: SHASTRA, MS15: TATHVA VIVEEKA(ತತ್ವ ವಿವೇಕ), I7dapDC_UR4
+MANA: SHASTRA, MS16: TATHVA VIVEEKA(ತತ್ವ ವಿವೇಕ-2), 5bjuxPtYmiQ
+MANA: SHASTRA, MS17: TATHVA VIVEEKA(ತತ್ವ ವಿವೇಕ-3), RzOGeywruQo
+MANA: SHASTRA, MS18: TATHVA VIVEEKA(ತತ್ವ ವಿವೇಕ-4), 5MpjL9bOdco
+MANA: SHASTRA, MS19: Aatma-Existance-Experience, ylDDt7zzJLM
+MANA: SHASTRA, MS20: VAIKUNTA EKADASHI - Upavaasa-Importance, TT8GEgcByhg
+MANA: SHASTRA, MS21: How to come-out from 15 Fences..?, 5zjSqUwlVJI
+MANA: SHASTRA, MS22: Swadharma-KulaDharma-Sanaathana Dharma, DooLPDXVa3A
+MANA: SHASTRA, MS23: Swadharma-Kartavya, 1ZfsJ8QDTuI
+MANA: SHASTRA, MS24: Sankya Vs Yoga, ZgsS-Od0HwU
+MANA: SHASTRA, MS25: Vaidhika Yoga, gcEkuJF9NCA
+MANA: SHASTRA, MS26: How to follow Veda, cekY3blMeAc
+MANA: SHASTRA, MS27: Karma (Request Vs Demand), t2Ho9nr7Hrw
+MANA: SHASTRA, MS28: Jnaana Yoga Vs Karma Yoga, defghULhnSA
+MANA: SHASTRA, MS29: Questions & Answers, WGwuh3qvvh4
+MANA: SHASTRA, MS30: Karma Yoga, HrqAGSNIUis
+MANA: SHASTRA, MS31: Sthitha Prajna Lakshanagalu-1, tBnm7S6pBVY
+MANA: SHASTRA, MS32: How to control desires..?, nP1j4Z1aMx4
+MANA: SHASTRA, MS33: How to Control our Indriyas(ಇಂದ್ರಿಯಗಳನ್ನು ನಿಗ್ರಹ ಮಾಡುವುದು ಹೇಗೆ...?), Ij3cNI26T-8
+MANA: SHASTRA, MS34: Reasons for mind deterioration(ಮನಸ್ಸಿನ ಅಧಃಪಾಥಕ್ಕೆ ಕಾರಣಗಳು)-1, uUExjt000ik
+MANA: SHASTRA, MS35: Reasons for mind deterioration(Part-2), 2HVOdffGLKE
+MANA: SHASTRA, MS36: Reasons for mind deterioration(Part-3), OSggajhyZYE
+MANA: SHASTRA, MS37: Tatva-Viveka-Yoga_Summary, VjSJdR6MFkc
+MANA: SHASTRA, MS38: Moksha - Chintane(Part-01), oMTNB3lt6uU
+MANA: SHASTRA, MS39: Moksha - Chintane(Part-02), AOW5_iBB2uU
+MANA: SHASTRA, MS40: Moksha - Chintane(Part-03), dT73Tq-mU1Y
+MANA: SHASTRA, MS41: Moksha as per Abrahamic Religions (Judaism-Christianity-Islam), Jainism and Buddhism, mRKCjRVx180
+MANA: SHASTRA, MS42: Moksha as per Shankaracharya(ಮಾಯಾವಾದ), szWXxWGYsZw
+MANA: SHASTRA, MS43: Moksha as per Ramanujacharya(ಶರೀರವಾದ) & Bhaskaraacharya(ಭೇದಾಭೇದ), K0SDzF-Inb0
+MANA: SHASTRA, MS44: Moksha as per Madwacharya, 200KauOeH-E
+MANA: SHASTRA, MS45: Swadharma Yoga(Jnaana Yoga vs Karma Yoga), ZveLzdTi2Gw
+MANA: SHASTRA, MS46: ಕರ್ಮ ಅನಿವಾಯವಾದರೇ ಮೋಕ್ಷದ ಮಾರ್ಗ ಯಾವುದು?, 10hKMJucQrg
+MANA: SHASTRA, MS47: Swadharma Yoga(ಕರ್ತವ್ಯಕರ್ಮ ಮಾಡದೇ ಇದ್ದರೇ ಸಮಾಜದಮೇಲೆ ಆಗುವ ದುಷ್ಪರಿಣಾಮ), Je-019xgn9I
+MANA: SHASTRA, MS48: Karma Yoga, QUNx1uQYl7w
+MANA: SHASTRA, MS49: About Jeeva's LifeStyle, Samskara & Swabhaava, vWjc-S1-KVc
+MANA: SHASTRA, MS51: Our Real enemies(ನಮ್ಮ ಕಡು ಶತ್ರು)....!, _TLY6OLMWq8
+MANA: SHASTRA, MS52: Adhyaya 3 Summary & Moksha Dharma Parva(Introduction), gtxGyKSHu6U
+MANA: SHASTRA, MS53: ನಾವು ಪ್ರೀತಿಸಿದ ವಸ್ತು/ವ್ಯಕ್ತಿ/ವಿಷಯ ನಮ್ಮಿಂದಿ ತಪ್ಪಿಸಿಹೋದಾಗ ದುಃಖ ಆಗತ್ತೆ” ಅದಕ್ಕೇನು ಮಾಡೋದು?, zW47mcbKmbc
+MANA: SHASTRA, MS54: ನನ್ನ ಮನಸ್ಸು ನಾನು ಹೇಳಿದಂಗೆ ಯಾಕೆ ಕೇಳೊಲ್ಲ?, Tn1vZD_QgiI
+MANA: SHASTRA, MS55: ಪ್ರೀತಿಯ ವ್ಯಕ್ತಿಯನ್ನ ಕಳ್ಕೊಂಡಾಗ ದುಃಖ ಆಗುತ್ತೆ. ಅದಕ್ಕೇನು ಮಾಡೋದು?(Question:5), uCqyPyoN1Rg
+MANA: SHASTRA, MS56: How does happiness and sadness come?(ಹೇಗೆ ಬರುತ್ತೆ ಸುಖ-ದುಃಖ), GxLmYhe4fmM
+MANA: SHASTRA, MS57: Theology of happiness(ಸುಖದ ಮೀಮಾಂಸೆ ), R1CMvDsXA1k
+MANA: SHASTRA, MS58: Theology of happiness(ಪಿಂಗಳೋಪಾಖ್ಯಾನ & ಮೇಧಾವೀ ಕಥೆ ), IW8tD0a9jXY
+MANA: SHASTRA, MS59: Problem & Remedy (ಸಮಸ್ಯೆ-ಪರಿಹಾರ), sEIY3i-qwNU
+MANA: SHASTRA, MS60: Medhavi's Wisdom: Sanyasa Beyond Ashrama Boundaries, uYBbWQwpP2w
+MANA: SHASTRA, MS61: Indra-Brahmana Conversation(ಬ್ರಾಹ್ಮಣನ ಕಥೆ), 4j1dZlLDULE
+MANA: SHASTRA, MS62: Nirlepa Karma Yoga-1, OIuHXvX4aYs
+MANA: SHASTRA, MS63: About Varna Vyavasthe(ವರ್ಣ ವ್ಯವಸ್ಥೆ), zX9khfJ4iPg
+MANA: SHASTRA, MS64: VARNA SYSTEM - More Explanation, B3-r_V-ksw4
+MANA: SHASTRA, MS65: How can a person overcome stress, despair, and disappointment in life?, aVKm908r3yE
+
+
