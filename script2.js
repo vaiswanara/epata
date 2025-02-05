@@ -1,30 +1,34 @@
-// Function to fetch the file and parse the contents
 async function fetchAndParseData() {
-    const response = await fetch('links.txt'); // Assuming the file is in the same directory as your HTML file
-    const text = await response.text(); // Get text content of the file
+    document.getElementById('loadingIndicator').style.display = 'block';
+    try {
+        const response = await fetch('links.txt');
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const text = await response.text();
+        const rows = text.trim().split('\n').slice(1); // Skip the header row
 
-    // Split the text into rows, then split each row by commas to get individual fields
-    const rows = text.trim().split('\n');
-    const videoData = rows.slice(1).map(row => { // Skip the header row
-        const [playlist, title, youtubeID, googleDocLink] = row.split(',').map(item => item.trim());
-        return { playlist, title, youtubeID, googleDocLink };
-    });
+        const videoData = rows.map(row => {
+            const [playlist, title, youtubeID, googleDocLink] = row.split(',').map(item => item.trim());
+            return { playlist, title, youtubeID, googleDocLink };
+        });
 
-    // Pass the parsed data to the function to display the content
-    displayPlaylistAndVideos(videoData);
+        displayPlaylistAndVideos(videoData);
+    } catch (error) {
+        console.error('Failed to fetch and parse data:', error);
+        document.body.innerHTML = '<p>Failed to load video data. Please try again later.</p>';
+    } finally {
+        document.getElementById('loadingIndicator').style.display = 'none';
+    }
 }
 
-// Function to display the playlists and video titles
 function displayPlaylistAndVideos(videoData) {
     const playlistSelect = document.getElementById('playlistSelect');
     const videoList = document.getElementById('videoList');
-    const videoPlayer = document.getElementById('videoPlayer');
     const pdfLink = document.getElementById('pdfLink');
 
-    // Get unique playlists
+    // Populate playlists
     const playlists = [...new Set(videoData.map(video => video.playlist))];
-
-    // Populate the playlist dropdown
     playlists.forEach(playlist => {
         const option = document.createElement('option');
         option.value = playlist;
@@ -32,49 +36,40 @@ function displayPlaylistAndVideos(videoData) {
         playlistSelect.appendChild(option);
     });
 
-    // Filter and display videos based on selected playlist
+    // When a playlist is selected
     playlistSelect.addEventListener('change', () => {
+        videoList.innerHTML = ''; // Clear previous list
+        pdfLink.style.display = 'none'; // Hide PDF link initially
+
         const selectedPlaylist = playlistSelect.value;
-        
-        // Clear the video list and video player
-        videoList.innerHTML = '';
-        videoPlayer.innerHTML = '';
-        pdfLink.style.display = 'none'; // Hide PDF link
+        const filteredVideos = videoData.filter(video => video.playlist === selectedPlaylist);
 
-        // If a playlist is selected, filter the videos for that playlist
-        if (selectedPlaylist) {
-            const filteredVideos = videoData.filter(video => video.playlist === selectedPlaylist);
+        filteredVideos.forEach(video => {
+            const listItem = document.createElement('li');
+            listItem.textContent = video.title;
+            listItem.style.cursor = 'pointer';
 
-            // Add video titles to the list
-            filteredVideos.forEach(video => {
-                const listItem = document.createElement('li');
-                listItem.textContent = video.title;
-                listItem.onclick = () => displayVideo(video);
-                videoList.appendChild(listItem);
+            listItem.addEventListener('click', () => {
+                // Open YouTube video in a new tab (fullscreen)
+                const youtubeURL = `https://www.youtube.com/embed/${video.youtubeID}?autoplay=1&fs=1`;
+                const newTab = window.open(youtubeURL, '_blank');
+                if (newTab) {
+                    newTab.focus();
+                }
+
+                // Show PDF link if available
+                if (video.googleDocLink.toLowerCase() !== 'none') {
+                    pdfLink.href = video.googleDocLink;
+                    pdfLink.style.display = 'block';
+                } else {
+                    pdfLink.style.display = 'none';
+                }
             });
-        }
+
+            videoList.appendChild(listItem);
+        });
     });
-
-    // Function to display selected video and its PDF link
-    function displayVideo(video) {
-        const iframe = document.createElement('iframe');
-        iframe.src = `https://www.youtube.com/embed/${video.youtubeID}?autoplay=1`;
-        iframe.width = "100%";
-        iframe.height = "100%";
-        iframe.frameborder = "0";
-        iframe.allow = "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture";
-        iframe.allowfullscreen = true;
-        videoPlayer.innerHTML = '';  // Clear existing iframe
-        videoPlayer.appendChild(iframe);
-
-        if (video.googleDocLink !== "none") {
-            pdfLink.href = video.googleDocLink;
-            pdfLink.style.display = 'inline'; // Show the PDF link
-        } else {
-            pdfLink.style.display = 'none'; // Hide the PDF link if it's not available
-        }
-    }
 }
 
-// Initialize when the page loads
-window.onload = fetchAndParseData;
+// Call the fetch function when the page loads
+fetchAndParseData();
