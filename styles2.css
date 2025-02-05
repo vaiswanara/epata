@@ -1,0 +1,77 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    height: 100vh; /* Full height */
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #f4f4f4;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.sidebar h2, .sidebar h3 {
+    color: #333;
+}
+
+#playlistSelect {
+    width: 100%;
+    padding: 8px;
+}
+
+#videoList {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+#videoList li {
+    cursor: pointer;
+    padding: 5px;
+    background-color: #f0f0f0;
+    margin: 5px 0;
+}
+
+#videoList li:hover {
+    background-color: #ddd;
+}
+
+.content {
+    flex-grow: 1;
+    position: relative;
+    height: 100%;
+}
+
+.video-player {
+    width: 100%;
+    height: 100%; /* Full screen height */
+    margin-bottom: 20px;
+}
+
+#pdfLink {
+    position: absolute;
+    top: 10px;
+    left: 500px;
+    font-size: 16px;
+}
+
+#pdfLink:hover {
+    text-decoration: underline;
+}
+
+/* Remove any padding or margin that might be coming from the header */
+header {
+    display: none; /* Ensuring the header is completely removed */
+}
+
+/* Ensure no extra margin or padding at the top */
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
