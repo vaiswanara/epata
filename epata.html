@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ...existing code... -->
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+    <style>
+        .logo {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 100px; /* Set the width of the logo */
+            height: auto; /* Maintain aspect ratio */
+        }
+        .home-button {
+            position: absolute;
+            top: 120px; /* Adjust based on the logo size */
+            left: 30px;
+            padding: 5px 10px;
+            background-color: #007BFF;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        @media (max-width: 600px) {
+            .logo {
+                width: 50px; /* Adjust the width for smaller screens */
+            }
+            .home-button {
+                top: 70px; /* Adjust based on the logo size */
+                left: 10px;
+                padding: 3px 5px;
+                font-size: 12px; /* Adjust font size for smaller screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    <img src="logo.jpeg" alt="Logo" class="logo">
+    <a href="https://vaiswanara.com" class="home-button">HOME</a>
+    <h1>OFFLINE CLASSES</h1>
+    <h3><center>(Recorded YouTube Sessions)</center></h3>
+    <label for="playlistDropdown">Select Playlist</label>
+    <select id="playlistDropdown">
+        <option value="">--Select Playlist--</option>
+    </select>
+    <table>
+        <thead>
+            <tr>
+                <th>Lessons</th>
+                <th>YouTube Link</th>
+                <th>NOTES</th>
+            </tr>
+        </thead>
+        <tbody id="playlistTableBody">
+            <!-- Filtered rows will be inserted here -->
+        </tbody>
+    </table>
+    <!-- ...existing code... -->
+</body>
+</html>

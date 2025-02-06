@@ -1,0 +1,70 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff; /* Set background color to white */
+    margin: 0;
+    padding: 20px;
+}
+h1 {
+    text-align: center;
+    color: #333;
+}
+label {
+    display: block;
+    margin: 20px 0 10px;
+    font-weight: bold;
+    text-align: center;
+}
+select {
+    display: block;
+    margin: 0 auto 20px;
+    padding: 10px;
+    font-size: 16px;
+}
+table {
+    width: 100%;
+    max-width: 100%;
+    margin: 20px auto;
+    border: 1px solid #ddd;
+    border-collapse: collapse;
+    background-color: #fff;
+}
+th, td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+th {
+    background-color: #f2f2f2;
+    color: #333;
+}
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+tr:hover {
+    background-color: #f1f1f1;
+}
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+    table, th, td {
+        font-size: 14px;
+    }
+    th, td {
+        padding: 8px;
+    }
+    select {
+        width: 100%;
+        font-size: 14px;
+    }
+}
+td:first-child {
+    text-align: left; /* Align the first column data to the left */
+}

@@ -5,68 +5,173 @@ JYOTISHA(KAN)-2025, 03: Astronomy relavent to Astrology, Ewo5H_rRaQ8, none
 JYOTISHA(TEL)-2025, 01: Course Introduction & Syllabus, DzT7dy5N6f4, https://drive.google.com/file/d/1iufEAMsGVxlwGgX_7JNWqP_75IEKZ0xJ/view?usp=drive_link
 JYOTISHA(TEL)-2025, 02: Introduction to Vedic Astrology, Pt9YbZzct14, none
 JYOTISHA(TEL)-2025, 03: Astronomy relavent to Astrology, 7kTGrYINHiw, none
-MANA: SHASTRA, 01: Introduction, KIHKpK9nzNM
-MANA: SHASTRA, 02: Vidura Neethi, ojuhNT5YVp8
-MANA: SHASTRA, 03: ADHYATMA VIJNAANA - Introduction, sdomJ4l_SaE
-MANA: SHASTRA, 04: About MANASSU & BUDHI(Part-1), f72gyGPsf4w
-MANA: SHASTRA, 05: About MANASSU & BUDHI(Part-2), r41xM4hzNBg
-MANA: SHASTRA, 06: BHAGAWADGEETHA-IMPORTANCE(Part-01), wN_1JrH9BkI
-MANA: SHASTRA, 07: BHAGAWADGEETHA-IMPORTANCE(Part-02), NC4dSAW2sH4
-MANA: SHASTRA, 08: BHAGAWADGEETHA-PREFACE(Part-01), xA478uZYCjk
-MANA: SHASTRA, 09: BHAGAWADGEETHA-PREFACE(Part-02), D6UNzOeD5k8
-MANA: SHASTRA, 10: Vishaada Yoga(Drutarastra-Dhuryodhana-Arjuna)-01, Zwv5IKGcbm0
-MANA: SHASTRA, 11: Duryodhana Vishaada-02, IQhRe-Uesag
-MANA: SHASTRA, 12: ಶಂಖನಾದ ಕ್ರಮ ಮತ್ತು ಶಿಸ್ತು, 0-1LhyJ4KyE
-MANA: SHASTRA, 13: ಯುದ್ಧ ಜಿಹಾಸೆ  - ಅರ್ಜುನ ಹೇಳುವ ಕಾರಣಗಳು, e93OvRPRZ90
-MANA: SHASTRA, 14: ಯುದ್ಧ ಪುಣ್ಯದ ಕೆಲಸವೋ/ಪಾಪದ ಕೆಲಸವೋ...?, 5l1a5mLUoSY
-MANA: SHASTRA, 15: TATHVA VIVEEKA(ತತ್ವ ವಿವೇಕ), I7dapDC_UR4
-MANA: SHASTRA, 16: TATHVA VIVEEKA(ತತ್ವ ವಿವೇಕ-2), 5bjuxPtYmiQ
-MANA: SHASTRA, 17: TATHVA VIVEEKA(ತತ್ವ ವಿವೇಕ-3), RzOGeywruQo
-MANA: SHASTRA, 18: TATHVA VIVEEKA(ತತ್ವ ವಿವೇಕ-4), 5MpjL9bOdco
-MANA: SHASTRA, 19: Aatma-Existance-Experience, ylDDt7zzJLM
-MANA: SHASTRA, 20: VAIKUNTA EKADASHI - Upavaasa-Importance, TT8GEgcByhg
-MANA: SHASTRA, 21: How to come-out from 15 Fences..?, 5zjSqUwlVJI
-MANA: SHASTRA, 22: Swadharma-KulaDharma-Sanaathana Dharma, DooLPDXVa3A
-MANA: SHASTRA, 23: Swadharma-Kartavya, 1ZfsJ8QDTuI
-MANA: SHASTRA, 24: Sankya Vs Yoga, ZgsS-Od0HwU
-MANA: SHASTRA, 25: Vaidhika Yoga, gcEkuJF9NCA
-MANA: SHASTRA, 26: How to follow Veda, cekY3blMeAc
-MANA: SHASTRA, 27: Karma (Request Vs Demand), t2Ho9nr7Hrw
-MANA: SHASTRA, 28: Jnaana Yoga Vs Karma Yoga, defghULhnSA
-MANA: SHASTRA, 29: Questions & Answers, WGwuh3qvvh4
-MANA: SHASTRA, 30: Karma Yoga, HrqAGSNIUis
-MANA: SHASTRA, 31: Sthitha Prajna Lakshanagalu-1, tBnm7S6pBVY
-MANA: SHASTRA, 32: How to control desires..?, nP1j4Z1aMx4
-MANA: SHASTRA, 33: How to Control our Indriyas(ಇಂದ್ರಿಯಗಳನ್ನು ನಿಗ್ರಹ ಮಾಡುವುದು ಹೇಗೆ...?), Ij3cNI26T-8
-MANA: SHASTRA, 34: Reasons for mind deterioration(ಮನಸ್ಸಿನ ಅಧಃಪಾಥಕ್ಕೆ ಕಾರಣಗಳು)-1, uUExjt000ik
-MANA: SHASTRA, 35: Reasons for mind deterioration(Part-2), 2HVOdffGLKE
-MANA: SHASTRA, 36: Reasons for mind deterioration(Part-3), OSggajhyZYE
-MANA: SHASTRA, 37: Tatva-Viveka-Yoga_Summary, VjSJdR6MFkc
-MANA: SHASTRA, 38: Moksha - Chintane(Part-01), oMTNB3lt6uU
-MANA: SHASTRA, 39: Moksha - Chintane(Part-02), AOW5_iBB2uU
-MANA: SHASTRA, 40: Moksha - Chintane(Part-03), dT73Tq-mU1Y
-MANA: SHASTRA, 41: Moksha as per Abrahamic Religions (Judaism-Christianity-Islam), Jainism and Buddhism, mRKCjRVx180
-MANA: SHASTRA, 42: Moksha as per Shankaracharya(ಮಾಯಾವಾದ), szWXxWGYsZw
-MANA: SHASTRA, 43: Moksha as per Ramanujacharya(ಶರೀರವಾದ) & Bhaskaraacharya(ಭೇದಾಭೇದ), K0SDzF-Inb0
-MANA: SHASTRA, 44: Moksha as per Madwacharya, 200KauOeH-E
-MANA: SHASTRA, 45: Swadharma Yoga(Jnaana Yoga vs Karma Yoga), ZveLzdTi2Gw
-MANA: SHASTRA, 46: ಕರ್ಮ ಅನಿವಾಯವಾದರೇ ಮೋಕ್ಷದ ಮಾರ್ಗ ಯಾವುದು?, 10hKMJucQrg
-MANA: SHASTRA, 47: Swadharma Yoga(ಕರ್ತವ್ಯಕರ್ಮ ಮಾಡದೇ ಇದ್ದರೇ ಸಮಾಜದಮೇಲೆ ಆಗುವ ದುಷ್ಪರಿಣಾಮ), Je-019xgn9I
-MANA: SHASTRA, 48: Karma Yoga, QUNx1uQYl7w
-MANA: SHASTRA, 49: About Jeeva's LifeStyle, Samskara & Swabhaava, vWjc-S1-KVc
-MANA: SHASTRA, 51: Our Real enemies(ನಮ್ಮ ಕಡು ಶತ್ರು)....!, _TLY6OLMWq8
-MANA: SHASTRA, 52: Adhyaya 3 Summary & Moksha Dharma Parva(Introduction), gtxGyKSHu6U
-MANA: SHASTRA, 53: ನಾವು ಪ್ರೀತಿಸಿದ ವಸ್ತು/ವ್ಯಕ್ತಿ/ವಿಷಯ ನಮ್ಮಿಂದಿ ತಪ್ಪಿಸಿಹೋದಾಗ ದುಃಖ ಆಗತ್ತೆ” ಅದಕ್ಕೇನು ಮಾಡೋದು?, zW47mcbKmbc
-MANA: SHASTRA, 54: ನನ್ನ ಮನಸ್ಸು ನಾನು ಹೇಳಿದಂಗೆ ಯಾಕೆ ಕೇಳೊಲ್ಲ?, Tn1vZD_QgiI
-MANA: SHASTRA, 55: ಪ್ರೀತಿಯ ವ್ಯಕ್ತಿಯನ್ನ ಕಳ್ಕೊಂಡಾಗ ದುಃಖ ಆಗುತ್ತೆ. ಅದಕ್ಕೇನು ಮಾಡೋದು?(Question:5), uCqyPyoN1Rg
-MANA: SHASTRA, 56: How does happiness and sadness come?(ಹೇಗೆ ಬರುತ್ತೆ ಸುಖ-ದುಃಖ), GxLmYhe4fmM
-MANA: SHASTRA, 57: Theology of happiness(ಸುಖದ ಮೀಮಾಂಸೆ ), R1CMvDsXA1k
-MANA: SHASTRA, 58: Theology of happiness(ಪಿಂಗಳೋಪಾಖ್ಯಾನ & ಮೇಧಾವೀ ಕಥೆ ), IW8tD0a9jXY
-MANA: SHASTRA, 59: Problem & Remedy (ಸಮಸ್ಯೆ-ಪರಿಹಾರ), sEIY3i-qwNU
-MANA: SHASTRA, 60: Medhavi's Wisdom: Sanyasa Beyond Ashrama Boundaries, uYBbWQwpP2w
-MANA: SHASTRA, 61: Indra-Brahmana Conversation(ಬ್ರಾಹ್ಮಣನ ಕಥೆ), 4j1dZlLDULE
-MANA: SHASTRA, 62: Nirlepa Karma Yoga-1, OIuHXvX4aYs
-MANA: SHASTRA, 63: About Varna Vyavasthe(ವರ್ಣ ವ್ಯವಸ್ಥೆ), zX9khfJ4iPg
-MANA: SHASTRA, 64: VARNA SYSTEM - More Explanation, B3-r_V-ksw4
-MANA: SHASTRA, 65: How can a person overcome stress, despair, and disappointment in life?, aVKm908r3yE
-
+MANA: SHASTRA(Kannada),MS01: Introduction,KIHKpK9nzNM, none
+JYOTISHA(Kannada)-2022,Vedic Astrology-Course Syllabus,bYVTAcBpK_Q, none
+JYOTISHA(Kannada)-2022,Class 01: Vedic Astrology - Introduction,-Yi1LBXHNzQ, none
+JYOTISHA(Kannada)-2022,How to Watch Offline videos & Course Material Download,5Cd-fYkWReM, none
+JYOTISHA(Kannada)-2022,Class 02: Astronomy relevant to Astrology,bLipe9jb1go, none
+JYOTISHA(Kannada)-2022,Class 03: Karma Theory,krgYNLpld1s, none
+JYOTISHA(Kannada)-2022,Class 04: Strength of Time,W265iX_eyK8, none
+JYOTISHA(Kannada)-2022,Class 05: Planets - Sahaja Karakatwas,SAmhG3L_p4k, none
+JYOTISHA(Kannada)-2022,Class 06: Lagna & Dwadasha Bhavagalu,k1oARTU03qk, none
+JYOTISHA(Kannada)-2022,Class 07: Trikona-Kendra Sthana-Yoga karaka..etc,FxEDKdzQWwA, none
+JYOTISHA(Kannada)-2022,Class 08: Planetary Relationship(ಗ್ರಹಗಳು-ಮೈತ್ರಿ),Hwj6qry8Org, none
+JYOTISHA(Kannada)-2022,Class 09: How to read a Horoscope in a Systematic Manner,CN0L2j4MOlI, none
+JYOTISHA(Kannada)-2022,Class 10: Predictive Principles,LWhBz7WiMuQ, none
+JYOTISHA(Kannada)-2022,Class 11: Psychology relevant to Astrology,Jcsa9sVbx_U, none
+JYOTISHA(Kannada)-2022,Class 12: Lagna Sthana-Significance,1uxe0yI_EcY, none
+JYOTISHA(Kannada)-2022,Class 13: Lagna Sthana-Practice,IpkR6i2M4Fs, none
+JYOTISHA(Kannada)-2022,Class 14: Lagna Sthana-Practice(Day-2),yOK_zhUrs4o, none
+JYOTISHA(Kannada)-2022,Class 15: Education - Introduction,Uq-jVUsZi6A, none
+JYOTISHA(Kannada)-2022,Class 16: Education - Practice Session-1,Fi_RWTyK-5o, none
+JYOTISHA(Kannada)-2022,Class 17: Education - Practice Session-2,VNPzXBvSN9k, none
+JYOTISHA(Kannada)-2022,Class 18: Education - Questions - Parihaara,WGyqCuVFP14, none
+JYOTISHA(Kannada)-2022,Class 19: Higher Education - Questions - Answers,wg8HY4IaUnI, none
+JYOTISHA(Kannada)-2022,Class 20: Education - Additional info,9pgKs2gk1Sc, none
+JYOTISHA(Kannada)-2022,Class 21: Education - Questions & Answers,1PabfrlwTI0, none
+JYOTISHA(Kannada)-2022,Class 22: Vedic Education,TNjMT-2jaLI, none
+JYOTISHA(Kannada)-2022,Class 23: Karma Sthana (Introduction),rcyOFqF2iUE, none
+JYOTISHA(Kannada)-2022,Class 24: Karma Sthana - Analysing Chart,5g1MdUZaTlY, none
+JYOTISHA(Kannada)-2022,Class 25: Understanding Navamsha (D9 Chart),8OqgOVfmt0s, none
+JYOTISHA(Kannada)-2022,Class 26: Business & Job,jxfmMVP48Us, none
+JYOTISHA(Kannada)-2022,Class 27: Analyzing Business (Practice),jkwewjOQeb8, none
+JYOTISHA(Kannada)-2022,Class 28: About Income,loR5K75YJjY, none
+JYOTISHA(Kannada)-2022,Class 29: Kalatra Sthaana-Introduction,r_GTl6MSit0, none
+JYOTISHA(Kannada)-2022,Class 30: Kalatra Sthaana-Pre-Marital Issues,1xzXu9NJCZg, none
+JYOTISHA(Kannada)-2022,Class 31: Analyzing Kalatra Sthaana,aSov3IWKcZM, none
+JYOTISHA(Kannada)-2022,Class 32: Practicing Kalatra Sthaana,WRt1v6PoEbo, none
+JYOTISHA(Kannada)-2022,Class 33: Practicing Kalatra Sthaana-2,2dTsjL_m00c, none
+JYOTISHA(Kannada)-2022,Class 34: Pre-Marital Questions,3zFdazLKE7k, none
+JYOTISHA(Kannada)-2022,Class 35: ABOUT KUTUMBHA STHAANA,soZ0_zwmCuY, none
+JYOTISHA(Kannada)-2022,Class 36: Kutumbha Sthana - Practical Example,KTnNLhIJUlg, none
+JYOTISHA(Kannada)-2022,Class 37: ASHTAKUTA CALCULATION(Part-1),SrPz8pfe7-o, none
+JYOTISHA(Kannada)-2022,Class 38: ASHTAKUTA CALCULATION(Part-2),atUAcqZ8Yj0, none
+JYOTISHA(Kannada)-2022,Class 39: ASHTAKUTA-PRACTICE,kYt0VtrD9Bc, none
+JYOTISHA(Kannada)-2022,Class 40: KUJA DOSHA,8Wwmn5GtlT0, none
+JYOTISHA(Kannada)-2022,Class 41: SARPHA DOSHA & PITRU DOSHA,qJdelL2GGAA, none
+JYOTISHA(Kannada)-2022,Class 42: KALA-SARPHA DOSHA & MANGALYA DOSHA,URuAjn1oeO4, none
+JYOTISHA(Kannada)-2022,Class 43: MARRIAGE MATCHING(Practice-01),6LbvGFsoVD4, none
+JYOTISHA(Kannada)-2022,Class 44: MARRIAGE MATCHING(Practice-02),zavOD-KjdxU, none
+JYOTISHA(Kannada)-2022,Class 45: MARITAL ISSUES & REMIDIES,DzTzofBtskU, none
+JYOTISHA(Kannada)-2022,Class 46: MARITAL QUESTIONS & ANSWERS,pxtw-DlPJAM, none
+JYOTISHA(Kannada)-2022,Class 47: LOVE & INTER-CAST MARRIAGES(Part-1),ZcXHKJC03j0, none
+JYOTISHA(Kannada)-2022,Class 48: LOVE & INTER-CAST MARRIAGES(Part-2),AwTjzMFxCSs, none
+JYOTISHA(Kannada)-2022,Class 49: Extra-Marital Affairs.,M_74UuI2b-I, none
+JYOTISHA(Kannada)-2022,Class 50: Santhaana Vichaara-Introduction,30Em37rIzWE, none
+JYOTISHA(Kannada)-2022,Class 51: How to analyze Santhana Sthaana...?,pnCs9IkzBeA, none
+JYOTISHA(Kannada)-2022,Class 52: Second issue & General Remedies,Q9M0HLDLZq4, none
+JYOTISHA(Kannada)-2022,Class 53: BOY/BABY- C SECTION(Blarista-Nakshatra Dosha)-Mis-CARRIAGES,n5PUgJ-V6mc, none
+JYOTISHA(Kannada)-2022,Class 54: Dasha System(ದಶೆಗಳು),vRcoEKxrOKg, none
+JYOTISHA(Kannada)-2022,Class 55: Analysing Vimshothari Dasha,6JsQ68V6jVY, none
+JYOTISHA(Kannada)-2022,Class 56: Vimshothari Dasha - Practise,oGMkbwhWg5M, none
+JYOTISHA(Kannada)-2022,Class 57: Gochara (Planetery Transit) - Introduction,ZBjaoiZ_Bzg, none
+JYOTISHA(Kannada)-2022,Class 58: Gochara Phala-Veda-Vipareeta Veda,97l5hLR5QIU, none
+JYOTISHA(Kannada)-2022,Class 59: Gochara Phala(GuruBhala; 7 1/2 Shani; Ashtama Shani; Ardhastama Shani...etc),RZC1h-n1Wec, none
+JYOTISHA(Kannada)-2022,Class 60: Gochara  Phala through Jaganatha Hora Software,I_7_lv8E91o, none
+JYOTISHA(Kannada)-2022,Class 61: MUHURTHA-BASICS,_odQFWBLPJw, none
+JYOTISHA(Kannada)-2022,Class 62: Muhurtha(Panchanga Shudhi),O6UyuRrFVgs, none
+JYOTISHA(Kannada)-2022,Class 63: MUHURTHA(Tarabhala; Chandra Bhala; Lagna Bhala),gCFQaw_DPi4, none
+JYOTISHA(Kannada)-2022,Class 64: Muhurtha(Lagna Bhala & Eka-Vimshathi Doshagalu),6ypk3JKpfgI, none
+JYOTISHA(Kannada)-2022,Class 65: MUHURTHA-PRACTICE-1,R1xPzUwLusI, none
+JYOTISHA(Kannada)-2022,Class 66: PUSHKARAMSHA; PANCHAKA; ABHIJITH LAGNA & Muhurtha Practice,JmzDZA63yr0, none
+JYOTISHA(Kannada)-2022,Class 67: UPANAYANA & NAMAKARANA MUHURTHA,-idyxfw-KXI, none
+JYOTISHA(Kannada)-2022,Class 68: MISCELLANEOUS  MUHURTHAs,P6ctjfnpmW8, none
+JYOTISHA(Kannada)-2022,Class 69: Effects of Retrograde Planet,9eycp-zNSzo, none
+JYOTISHA(Kannada)-2022,Class 70: PROPERTY BUYING & SELLING,CdGUyGFarOA, none
+JYOTISHA(Kannada)-2022,Class 71: Income; Expenditure & Savings,nCEYeZuEzKs, none
+JYOTISHA(Kannada)-2022,Class 72: Analysing Dwiteeya Sthaana,6o9IYVeIQR8, none
+JYOTISHA(Kannada)-2022,Class 73: Predicting Huge Income through Indu/Shree Lagna,-38wll_qe70, none
+JYOTISHA(Kannada)-2022,Class 74: Dhana Sthaana - Practical Examples,jzLbvVmUIMI, none
+JYOTISHA(Kannada)-2022,Class 75: ಹಣ ಸಂಪಾಧನೆ@ವೇದ,fpm0bTbR4PI, none
+JYOTISHA(Kannada)-2022,Class 76: Understanding Human Desires as per Astrology(ಮೋಹ ವಿಚಾರ),rIXm-_bYHV8, none
+JYOTISHA(Kannada)-2022,Class 77: Finance (Questions & Answers),UMSelMN0o_k, none
+JYOTISHA(Kannada)-2022,Class 78: Is horoscope matching necessary for marriage? ವಿವಾಹಕ್ಕೆ ಜಾತಕ ಕೂಡಿ ಬರುವುದು ಅಗತ್ಯವೇ..?,ziuuC-MlbRo, none
+JYOTISHA(Kannada)-2022,Class 79: Miscellaneous Questions (Divorce & Jataka-Dashe-Gochara),MmWJ82m93Wg, none
+JYOTISHA(Kannada)-2022,Class 80: Medical Astrology(Introduction),uJNSraeLZ14, none
+JYOTISHA(Kannada)-2022,Class 81: Roga Sthana Vs Lagna Sthaana,4YSKaEmixtA, none
+JYOTISHA(Kannada)-2022,Class 82: Planets-Signifying Disease (ಗ್ರಹಗಳು – ರೋಗ ಕಾರಕತ್ವಗಳು),9c4eDRmY5l4, none
+JYOTISHA(Kannada)-2022,Class 83: Planets-Signifying Disease-2 (ಗ್ರಹಗಳು – ರೋಗ ಕಾರಕತ್ವಗಳು),DmpZoRefYbs, none
+JYOTISHA(Kannada)-2022,Class 84: Planetery Combination to understand Diseases(ರೋಗನಿರ್ಣಯಕ್ಕೆ ಸೂತ್ರಗಳು),z928opvuKoI, none
+JYOTISHA(Kannada)-2022,Class 85: Questions & Answers(ಪ್ರಶ್ನೋತ್ತರಗಳು),qw1dUY34c_I, none
+JYOTISHA(Kannada)-2022,Class 86: Importance of Drekkana Chakra,T_IbDN78JmQ, none
+JYOTISHA(Kannada)-2022,Class 87: Roga Prashne & QA,zAPd-qjAJGo, none
+JYOTISHA(Kannada)-2022,Class 88: Roga Sthaana(Practice-I),NnUdRZp3Ozs, none
+JYOTISHA(Kannada)-2022,Class 89: Roga Sthaana(Practice-II),SLUdeNiZgj4, none
+JYOTISHA(Kannada)-2022,Class 90: Balarista Dosha & Maanasika Roga(Introduction),D3svHod9HEQ, none
+JYOTISHA(Kannada)-2022,Class 91: Understanding Shatru(Enemy) Sthaana,DwwJGC3wqf4, none
+JYOTISHA(Kannada)-2022,Class 92: Analysing Shatru Bhaava (ಶತೃಭಾವ ಪರಿಶೀಲನೆ),hKIk1MmWya0, none
+JYOTISHA(Kannada)-2022,Class 93: Analyzing  Debts(ಸಾಲ - ಪರಿಶೀಲನೆ),BFTo56vOhM0, none
+JYOTISHA(Kannada)-2022,Class 94 : Ashtama Sthaana(Part-1),uzLOa4b4bdc, none
+JYOTISHA(Kannada)-2022,Class 95 : Ashtama Sthaana(Part-2),RmGfh72EUmY, none
+JYOTISHA(Kannada)-2022,Class 96: Analysing 9th House(ಭಾಗ್ಯಸ್ಥಾನ)-1,3qdUh0iVq0A, none
+JYOTISHA(Kannada)-2022,Class 97: Analysing 9th House(ಭಾಗ್ಯಸ್ಥಾನ)-2,2GPzQdZs0eY, none
+JYOTISHA(Kannada)-2022,Class 98: Problems & Remedies(ಸಮಸ್ಯೆ-ಪರಿಹಾರ)-1,uVcJczV8lQY, none
+JYOTISHA(Kannada)-2022,Class 99: Problems & Remedies(ಸಮಸ್ಯೆ-ಪರಿಹಾರ)-2,lwzjipjDeBE, none
+JYOTISHA(Kannada)-2022,Class 100: Course Summary,qlhmlKJH7mM, none
+JYOTISHA(Kannada)-2022,Advice to Aspiring Astrologers,Hp9mr4vNDsc, none
+JYOTISHA(Kannada)-2022,Students Feedback,urDY6Fl_Ny0, none
+MANA: SHASTRA(Kannada),MS02: Vidura Neethi,ojuhNT5YVp8, none
+MANA: SHASTRA(Kannada),MS03: ADHYATMA VIJNAANA - Introduction,sdomJ4l_SaE, none
+MANA: SHASTRA(Kannada),MS04: About MANASSU & BUDHI(Part-1),f72gyGPsf4w, none
+MANA: SHASTRA(Kannada),MS05: About MANASSU & BUDHI(Part-2),r41xM4hzNBg, none
+MANA: SHASTRA(Kannada),MS06: BHAGAWADGEETHA-IMPORTANCE(Part-01),wN_1JrH9BkI, none
+MANA: SHASTRA(Kannada),MS07: BHAGAWADGEETHA-IMPORTANCE(Part-02),NC4dSAW2sH4, none
+MANA: SHASTRA(Kannada),MS08: BHAGAWADGEETHA-PREFACE(Part-01),xA478uZYCjk, none
+MANA: SHASTRA(Kannada),MS09: BHAGAWADGEETHA-PREFACE(Part-02),D6UNzOeD5k8, none
+MANA: SHASTRA(Kannada),MS10: Vishaada Yoga(Drutarastra-Dhuryodhana-Arjuna)-01,Zwv5IKGcbm0, none
+MANA: SHASTRA(Kannada),MS11: Duryodhana Vishaada-02,IQhRe-Uesag, none
+MANA: SHASTRA(Kannada),MS12: ಶಂಖನಾದ ಕ್ರಮ ಮತ್ತು ಶಿಸ್ತು,0-1LhyJ4KyE, none
+MANA: SHASTRA(Kannada),MS13: ಯುದ್ಧ ಜಿಹಾಸೆ  - ಅರ್ಜುನ ಹೇಳುವ ಕಾರಣಗಳು,e93OvRPRZ90, none
+MANA: SHASTRA(Kannada),MS14: ಯುದ್ಧ ಪುಣ್ಯದ ಕೆಲಸವೋ/ಪಾಪದ ಕೆಲಸವೋ...?,5l1a5mLUoSY, none
+MANA: SHASTRA(Kannada),MS15: TATHVA VIVEEKA(ತತ್ವ ವಿವೇಕ),I7dapDC_UR4, none
+MANA: SHASTRA(Kannada),MS16: TATHVA VIVEEKA(ತತ್ವ ವಿವೇಕ-2),5bjuxPtYmiQ, none
+MANA: SHASTRA(Kannada),FAQ-01: ಸರ್ಪವನ್ನು ಕೊಲ್ಲುವುದು ಪಾಪವೋ...? ಗಿಡ-ಮರವನ್ನು ಕಡೆಯುವುದು ಪಾಪವಲ್ಲವೋ...? ವಿಶ್ಲೇಷಣೆ,enQyDChjr2I, none
+MANA: SHASTRA(Kannada),MS17: TATHVA VIVEEKA(ತತ್ವ ವಿವೇಕ-3),RzOGeywruQo, none
+MANA: SHASTRA(Kannada),MS18: TATHVA VIVEEKA(ತತ್ವ ವಿವೇಕ-4),5MpjL9bOdco, none
+MANA: SHASTRA(Kannada),Class 19: Aatma-Existance-Experience,ylDDt7zzJLM, none
+MANA: SHASTRA(Kannada),Class 20: VAIKUNTA EKADASHI - Upavaasa-Importance,TT8GEgcByhg, none
+MANA: SHASTRA(Kannada),Class 21: How to come-out from 15 Fences..?,5zjSqUwlVJI, none
+MANA: SHASTRA(Kannada),Class 22: Swadharma-KulaDharma-Sanaathana Dharma,DooLPDXVa3A, none
+MANA: SHASTRA(Kannada),Class 23: Swadharma-Kartavya,1ZfsJ8QDTuI, none
+MANA: SHASTRA(Kannada),Class 24: Sankya Vs Yoga,ZgsS-Od0HwU, none
+MANA: SHASTRA(Kannada),Class 25: Vaidhika Yoga,gcEkuJF9NCA, none
+MANA: SHASTRA(Kannada),Class 26: How to follow Veda,cekY3blMeAc, none
+MANA: SHASTRA(Kannada),Class 27: Karma (Request Vs Demand),t2Ho9nr7Hrw, none
+MANA: SHASTRA(Kannada),Class 28: Jnaana Yoga Vs Karma Yoga,defghULhnSA, none
+MANA: SHASTRA(Kannada),Class 29: Questions & Answers,WGwuh3qvvh4, none
+MANA: SHASTRA(Kannada),Class 30: Karma Yoga,HrqAGSNIUis, none
+MANA: SHASTRA(Kannada),Class 31: Sthitha Prajna Lakshanagalu-1,tBnm7S6pBVY, none
+MANA: SHASTRA(Kannada),Class 32: How to control desires..?,nP1j4Z1aMx4, none
+MANA: SHASTRA(Kannada),PANCHANGA SHRAVANA-2024(LIVE),R7mXJCwfODc, none
+MANA: SHASTRA(Kannada),Class 33: How to Control our Indriyas(ಇಂದ್ರಿಯಗಳನ್ನು ನಿಗ್ರಹ ಮಾಡುವುದು ಹೇಗೆ...?),Ij3cNI26T-8, none
+MANA: SHASTRA(Kannada),Class 34: Reasons for mind deterioration(ಮನಸ್ಸಿನ ಅಧಃಪಾಥಕ್ಕೆ ಕಾರಣಗಳು)-1,uUExjt000ik, none
+MANA: SHASTRA(Kannada),Class 35: Reasons for mind deterioration(Part-2),2HVOdffGLKE, none
+MANA: SHASTRA(Kannada),Class 36: Reasons for mind deterioration(Part-3),OSggajhyZYE, none
+MANA: SHASTRA(Kannada),Class 37: Tatva-Viveka-Yoga_Summary,VjSJdR6MFkc, none
+MANA: SHASTRA(Kannada),Class 38: Moksha - Chintane(Part-01),oMTNB3lt6uU, none
+MANA: SHASTRA(Kannada),Class 39: Moksha - Chintane(Part-02),AOW5_iBB2uU, none
+MANA: SHASTRA(Kannada),Class 40: Moksha - Chintane(Part-03),dT73Tq-mU1Y, none
+MANA: SHASTRA(Kannada),Class 41: Moksha as per Judaism-Christianity-Islam-Jainism and Buddhism,mRKCjRVx180, none
+MANA: SHASTRA(Kannada),Class 42: Moksha as per Shankaracharya(ಮಾಯಾವಾದ),szWXxWGYsZw, none
+MANA: SHASTRA(Kannada),Class 43: Moksha as per Ramanujacharya(ಶರೀರವಾದ) & Bhaskaraacharya(ಭೇದಾಭೇದ),K0SDzF-Inb0, none
+MANA: SHASTRA(Kannada),Class 44: Moksha as per Madwacharya,200KauOeH-E, none
+MANA: SHASTRA(Kannada),Class 45: Swadharma Yoga(Jnaana Yoga vs Karma Yoga),ZveLzdTi2Gw, none
+MANA: SHASTRA(Kannada),Class 46: ಕರ್ಮ ಅನಿವಾಯವಾದರೇ ಮೋಕ್ಷದ ಮಾರ್ಗ ಯಾವುದು?,10hKMJucQrg, none
+MANA: SHASTRA(Kannada),Class 47: Swadharma Yoga(ಕರ್ತವ್ಯಕರ್ಮ ಮಾಡದೇ ಇದ್ದರೇ ಸಮಾಜದಮೇಲೆ ಆಗುವ ದುಷ್ಪರಿಣಾಮ),Je-019xgn9I, none
+MANA: SHASTRA(Kannada),Class 48: Karma Yoga,QUNx1uQYl7w, none
+MANA: SHASTRA(Kannada),Class 49: About Jeeva's LifeStyle; Samskara & Swabhaava,vWjc-S1-KVc, none
+MANA: SHASTRA(Kannada),Class 51: Our Real enemies(ನಮ್ಮ ಕಡು ಶತ್ರು)....!,_TLY6OLMWq8, none
+MANA: SHASTRA(Kannada),Class 52: Adhyaya 3 Summary & Moksha Dharma Parva(Introduction),gtxGyKSHu6U, none
+MANA: SHASTRA(Kannada),Class 53: ನಾವು ಪ್ರೀತಿಸಿದ ವಸ್ತು/ವ್ಯಕ್ತಿ/ವಿಷಯ ನಮ್ಮಿಂದಿ ತಪ್ಪಿಸಿಹೋದಾಗ ದುಃಖ ಆಗತ್ತೆ” ಅದಕ್ಕೇನು ಮಾಡೋದು?,zW47mcbKmbc, none
+MANA: SHASTRA(Kannada),Class 54: ನನ್ನ ಮನಸ್ಸು ನಾನು ಹೇಳಿದಂಗೆ ಯಾಕೆ ಕೇಳೊಲ್ಲ?,Tn1vZD_QgiI, none
+MANA: SHASTRA(Kannada),Class 55: ಪ್ರೀತಿಯ ವ್ಯಕ್ತಿಯನ್ನ ಕಳ್ಕೊಂಡಾಗ ದುಃಖ ಆಗುತ್ತೆ. ಅದಕ್ಕೇನು ಮಾಡೋದು?(Question:5),uCqyPyoN1Rg, none
+MANA: SHASTRA(Kannada),Class 56: How does happiness and sadness come?(ಹೇಗೆ ಬರುತ್ತೆ ಸುಖ-ದುಃಖ),GxLmYhe4fmM, none
+MANA: SHASTRA(Kannada),Class 57: Theology of happiness(ಸುಖದ ಮೀಮಾಂಸೆ ),R1CMvDsXA1k, none
+MANA: SHASTRA(Kannada),Class 58: Theology of happiness(ಪಿಂಗಳೋಪಾಖ್ಯಾನ & ಮೇಧಾವೀ ಕಥೆ ),IW8tD0a9jXY, none
+MANA: SHASTRA(Kannada),Class 59: Problem & Remedy (ಸಮಸ್ಯೆ-ಪರಿಹಾರ),sEIY3i-qwNU, none
+MANA: SHASTRA(Kannada),Class 60: Medhavi's Wisdom: Sanyasa Beyond Ashrama Boundaries,uYBbWQwpP2w, none
+MANA: SHASTRA(Kannada),Class 61: Indra-Brahmana Conversation(ಬ್ರಾಹ್ಮಣನ ಕಥೆ),4j1dZlLDULE, none
+MANA: SHASTRA(Kannada),MS62: Nirlepa Karma Yoga-1,OIuHXvX4aYs, none
+MANA: SHASTRA(Kannada),MS63: About Varna Vyavasthe(ವರ್ಣ ವ್ಯವಸ್ಥೆ),zX9khfJ4iPg, none
+MANA: SHASTRA(Kannada),MS64: VARNA SYSTEM - More Explanation,B3-r_V-ksw4, none
+MANA: SHASTRA(Kannada),MS65: How can a person overcome stress-despair and disappointment in life?,aVKm908r3yE, none
