@@ -125,7 +125,6 @@ MANA:SHASTRA(Kannada),13: ಯುದ್ಧ ಜಿಹಾಸೆ  - ಅರ್ಜು�
 MANA:SHASTRA(Kannada),14: ಯುದ್ಧ ಪುಣ್ಯದ ಕೆಲಸವೋ/ಪಾಪದ ಕೆಲಸವೋ...?,5l1a5mLUoSY, none
 MANA:SHASTRA(Kannada),15: TATHVA VIVEEKA(ತತ್ವ ವಿವೇಕ),I7dapDC_UR4, none
 MANA:SHASTRA(Kannada),16: TATHVA VIVEEKA(ತತ್ವ ವಿವೇಕ-2),5bjuxPtYmiQ, none
-FAQ,01: ಸರ್ಪವನ್ನು ಕೊಲ್ಲುವುದು ಪಾಪವೋ...? ಗಿಡ-ಮರವನ್ನು ಕಡೆಯುವುದು ಪಾಪವಲ್ಲವೋ...? ವಿಶ್ಲೇಷಣೆ,enQyDChjr2I, none
 MANA:SHASTRA(Kannada),17: TATHVA VIVEEKA(ತತ್ವ ವಿವೇಕ-3),RzOGeywruQo, none
 MANA:SHASTRA(Kannada),18: TATHVA VIVEEKA(ತತ್ವ ವಿವೇಕ-4),5MpjL9bOdco, none
 MANA:SHASTRA(Kannada),19: Aatma-Existance-Experience,ylDDt7zzJLM, none
@@ -180,6 +179,7 @@ PRACTICE-2022, Practice 03: Electing Upanayana Muhurtha, Bc4MP-dJWHw, https://do
 PRACTICE-2022, Practice 04: Question on Delayed Marriage, 7J3vzKlieSI, https://docs.google.com/spreadsheets/d/1izEzrnW9csd-cZBsI3AlswiRILAReXX0txRv3mMm9es/edit?usp=sharing
 Questions & Answers, General Questions & Answers,cyUpzCD_tzk, none
 Questions & Answers, ASHTAKUTA QUESTIONS & ANSWERS,0Pt4zC22x7s, https://docs.google.com/spreadsheets/d/14n_W9NAV9Crb7d_njX5cj4IFK8pBQiqqQ6EZ_8JuphA/edit?usp=drive_link 
+Questions & Answers,01: ಸರ್ಪವನ್ನು ಕೊಲ್ಲುವುದು ಪಾಪವೋ...? ಗಿಡ-ಮರವನ್ನು ಕಡೆಯುವುದು ಪಾಪವಲ್ಲವೋ...? ವಿಶ್ಲೇಷಣೆ,enQyDChjr2I, none
 Google Sheets,ASHTAKUTA MATCHING-GOOGLE SHEET,, https://docs.google.com/spreadsheets/d/14n_W9NAV9Crb7d_njX5cj4IFK8pBQiqqQ6EZ_8JuphA/edit?usp=drive_link 
 Google Sheets,GOCHARA PHALA GOOGLE SHEET,, https://docs.google.com/spreadsheets/d/1izEzrnW9csd-cZBsI3AlswiRILAReXX0txRv3mMm9es/edit?usp=sharing
 Google Sheets,MUHURTHA_FOR_STUDENTS,, https://docs.google.com/spreadsheets/d/1NbprMX_xkVGBj2E9PWO3f3duCwZW-Evv89pkrWfc2Ts/edit?usp=drive_link
