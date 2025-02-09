@@ -1,7 +1,8 @@
 Playlist, Tittle, YouTube_Vidoe_ID, google_doc_link
 JYOTISHA(Kannada)-2025,01: Course Introduction & Syllabus, QSoXOqu8Z8E, https://drive.google.com/file/d/1iufEAMsGVxlwGgX_7JNWqP_75IEKZ0xJ/view?usp=drive_link
 JYOTISHA(Kannada)-2025,02: Introduction to Vedic Astrology, sLimesWCFNk, none
-JYOTISHA(Kannada)-2025,03: Astronomy relavent to Astrology, Ewo5H_rRaQ8, none
+JYOTISHA(Kannada)-2025,03: Astronomy relevant to Astrology, Ewo5H_rRaQ8, https://drive.google.com/file/d/1TMsh7BQS4AzbuGeKDn4bjoOdlsqo0Qjo/view?usp=drive_link
+JYOTISHA(Kannada)-2025,04: Strength of Time, YpCGf8NjKbM, https://drive.google.com/file/d/1_EvAcUDoA_4eVppdg--IszcodFNOKkO2/view?usp=drive_link
 JYOTISHA(Telugu)-2025,01: Course Introduction & Syllabus, DzT7dy5N6f4, https://drive.google.com/file/d/1iufEAMsGVxlwGgX_7JNWqP_75IEKZ0xJ/view?usp=drive_link
 JYOTISHA(Telugu)-2025,02: Introduction to Vedic Astrology, Pt9YbZzct14, none
 JYOTISHA(Telugu)-2025,03: Astronomy relavent to Astrology, 7kTGrYINHiw, none
