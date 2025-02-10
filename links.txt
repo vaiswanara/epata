@@ -6,7 +6,7 @@ JYOTISHA(Kannada)-2025,04: Strength of Time(ಕಾಲ ಬಲ), YpCGf8NjKbM, http
 JYOTISHA(Telugu)-2025,01: Course Introduction & Syllabus, DzT7dy5N6f4, https://drive.google.com/file/d/1iufEAMsGVxlwGgX_7JNWqP_75IEKZ0xJ/view?usp=drive_link
 JYOTISHA(Telugu)-2025,02: Introduction to Vedic Astrology, Pt9YbZzct14, none
 JYOTISHA(Telugu)-2025,03: Astronomy relevant to Astrology, 7kTGrYINHiw, none
-JYOTISHA(Telugu)-2025,04: Strength of Time(కాల బలము), oNdTn9iGdPA, none
+JYOTISHA(Telugu)-2025,04: Strength of Time(కాల బలము), oNdTn9iGdPA, https://drive.google.com/file/d/1VsEVe6vmPa23tzWe6CBp_-sPIP3eJeXk/view?usp=drive_link
 MANA:SHASTRA(Kannada),01: Introduction,KIHKpK9nzNM, none
 JYOTISHA(Kannada)-2022,Vedic Astrology-Course Syllabus, bYVTAcBpK_Q, https://drive.google.com/file/d/109K40HfYYEJPh7fxBD4bXDcmoZqe3ePv/view?usp=sharing
 JYOTISHA(Kannada)-2022,01: Vedic Astrology - Introduction,-Yi1LBXHNzQ, none
