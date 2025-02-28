@@ -182,9 +182,10 @@ PRACTICE-2022, Practice 04: Question on Delayed Marriage, 7J3vzKlieSI, https://d
 Questions & Answers, General Questions & Answers,cyUpzCD_tzk, none
 Questions & Answers, ASHTAKUTA QUESTIONS & ANSWERS,0Pt4zC22x7s, https://docs.google.com/spreadsheets/d/14n_W9NAV9Crb7d_njX5cj4IFK8pBQiqqQ6EZ_8JuphA/edit?usp=drive_link 
 Questions & Answers,01: ಸರ್ಪವನ್ನು ಕೊಲ್ಲುವುದು ಪಾಪವೋ...? ಗಿಡ-ಮರವನ್ನು ಕಡೆಯುವುದು ಪಾಪವಲ್ಲವೋ...? ವಿಶ್ಲೇಷಣೆ,enQyDChjr2I, none
-Google Sheets,ASHTAKUTA MATCHING-GOOGLE SHEET,, https://docs.google.com/spreadsheets/d/14n_W9NAV9Crb7d_njX5cj4IFK8pBQiqqQ6EZ_8JuphA/edit?usp=drive_link 
-Google Sheets,GOCHARA PHALA GOOGLE SHEET,, https://docs.google.com/spreadsheets/d/1izEzrnW9csd-cZBsI3AlswiRILAReXX0txRv3mMm9es/edit?usp=sharing
-Google Sheets,MUHURTHA_FOR_STUDENTS,, https://docs.google.com/spreadsheets/d/1NbprMX_xkVGBj2E9PWO3f3duCwZW-Evv89pkrWfc2Ts/edit?usp=drive_link
+ASTROLOGY APPS,ASHTAKUTA MATCHING-GOOGLE SHEET,, https://docs.google.com/spreadsheets/d/14n_W9NAV9Crb7d_njX5cj4IFK8pBQiqqQ6EZ_8JuphA/edit?usp=drive_link 
+ASTROLOGY APPS,GOCHARA PHALA GOOGLE SHEET,, https://docs.google.com/spreadsheets/d/1izEzrnW9csd-cZBsI3AlswiRILAReXX0txRv3mMm9es/edit?usp=sharing
+ASTROLOGY APPS,MUHURTHA_FOR_STUDENTS,, https://docs.google.com/spreadsheets/d/1NbprMX_xkVGBj2E9PWO3f3duCwZW-Evv89pkrWfc2Ts/edit?usp=drive_link
+ASTROLOGY APPS,ABOUT JAGANNATHA HORA SOFTWARE,3Z1wx8_TDrc&t=3s, https://docs.google.com/spreadsheets/d/1NbprMX_xkVGBj2E9PWO3f3duCwZW-Evv89pkrWfc2Ts/edit?usp=drive_link
 JYOTISHA(Kannada)-2025,05: Karma Theory(Part-1), uGOxpIsIt14, https://drive.google.com/file/d/188yhzeEWUDGotltJIq-gfkeI6kTp0GzU/view?usp=sharing
 JYOTISHA(Telugu)-2025,05: Karma Theory(Part-1), zFq_tK3sN_o, https://drive.google.com/file/d/1IS8HjBhxCpn2MEdo1KA53TIZWqtZFASX/view?usp=sharing
 Questions & Answers,04: Question & Answers,08kNB-Ao69o, none
@@ -193,4 +194,6 @@ MANA:SHASTRA(Kannada),67: Concept of YAJNA,LN9ZaPa75UQ, none
 JYOTISHA(Kannada)-2025,06: Karma Theory(Part-2), zLVVF9SSrA8, https://drive.google.com/file/d/1TMsh7BQS4AzbuGeKDn4bjoOdlsqo0Qjo/view?usp=sharing
 JYOTISHA(Telugu)-2025,06: Karma Theory (Part-2), tg3_i5FfyYQ, https://drive.google.com/file/d/1YXLh6T8pt_ZRYHA4lLaJNAReZ4xLh1jx/view?usp=sharing
 Questions & Answers,About Jagannatha Hora Software,3Z1wx8_TDrc, none
+
+
 
