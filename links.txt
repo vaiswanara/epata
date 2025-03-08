@@ -194,3 +194,8 @@ MANA:SHASTRA(Kannada),67: Concept of YAJNA,LN9ZaPa75UQ, none
 JYOTISHA(Kannada)-2025,06: Karma Theory(Part-2), zLVVF9SSrA8, https://drive.google.com/file/d/1TMsh7BQS4AzbuGeKDn4bjoOdlsqo0Qjo/view?usp=sharing
 JYOTISHA(Telugu)-2025,06: Karma Theory (Part-2), tg3_i5FfyYQ, https://drive.google.com/file/d/1YXLh6T8pt_ZRYHA4lLaJNAReZ4xLh1jx/view?usp=sharing
 Questions & Answers,About Jagannatha Hora Software,3Z1wx8_TDrc, none
+
+MANA:SHASTRA(Kannada),68: Types of Yajnas,r-57-LTI-pM, none	
+MANA:SHASTRAMU(Telugu),01: yet to start,, none
+JYOTISHA(Kannada)-2025,06: Karma Theory(Part-2), , none
+JYOTISHA(Telugu)-2025,06: Karma Theory (Part-2), , none
