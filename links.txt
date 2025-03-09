@@ -196,5 +196,5 @@ JYOTISHA(Telugu)-2025,06: Karma Theory (Part-2), tg3_i5FfyYQ, https://drive.goog
 Questions & Answers,About Jagannatha Hora Software,3Z1wx8_TDrc, none
 MANA:SHASTRA(Kannada),68: Types of Yajnas,r-57-LTI-pM, none	
 MANA:SHASTRAMU(Telugu),01: Concept of Moksha,HfzSIyf-gIQ, none
-JYOTISHA(Kannada)-2025,07: Planets-Karakatwas,, none
-JYOTISHA(Telugu)-2025,07: Planets-Karakatwas,, none
+JYOTISHA(Kannada)-2025,07: Planets-Karakatwas,l6kSfIgKCT8, none
+JYOTISHA(Telugu)-2025,07: Planets-Karakatwas,LheeYARsgLE, none
