@@ -175,6 +175,7 @@ MANA:SHASTRA(Kannada),62: Nirlepa Karma Yoga-1,OIuHXvX4aYs, none
 MANA:SHASTRA(Kannada),63: About Varna Vyavasthe(ವರ್ಣ ವ್ಯವಸ್ಥೆ),zX9khfJ4iPg, none
 MANA:SHASTRA(Kannada),64: VARNA SYSTEM - More Explanation,B3-r_V-ksw4, none
 MANA:SHASTRA(Kannada),65: How can a person overcome stress-despair and disappointment in life?,aVKm908r3yE, none
+MANA:SHASTRAMU(Telugu),01: Concept of Moksha,HfzSIyf-gIQ, none
 JYOTISHA(Kannada)-2022, Practice 01: Delay Marriage, hWgzsHu6SAc, none
 JYOTISHA(Kannada)-2022, Practice 02: Job & Debts, KcCYL54iiRw, none
 JYOTISHA(Kannada)-2022, Practice 03: Electing Upanayana Muhurtha, Bc4MP-dJWHw, https://docs.google.com/spreadsheets/d/1NbprMX_xkVGBj2E9PWO3f3duCwZW-Evv89pkrWfc2Ts/edit?usp=drive_link
@@ -195,6 +196,7 @@ JYOTISHA(Kannada)-2025,06: Karma Theory(Part-2), zLVVF9SSrA8, https://drive.goog
 JYOTISHA(Telugu)-2025,06: Karma Theory (Part-2), tg3_i5FfyYQ, https://drive.google.com/file/d/1YXLh6T8pt_ZRYHA4lLaJNAReZ4xLh1jx/view?usp=sharing
 Questions & Answers,About Jagannatha Hora Software,3Z1wx8_TDrc, none
 MANA:SHASTRA(Kannada),68: Types of Yajnas,r-57-LTI-pM, none	
-MANA:SHASTRAMU(Telugu),01: Concept of Moksha,HfzSIyf-gIQ, none
 JYOTISHA(Kannada)-2025,07: Planets-Karakatwas,l6kSfIgKCT8, none
 JYOTISHA(Telugu)-2025,07: Planets-Karakatwas,LheeYARsgLE, none
+MANA:SHASTRA(Kannada),69: 4th Adhyaya - Summary,R0Lgz2HIj2g, none
+MANA:SHASTRAMU(Telugu),02: Athma - 15 Fences (ఆత్మ-15 కంచలు),ptIo3vUXx50, none
