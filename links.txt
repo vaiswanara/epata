@@ -197,8 +197,9 @@ JYOTISHA(తెలుగు)-2025,06: Karma Theory (Part-2), tg3_i5FfyYQ, https:
 Questions & Answers,About Jagannatha Hora Software,3Z1wx8_TDrc, none
 MANA:SHASTRA(ಕನ್ನಡ),68: Types of Yajnas,r-57-LTI-pM, none	
 JYOTISHA(ಕನ್ನಡ)-2025,07: Planets-Karakatwas(Part-1),l6kSfIgKCT8, none
-JYOTISHA(తెలుగు)-2025,07: Planets-Karakatwas,LheeYARsgLE, none
+JYOTISHA(తెలుగు)-2025,07: Planets-Karakatwas(Part-1),LheeYARsgLE, none
 MANA:SHASTRA(ಕನ್ನಡ),69: 4th Adhyaya - Summary,R0Lgz2HIj2g, none
 MANA:SHASTRAMU(తెలుగు),02: Athma - 15 Fences (ఆత్మ-15 కంచలు),ptIo3vUXx50, none
 JYOTISHA(ಕನ್ನಡ)-2025,07: Planets-Karakatwas(Part-2),Jp1F9cWwh1s, none
+JYOTISHA(తెలుగు)-2025,07: Planets-Karakatwas(Part-2),DlScTh82t58, none
 
