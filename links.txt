@@ -206,4 +206,8 @@ MANA:SHASTRA(ಕನ್ನಡ),70: Difference Between Karma Sanyasa Vs Karma Yoga
 MANA:SHASTRAMU(తెలుగు),03: మతాలు-మోక్షము- పరికల్పన(Part-1); Concept of Moksha in Different Religions,E8DmXG3q3T0, none
 MANA:SHASTRA(ಕನ್ನಡ),71: ನಿತ್ಯಜೀವನದಲ್ಲಿ ಕರ್ಮಸಂನ್ಯಾಸ ಮತ್ತು ಕರ್ಮಯೋಗ(ಆಚರಣೆ),7-xUNHOJ97Y, none
 MANA:SHASTRAMU(తెలుగు),04: Budhism; MAYA VAADAM(అద్వైత సిద్ధాంతము) & భేదాభేదము,L7h6caDPy8g, none
+MANA:SHASTRA(ಕನ್ನಡ),72: ದೇವರು ನಮ್ಮ ಹತ್ತರ ಕೆಟ್ಟ ಕೆಲಸ ಯಾಕೆ ಮಾಡಿಸುತ್ತಾನೆ?,AXytvSJ34Ec, none
+MANA:SHASTRAMU(తెలుగు),05: శరీర-శరీరీ వాధము & తత్వవాదము,fyGESDRPtTA, none
+JYOTISHA(ಕನ್ನಡ)-2025,09: Lagna & Dwadasha Bhavagalu(Part-1),b1RzY0yXMn4, none
+JYOTISHA(తెలుగు)-2025,09: Lagnamu & Dwadasha Bhaavamulu(Part-01),fw1N7iKcaQs, none
 
