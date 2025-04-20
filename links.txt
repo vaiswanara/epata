@@ -212,5 +212,5 @@ JYOTISHA(ಕನ್ನಡ)-2025,09: Lagna & Dwadasha Bhavagalu(Part-1),b1RzY0yXMn
 JYOTISHA(తెలుగు)-2025,09: Lagnamu & Dwadasha Bhaavamulu(Part-01),fw1N7iKcaQs, none
 MANA:SHASTRA(ಕನ್ನಡ),73: ದೇವರು ನಮ್ಮ ಹತ್ತರ ಕೆಟ್ಟ ಕೆಲಸ ಯಾಕೆ ಮಾಡಿಸುತ್ತಾನೆ?(Part-2),4IyjZfpYg-Y, none
 JYOTISHA(ಕನ್ನಡ)-2025,10: Dwadasha Bhavagalu(Part-2),wRHx02j6AQ0, https://drive.google.com/file/d/1Zb8x0TdTx4rFjqkI-FdLJkGgftcg1HVU/view?usp=drive_link
-JYOTISHA(తెలుగు)-2025,10: Dwadasha Bhaavamulu(Part-02), none, none
+JYOTISHA(తెలుగు)-2025,10: Dwadasha Bhaavamulu(Part-02),cD866bNv9mY, none
 
