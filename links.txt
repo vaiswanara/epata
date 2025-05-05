@@ -218,7 +218,7 @@ JYOTISHA(ಕನ್ನಡ)-2022, 106: SHADBHALA(ಷಡ್ಬಲ)-1, mIl3X0Xo5To, 
 JYOTISHA(ಕನ್ನಡ)-2025,11: Kendra Sthaana & Trikona Sthaana,xJb_HwnO7lM, none
 JYOTISHA(తెలుగు)-2025,11: Kendra Sthaanamu; Trikona Sthaanamu & Dustha Sthaanamu,YLkvEMGjTNY, none
 MANA:SHASTRA(ಕನ್ನಡ),75: ಬೇರೇ ಅವರು ಮಾಡಿದ ಪಾಪ ನಮಗೆ transfer ಆಗುತ್ತಾ...?,WnxyFA1NJpQ, none
-JYOTISHA(ಕನ್ನಡ)-2022, 106: SHADBHALA(ಷಡ್ಬಲ)-2, J5eG8zbOmI, none
+JYOTISHA(ಕನ್ನಡ)-2022, 106: SHADBHALA(ಷಡ್ಬಲ)-2, -J5eG8zbOmI, none
 JYOTISHA(ಕನ್ನಡ)-2025,12: Yoga Karaka; Kendradhipatya Dosha; Planets & Relationship,7pIuZfgrGMw, none
 JYOTISHA(తెలుగు)-2025,12: Yoga Karakudu; Kendradhipathya Doshamu; Shubha-Paapa Grahaalu,CF6jRqF3J84, none
 
