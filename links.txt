@@ -196,20 +196,8 @@ JYOTISHA(ಕನ್ನಡ)-2025,06: Karma Theory(Part-2),zLVVF9SSrA8, https://dri
 JYOTISHA(తెలుగు)-2025,06: Karma Theory (Part-2), tg3_i5FfyYQ, https://drive.google.com/file/d/1YXLh6T8pt_ZRYHA4lLaJNAReZ4xLh1jx/view?usp=sharing
 Questions & Answers,About Jagannatha Hora Software,3Z1wx8_TDrc, none
 MANA:SHASTRA(ಕನ್ನಡ),68: Types of Yajnas,r-57-LTI-pM, none	
-JYOTISHA(ಕನ್ನಡ)-2025,07: Planets-Karakatwas(Part-1),l6kSfIgKCT8, https://drive.google.com/file/d/1kBbal8SvbIFg-sncZ0gxqVbkbnXSS5mj/view?usp=drive_link
-JYOTISHA(ಕನ್ನಡ)-2025,08: Planets-Karakatwas(Part-2),Jp1F9cWwh1s, https://drive.google.com/file/d/17CJqHOcvC4vrK0azMxvNks6kNzXsiVzG/view?usp=drive_link
-JYOTISHA(ಕನ್ನಡ)-2025,09: Lagna & Dwadasha Bhavagalu(Part-1),b1RzY0yXMn4, https://drive.google.com/file/d/1FFRffa_pXjXWpwrK5Jh8ekbi7JJLYVMF/view?usp=drive_link
-JYOTISHA(ಕನ್ನಡ)-2025,10: Dwadasha Bhavagalu(Part-2),wRHx02j6AQ0, https://drive.google.com/file/d/17QxhxXlj_1UnSR9XUq-xUurLHZ36ZivF/view?usp=drive_link
-JYOTISHA(ಕನ್ನಡ)-2025,11: Kendra Sthaana & Trikona Sthaana,xJb_HwnO7lM, https://drive.google.com/file/d/1MT1p1X2tubYcGVpJqayzzwkh_OavjGLE/view?usp=drive_link
-JYOTISHA(ಕನ್ನಡ)-2025,12: Yoga Karaka; Kendradhipatya Dosha; Planets & Relationship,7pIuZfgrGMw, https://drive.google.com/file/d/1QhfBSep7CfJ_pTggMxO7WU2-8iRktNui/view?usp=drive_link
-
-JYOTISHA(తెలుగు)-2025,07: Planets-Karakatwas(Part-1),LheeYARsgLE, none
-JYOTISHA(తెలుగు)-2025,08: Planets-Karakatwas(Part-2),DlScTh82t58, none
-JYOTISHA(తెలుగు)-2025,09: Lagnamu & Dwadasha Bhaavamulu(Part-01),fw1N7iKcaQs, none
-JYOTISHA(తెలుగు)-2025,10: Dwadasha Bhaavamulu(Part-02),cD866bNv9mY, none
-JYOTISHA(తెలుగు)-2025,11: Kendra Sthaanamu; Trikona Sthaanamu & Dustha Sthaanamu,YLkvEMGjTNY, none
-JYOTISHA(తెలుగు)-2025,12: Yoga Karakudu; Kendradhipathya Doshamu; Shubha-Paapa Grahaalu,CF6jRqF3J84, none
 MANA:SHASTRA(ಕನ್ನಡ),69: 4th Adhyaya - Summary,R0Lgz2HIj2g, none
+
 MANA:SHASTRAMU(తెలుగు),02: Athma - 15 Fences (ఆత్మ-15 కంచలు),ptIo3vUXx50, none
 MANA:SHASTRAMU(తెలుగు),03: మతాలు-మోక్షము- పరికల్పన(Part-1); Concept of Moksha in Different Religions,E8DmXG3q3T0, none
 MANA:SHASTRAMU(తెలుగు),04: Budhism; MAYA VAADAM(అద్వైత సిద్ధాంతము) & భేదాభేదము,L7h6caDPy8g, none
@@ -220,9 +208,28 @@ MANA:SHASTRA(ಕನ್ನಡ),71: ನಿತ್ಯಜೀವನದಲ್ಲಿ ಕ
 MANA:SHASTRA(ಕನ್ನಡ),72: ದೇವರು ನಮ್ಮ ಹತ್ತರ ಕೆಟ್ಟ ಕೆಲಸ ಯಾಕೆ ಮಾಡಿಸುತ್ತಾನೆ?,AXytvSJ34Ec, none
 MANA:SHASTRA(ಕನ್ನಡ),73: ದೇವರು ನಮ್ಮ ಹತ್ತರ ಕೆಟ್ಟ ಕೆಲಸ ಯಾಕೆ ಮಾಡಿಸುತ್ತಾನೆ?(Part-2),4IyjZfpYg-Y, none
 MANA:SHASTRA(ಕನ್ನಡ),74: How to Integrate the Bhagavad Gita into Daily Life?,34ewetb5zrM, none
-JYOTISHA(ಕನ್ನಡ)-2022, 106: SHADBHALA(ಷಡ್ಬಲ)-1, mIl3X0Xo5To, none
 MANA:SHASTRA(ಕನ್ನಡ),75: ಬೇರೇ ಅವರು ಮಾಡಿದ ಪಾಪ ನಮಗೆ transfer ಆಗುತ್ತಾ...?,WnxyFA1NJpQ, none
+MANA:SHASTRA(ಕನ್ನಡ),76: ಅಜ್ಞಾನವನ್ನು ಅಳಿಸುವ ಮಾರ್ಗ ಯಾವುದು? ಜ್ಞಾನ ಬರಬೇಕಾದರೆ ನಾವು ಏನು ಮಾಡಬೇಕು?,uBs_O5a2m6Q, none
+
+JYOTISHA(ಕನ್ನಡ)-2022, 105: SHADBHALA(ಷಡ್ಬಲ)-1, mIl3X0Xo5To, none
 JYOTISHA(ಕನ್ನಡ)-2022, 106: SHADBHALA(ಷಡ್ಬಲ)-2, -J5eG8zbOmI, none
+JYOTISHA(ಕನ್ನಡ)-2022, 107: ವ್ಯಸನಗಳು(Bad Habits)-1, liLLILjsBbo, none
+
+JYOTISHA(ಕನ್ನಡ)-2025,07: Planets-Karakatwas(Part-1),l6kSfIgKCT8, https://drive.google.com/file/d/1kBbal8SvbIFg-sncZ0gxqVbkbnXSS5mj/view?usp=drive_link
+JYOTISHA(ಕನ್ನಡ)-2025,08: Planets-Karakatwas(Part-2),Jp1F9cWwh1s, https://drive.google.com/file/d/17CJqHOcvC4vrK0azMxvNks6kNzXsiVzG/view?usp=drive_link
+JYOTISHA(ಕನ್ನಡ)-2025,09: Lagna & Dwadasha Bhavagalu(Part-1),b1RzY0yXMn4, https://drive.google.com/file/d/1FFRffa_pXjXWpwrK5Jh8ekbi7JJLYVMF/view?usp=drive_link
+JYOTISHA(ಕನ್ನಡ)-2025,10: Dwadasha Bhavagalu(Part-2),wRHx02j6AQ0, https://drive.google.com/file/d/17QxhxXlj_1UnSR9XUq-xUurLHZ36ZivF/view?usp=drive_link
+JYOTISHA(ಕನ್ನಡ)-2025,11: Kendra Sthaana & Trikona Sthaana,xJb_HwnO7lM, https://drive.google.com/file/d/1MT1p1X2tubYcGVpJqayzzwkh_OavjGLE/view?usp=drive_link
+JYOTISHA(ಕನ್ನಡ)-2025,12: Yoga Karaka; Kendradhipatya Dosha; Planets & Relationship,7pIuZfgrGMw, https://drive.google.com/file/d/1QhfBSep7CfJ_pTggMxO7WU2-8iRktNui/view?usp=drive_link
+JYOTISHA(ಕನ್ನಡ)-2025,13: Grahamaitri(ಗ್ರಹಮೈತ್ರಿ),nqENqcx07g4, https://drive.google.com/file/d/1or9YXRmbzlzGe3VLUKplM86SXSGYkfRH/view?usp=drive_link
+
+JYOTISHA(తెలుగు)-2025,07: Planets-Karakatwas(Part-1),LheeYARsgLE, none
+JYOTISHA(తెలుగు)-2025,08: Planets-Karakatwas(Part-2),DlScTh82t58, none
+JYOTISHA(తెలుగు)-2025,09: Lagnamu & Dwadasha Bhaavamulu(Part-01),fw1N7iKcaQs, none
+JYOTISHA(తెలుగు)-2025,10: Dwadasha Bhaavamulu(Part-02),cD866bNv9mY, none
+JYOTISHA(తెలుగు)-2025,11: Kendra Sthaanamu; Trikona Sthaanamu & Dustha Sthaanamu,YLkvEMGjTNY, none
+JYOTISHA(తెలుగు)-2025,12: Yoga Karakudu; Kendradhipathya Doshamu; Shubha-Paapa Grahaalu,CF6jRqF3J84, none
+JYOTISHA(తెలుగు)-2025,13: Grahamaitri(గ్రహమైత్రి),none, none
 
 
 
