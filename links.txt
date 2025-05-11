@@ -229,7 +229,7 @@ JYOTISHA(తెలుగు)-2025,09: Lagnamu & Dwadasha Bhaavamulu(Part-01),fw1
 JYOTISHA(తెలుగు)-2025,10: Dwadasha Bhaavamulu(Part-02),cD866bNv9mY, none
 JYOTISHA(తెలుగు)-2025,11: Kendra Sthaanamu; Trikona Sthaanamu & Dustha Sthaanamu,YLkvEMGjTNY, none
 JYOTISHA(తెలుగు)-2025,12: Yoga Karakudu; Kendradhipathya Doshamu; Shubha-Paapa Grahaalu,CF6jRqF3J84, none
-JYOTISHA(తెలుగు)-2025,13: Grahamaitri(గ్రహమైత్రి),none, none
+JYOTISHA(తెలుగు)-2025,13: Grahamaitri(గ్రహమైత్రి),pYasb5pIIng, none
 
 
 
