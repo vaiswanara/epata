@@ -187,6 +187,9 @@ ASTROLOGY APPS,ASHTAKUTA MATCHING-GOOGLE SHEET,, https://docs.google.com/spreads
 ASTROLOGY APPS,GOCHARA PHALA GOOGLE SHEET,, https://docs.google.com/spreadsheets/d/1izEzrnW9csd-cZBsI3AlswiRILAReXX0txRv3mMm9es/edit?usp=sharing
 ASTROLOGY APPS,MUHURTHA_FOR_STUDENTS,, https://docs.google.com/spreadsheets/d/1NbprMX_xkVGBj2E9PWO3f3duCwZW-Evv89pkrWfc2Ts/edit?usp=drive_link
 ASTROLOGY APPS,ABOUT JAGANNATHA HORA SOFTWARE,3Z1wx8_TDrc, none
+ASTROLOGY APPS,Graha Role Mapping Sheet(Telugu),DbO0Kdlp7iQ, https://vaiswanara.github.io/read_horoscope/
+ASTROLOGY APPS,Graha Role Mapping Sheet(Kannada),m77jfmMNXjg, https://vaiswanara.github.io/read_horoscope/
+
 JYOTISHA(ಕನ್ನಡ)-2025,05: Karma Theory(Part-1), uGOxpIsIt14, https://drive.google.com/file/d/1KCk0sp2ZShcA5DjqldiBKDOW40nmhWMp/view?usp=drive_link
 JYOTISHA(తెలుగు)-2025,05: Karma Theory(Part-1), zFq_tK3sN_o, https://drive.google.com/file/d/1IS8HjBhxCpn2MEdo1KA53TIZWqtZFASX/view?usp=sharing
 Questions & Answers,04: Question & Answers,08kNB-Ao69o, none
