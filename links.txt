@@ -215,6 +215,7 @@ MANA:SHASTRA(ಕನ್ನಡ),75: ಬೇರೇ ಅವರು ಮಾಡಿದ ಪ�
 MANA:SHASTRA(ಕನ್ನಡ),76: ಅಜ್ಞಾನವನ್ನು ಅಳಿಸುವ ಮಾರ್ಗ ಯಾವುದು? ಜ್ಞಾನ ಬರಬೇಕಾದರೆ ನಾವು ಏನು ಮಾಡಬೇಕು?,uBs_O5a2m6Q, none
 MANA:SHASTRA(ಕನ್ನಡ),77: ಸುಖ ಇರುವುದು ಎಲ್ಲಿ..?,MsrAOBbT3HI, none
 MANA:SHASTRA(ಕನ್ನಡ),78: Dhyanayoga(Introduction),NPj8VFNSj5g, none
+MANA:SHASTRA(ಕನ್ನಡ),79: MS79: Dhyana Preparation (ಧ್ಯಾನ ಸಿದ್ಧತೆ ),T-0IegAYv2c, none
 
 JYOTISHA(ಕನ್ನಡ)-2022, 105: SHADBHALA(ಷಡ್ಬಲ)-1, mIl3X0Xo5To, none
 JYOTISHA(ಕನ್ನಡ)-2022, 106: SHADBHALA(ಷಡ್ಬಲ)-2, -J5eG8zbOmI, none
@@ -232,6 +233,7 @@ JYOTISHA(ಕನ್ನಡ)-2025,13: Grahamaitri(ಗ್ರಹಮೈತ್ರಿ),n
 JYOTISHA(ಕನ್ನಡ)-2025,14: How to read a Horoscope(Part-1),U78ipXgdAFw, none
 JYOTISHA(ಕನ್ನಡ)-2025,15: Graha Role Mapping Sheet(WebApp),m77jfmMNXjg, https://vaiswanara.github.io/read_horoscope/
 JYOTISHA(ಕನ್ನಡ)-2025,16: PREDICTION PRINCIPLES & CORE LEARNING GUIDELINES,vZPSeDibpqQ, none
+JYOTISHA(ಕನ್ನಡ)-2025,17: Introduction to Lagna,vmgSAKS6g-c, none
 
 JYOTISHA(తెలుగు)-2025,07: Planets-Karakatwas(Part-1),LheeYARsgLE, none
 JYOTISHA(తెలుగు)-2025,08: Planets-Karakatwas(Part-2),DlScTh82t58, none
@@ -243,6 +245,7 @@ JYOTISHA(తెలుగు)-2025,13: Grahamaitri(గ్రహమైత్రి
 JYOTISHA(తెలుగు)-2025,14: How to read a Horoscope(Part-1), jMr0y-Rhutg, none
 JYOTISHA(తెలుగు)-2025,15: Graha Role Mapping Sheet(WebApp),DbO0Kdlp7iQ, https://vaiswanara.github.io/read_horoscope/
 JYOTISHA(తెలుగు)-2025,16: PREDICTION PRINCIPLES & CORE LEARNING GUIDELINES,G51Iw7e7tYc, none
+JYOTISHA(తెలుగు)-2025,17: Introduction to Lagna,IN9cZHzSZjY, none
 
 
 
