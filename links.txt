@@ -216,7 +216,7 @@ MANA:SHASTRA(ಕನ್ನಡ),76: ಅಜ್ಞಾನವನ್ನು ಅಳಿಸ
 MANA:SHASTRA(ಕನ್ನಡ),77: ಸುಖ ಇರುವುದು ಎಲ್ಲಿ..?,MsrAOBbT3HI, none
 MANA:SHASTRA(ಕನ್ನಡ),78: Dhyanayoga(Introduction),NPj8VFNSj5g, none
 MANA:SHASTRA(ಕನ್ನಡ),79: MS79: Dhyana Preparation (ಧ್ಯಾನ ಸಿದ್ಧತೆ ),T-0IegAYv2c, none
-MANA:SHASTRA(ಕನ್ನಡ),79: 80: ಧ್ಯಾನ ಸಿದ್ಧತೆ - ಆಹಾರ ವಿವಾರಾದಿಗಳಲ್ಲಿ ನಿಯಮಗಳು,M8BVRvpPEOI, none
+MANA:SHASTRA(ಕನ್ನಡ),80: ಧ್ಯಾನ ಸಿದ್ಧತೆ - ಆಹಾರ ವಿವಾರಾದಿಗಳಲ್ಲಿ ನಿಯಮಗಳು,M8BVRvpPEOI, none
 
 JYOTISHA(ಕನ್ನಡ)-2022, 105: SHADBHALA(ಷಡ್ಬಲ)-1, mIl3X0Xo5To, none
 JYOTISHA(ಕನ್ನಡ)-2022, 106: SHADBHALA(ಷಡ್ಬಲ)-2, -J5eG8zbOmI, none
