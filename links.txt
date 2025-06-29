@@ -198,6 +198,7 @@ MANA:SHASTRA(ಕನ್ನಡ),67: Concept of YAJNA,LN9ZaPa75UQ, none
 JYOTISHA(ಕನ್ನಡ)-2025,06: Karma Theory(Part-2),zLVVF9SSrA8, https://drive.google.com/file/d/1nkInVU1olHrfnFHYR2TrqWlmmP_-CZKn/view?usp=drive_link
 JYOTISHA(తెలుగు)-2025,06: Karma Theory (Part-2), tg3_i5FfyYQ, https://drive.google.com/file/d/1YXLh6T8pt_ZRYHA4lLaJNAReZ4xLh1jx/view?usp=sharing
 Questions & Answers,About Jagannatha Hora Software,3Z1wx8_TDrc, none
+Questions & Answers,General Questions(28-06-2025),1YyV9ikADqs, none
 MANA:SHASTRA(ಕನ್ನಡ),68: Types of Yajnas,r-57-LTI-pM, none	
 MANA:SHASTRA(ಕನ್ನಡ),69: 4th Adhyaya - Summary,R0Lgz2HIj2g, none
 
@@ -217,6 +218,7 @@ MANA:SHASTRA(ಕನ್ನಡ),77: ಸುಖ ಇರುವುದು ಎಲ್ಲ�
 MANA:SHASTRA(ಕನ್ನಡ),78: Dhyanayoga(Introduction),NPj8VFNSj5g, none
 MANA:SHASTRA(ಕನ್ನಡ),79: MS79: Dhyana Preparation (ಧ್ಯಾನ ಸಿದ್ಧತೆ ),T-0IegAYv2c, none
 MANA:SHASTRA(ಕನ್ನಡ),80: ಧ್ಯಾನ ಸಿದ್ಧತೆ - ಆಹಾರ ವಿವಾರಾದಿಗಳಲ್ಲಿ ನಿಯಮಗಳು,M8BVRvpPEOI, none
+MANA:SHASTRA(ಕನ್ನಡ),80: ಧ್ಯಾನದಲ್ಲಿ ಆಗುವ ಅನುಭವ,n6E49wekBp8, none
 
 JYOTISHA(ಕನ್ನಡ)-2022, 105: SHADBHALA(ಷಡ್ಬಲ)-1, mIl3X0Xo5To, none
 JYOTISHA(ಕನ್ನಡ)-2022, 106: SHADBHALA(ಷಡ್ಬಲ)-2, -J5eG8zbOmI, none
@@ -237,6 +239,7 @@ JYOTISHA(ಕನ್ನಡ)-2025,16: PREDICTION PRINCIPLES & CORE LEARNING GUIDELI
 JYOTISHA(ಕನ್ನಡ)-2025,17: Introduction to Lagna,vmgSAKS6g-c, none
 JYOTISHA(ಕನ್ನಡ)-2025,18: Lagna & the Self: A Philosophical Insight,u_9Q8N13xDk, none
 JYOTISHA(ಕನ್ನಡ)-2025,19: Analyzing Lagna - Practice,5lIudvJRLAM, none
+JYOTISHA(ಕನ್ನಡ)-2025,20: ಎಲ್ಲವೂ ವಿಧಿ ಲಿಖಿತವಾದರೆ ನಮ್ಮ ಪ್ರಯತ್ನಕ್ಕೆ ಏನು ಬೆಲೆ?,AJCVLLQikqg, none
 
 JYOTISHA(తెలుగు)-2025,07: Planets-Karakatwas(Part-1),LheeYARsgLE, none
 JYOTISHA(తెలుగు)-2025,08: Planets-Karakatwas(Part-2),DlScTh82t58, none
@@ -251,6 +254,7 @@ JYOTISHA(తెలుగు)-2025,16: PREDICTION PRINCIPLES & CORE LEARNING GUID
 JYOTISHA(తెలుగు)-2025,17: Introduction to Lagna,IN9cZHzSZjY, none
 JYOTISHA(తెలుగు)-2025,18: Lagna & the Self: A Philosophical Insight,obFZMCM2Hn8, none
 JYOTISHA(తెలుగు)-2025,19: Analyzing Lagna - Practice,S0jrklZzo9Y, none
+JYOTISHA(తెలుగు)-2025,20: విధి మరియు పురుష ప్రయత్నము,M5Sq1kLm-M4, none
 
 
 
