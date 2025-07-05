@@ -3,6 +3,7 @@ JYOTISHA(ಕನ್ನಡ)-2025,01: Course Introduction & Syllabus, QSoXOqu8Z8E, 
 JYOTISHA(ಕನ್ನಡ)-2025,02: Introduction to Vedic Astrology, sLimesWCFNk, https://drive.google.com/file/d/1sdNSDT2SzE--t_NqDJxrNz8vITkcyaLP/view?usp=drive_link
 JYOTISHA(ಕನ್ನಡ)-2025,03: Astronomy relevant to Astrology, Ewo5H_rRaQ8, https://drive.google.com/file/d/15FuR5mHLGx6FzP7l9MotR5FgSqTx9JSb/view?usp=drive_link
 JYOTISHA(ಕನ್ನಡ)-2025,04: Strength of Time(ಕಾಲ ಬಲ), YpCGf8NjKbM, https://drive.google.com/file/d/1ONL0v_aa27mdzOO-oMrL9qepv4J33VUy/view?usp=drive_link
+Prashna(ಕನ್ನಡ)-2025,01: PRASHNA SHASTRA (INTRODUCTION), OkU33yPz4xU, none
 JYOTISHA(తెలుగు)-2025,01: Course Introduction & Syllabus, DzT7dy5N6f4, https://drive.google.com/file/d/1iufEAMsGVxlwGgX_7JNWqP_75IEKZ0xJ/view?usp=drive_link
 JYOTISHA(తెలుగు)-2025,02: Introduction to Vedic Astrology, Pt9YbZzct14, none
 JYOTISHA(తెలుగు)-2025,03: Astronomy relevant to Astrology, 7kTGrYINHiw, none
@@ -218,7 +219,8 @@ MANA:SHASTRA(ಕನ್ನಡ),77: ಸುಖ ಇರುವುದು ಎಲ್ಲ�
 MANA:SHASTRA(ಕನ್ನಡ),78: Dhyanayoga(Introduction),NPj8VFNSj5g, none
 MANA:SHASTRA(ಕನ್ನಡ),79: MS79: Dhyana Preparation (ಧ್ಯಾನ ಸಿದ್ಧತೆ ),T-0IegAYv2c, none
 MANA:SHASTRA(ಕನ್ನಡ),80: ಧ್ಯಾನ ಸಿದ್ಧತೆ - ಆಹಾರ ವಿವಾರಾದಿಗಳಲ್ಲಿ ನಿಯಮಗಳು,M8BVRvpPEOI, none
-MANA:SHASTRA(ಕನ್ನಡ),80: ಧ್ಯಾನದಲ್ಲಿ ಆಗುವ ಅನುಭವ,n6E49wekBp8, none
+MANA:SHASTRA(ಕನ್ನಡ),81: ಧ್ಯಾನದಲ್ಲಿ ಆಗುವ ಅನುಭವ,n6E49wekBp8, none
+MANA:SHASTRA(ಕನ್ನಡ),82: ಧ್ಯಾನದಲ್ಲಿ ಆಗುವ ಅನುಭವ,AOFiOT3gLkM, none
 
 JYOTISHA(ಕನ್ನಡ)-2022, 105: SHADBHALA(ಷಡ್ಬಲ)-1, mIl3X0Xo5To, none
 JYOTISHA(ಕನ್ನಡ)-2022, 106: SHADBHALA(ಷಡ್ಬಲ)-2, -J5eG8zbOmI, none
