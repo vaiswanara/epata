@@ -242,6 +242,7 @@ JYOTISHA(ಕನ್ನಡ)-2025,17: Introduction to Lagna,vmgSAKS6g-c, none
 JYOTISHA(ಕನ್ನಡ)-2025,18: Lagna & the Self: A Philosophical Insight,u_9Q8N13xDk, none
 JYOTISHA(ಕನ್ನಡ)-2025,19: Analyzing Lagna - Practice,5lIudvJRLAM, none
 JYOTISHA(ಕನ್ನಡ)-2025,20: ಎಲ್ಲವೂ ವಿಧಿ ಲಿಖಿತವಾದರೆ ನಮ್ಮ ಪ್ರಯತ್ನಕ್ಕೆ ಏನು ಬೆಲೆ?,AJCVLLQikqg, none
+JYOTISHA(ಕನ್ನಡ)-2025,21: EDUCATION - Introduction,s2ZVRhsgKjs, none
 
 JYOTISHA(తెలుగు)-2025,07: Planets-Karakatwas(Part-1),LheeYARsgLE, none
 JYOTISHA(తెలుగు)-2025,08: Planets-Karakatwas(Part-2),DlScTh82t58, none
@@ -256,7 +257,9 @@ JYOTISHA(తెలుగు)-2025,16: PREDICTION PRINCIPLES & CORE LEARNING GUID
 JYOTISHA(తెలుగు)-2025,17: Introduction to Lagna,IN9cZHzSZjY, none
 JYOTISHA(తెలుగు)-2025,18: Lagna & the Self: A Philosophical Insight,obFZMCM2Hn8, none
 JYOTISHA(తెలుగు)-2025,19: Analyzing Lagna - Practice,S0jrklZzo9Y, none
-JYOTISHA(తెలుగు)-2025,20: విధి మరియు పురుష ప్రయత్నము,M5Sq1kLm-M4, none
+JYOTISHA(తెలుగు)-2025,20: అన్నీ విధి లిఖితమైతే మన ప్రయత్నానికి విలువ ఏముంది?,M5Sq1kLm-M4, none
+JYOTISHA(తెలుగు)-2025,21: EDUCATION - Introduction, none, none
+
 
 
 
