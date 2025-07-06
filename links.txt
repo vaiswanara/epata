@@ -258,7 +258,7 @@ JYOTISHA(తెలుగు)-2025,17: Introduction to Lagna,IN9cZHzSZjY, none
 JYOTISHA(తెలుగు)-2025,18: Lagna & the Self: A Philosophical Insight,obFZMCM2Hn8, none
 JYOTISHA(తెలుగు)-2025,19: Analyzing Lagna - Practice,S0jrklZzo9Y, none
 JYOTISHA(తెలుగు)-2025,20: అన్నీ విధి లిఖితమైతే మన ప్రయత్నానికి విలువ ఏముంది?,M5Sq1kLm-M4, none
-JYOTISHA(తెలుగు)-2025,21: EDUCATION - Introduction, none, none
+JYOTISHA(తెలుగు)-2025,21: EDUCATION - Introduction, aelfNpzuaZ4, none
 
 
 
