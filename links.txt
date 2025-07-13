@@ -221,6 +221,9 @@ MANA:SHASTRA(ಕನ್ನಡ),79: MS79: Dhyana Preparation (ಧ್ಯಾನ ಸ�
 MANA:SHASTRA(ಕನ್ನಡ),80: ಧ್ಯಾನ ಸಿದ್ಧತೆ - ಆಹಾರ ವಿವಾರಾದಿಗಳಲ್ಲಿ ನಿಯಮಗಳು,M8BVRvpPEOI, none
 MANA:SHASTRA(ಕನ್ನಡ),81: ಧ್ಯಾನದಲ್ಲಿ ಆಗುವ ಅನುಭವ,n6E49wekBp8, none
 MANA:SHASTRA(ಕನ್ನಡ),82: ಧ್ಯಾನದಲ್ಲಿ ಆಗುವ ಅನುಭವ,AOFiOT3gLkM, none
+MANA:SHASTRA(ಕನ್ನಡ),83: ಮನಸ್ಸು ನಾನು ಹೇಳಿದಂತೆ ಕೇಳಬೇಕಾದರೇ ಏನು ಮಾಡಬೇಕು..?,3vW5Q8JDiyQ, none
+
+Prashna(ಕನ್ನಡ)-2025,02: PS02: PRASHNA SHASTRA(Pravesha), k4glb2VA1sU, none
 
 JYOTISHA(ಕನ್ನಡ)-2022, 105: SHADBHALA(ಷಡ್ಬಲ)-1, mIl3X0Xo5To, none
 JYOTISHA(ಕನ್ನಡ)-2022, 106: SHADBHALA(ಷಡ್ಬಲ)-2, -J5eG8zbOmI, none
@@ -243,6 +246,7 @@ JYOTISHA(ಕನ್ನಡ)-2025,18: Lagna & the Self: A Philosophical Insight,u_9
 JYOTISHA(ಕನ್ನಡ)-2025,19: Analyzing Lagna - Practice,5lIudvJRLAM, none
 JYOTISHA(ಕನ್ನಡ)-2025,20: ಎಲ್ಲವೂ ವಿಧಿ ಲಿಖಿತವಾದರೆ ನಮ್ಮ ಪ್ರಯತ್ನಕ್ಕೆ ಏನು ಬೆಲೆ?,AJCVLLQikqg, none
 JYOTISHA(ಕನ್ನಡ)-2025,21: EDUCATION - Introduction,s2ZVRhsgKjs, none
+JYOTISHA(ಕನ್ನಡ)-2025,22: Vidya Sthaana-Practice,ND_o-XMGXQs, none
 
 JYOTISHA(తెలుగు)-2025,07: Planets-Karakatwas(Part-1),LheeYARsgLE, none
 JYOTISHA(తెలుగు)-2025,08: Planets-Karakatwas(Part-2),DlScTh82t58, none
@@ -259,6 +263,7 @@ JYOTISHA(తెలుగు)-2025,18: Lagna & the Self: A Philosophical Insight,
 JYOTISHA(తెలుగు)-2025,19: Analyzing Lagna - Practice,S0jrklZzo9Y, none
 JYOTISHA(తెలుగు)-2025,20: అన్నీ విధి లిఖితమైతే మన ప్రయత్నానికి విలువ ఏముంది?,M5Sq1kLm-M4, none
 JYOTISHA(తెలుగు)-2025,21: EDUCATION - Introduction, aelfNpzuaZ4, none
+JYOTISHA(తెలుగు)-2025,22: Vidya Sthaana-Practice, none, none
 
 
 
