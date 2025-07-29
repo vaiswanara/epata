@@ -250,6 +250,7 @@ JYOTISHA(ಕನ್ನಡ)-2025,20: ಎಲ್ಲವೂ ವಿಧಿ ಲಿಖಿ�
 JYOTISHA(ಕನ್ನಡ)-2025,21: EDUCATION - Introduction,s2ZVRhsgKjs, none
 JYOTISHA(ಕನ್ನಡ)-2025,22: Vidya Sthaana-Practice,ND_o-XMGXQs, none
 JYOTISHA(ಕನ್ನಡ)-2025,23: Course Selection & Common Questions,oxaH2GCVSVg, https://drive.google.com/file/d/1OyX_zNEliaBiWz0OSrbQra3OjFNk74Lx/view?usp=sharing
+JYOTISHA(ಕನ್ನಡ)-2025,24: Higher Education & Remedies,5s_DPNxQcC8, none
 
 JYOTISHA(తెలుగు)-2025,07: Planets-Karakatwas(Part-1),LheeYARsgLE, none
 JYOTISHA(తెలుగు)-2025,08: Planets-Karakatwas(Part-2),DlScTh82t58, none
@@ -268,6 +269,7 @@ JYOTISHA(తెలుగు)-2025,20: అన్నీ విధి లిఖి�
 JYOTISHA(తెలుగు)-2025,21: EDUCATION - Introduction, aelfNpzuaZ4, none
 JYOTISHA(తెలుగు)-2025,22: Vidya Sthaana-Practice, Jqsifw-tabM, none
 JYOTISHA(తెలుగు)-2025,23: Course Selection & Common Questions, AOVylkB7im4, https://drive.google.com/file/d/1udy8yi_fC2sZq6rpavpIqiZoWpEEdjMA/view?usp=drive_link
+JYOTISHA(తెలుగు)-2025,24: Higher Education & Remedies, WhvJYa5LjNg, none
 
 
 
