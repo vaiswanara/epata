@@ -224,6 +224,7 @@ MANA:SHASTRA(ಕನ್ನಡ),82: ಧ್ಯಾನದಲ್ಲಿ ಆಗುವ �
 MANA:SHASTRA(ಕನ್ನಡ),83: ಮನಸ್ಸು ನಾನು ಹೇಳಿದಂತೆ ಕೇಳಬೇಕಾದರೇ ಏನು ಮಾಡಬೇಕು..?,3vW5Q8JDiyQ, none
 MANA:SHASTRA(ಕನ್ನಡ),84: ಬಾಹ್ಯ ಸಾಧನೆ Vs ಅಂತರಂಗ ಸಾಧನೆ,1lmKXPn3qrw, none
 MANA:SHASTRA(ಕನ್ನಡ),85: ಭಗವದ್ಗೀತೆ-ಜ್ಞಾನವಿಜ್ಞಾನಯೋಗ( ದೇವರು ಎಲ್ಲಿ ಇದ್ದಾನೆ....?),P5zK1HR-Yc8, none
+MANA:SHASTRA(ಕನ್ನಡ),86: The glorious forms of God(ಭಗವಂತನ ವಿಭೂತಿ ರೂಪಗಳು),U7BpY9AZGSM, none
 
 Prashna(ಕನ್ನಡ)-2025,02: PRASHNA SHASTRA(Pravesha), k4glb2VA1sU, none
 Prashna(ಕನ್ನಡ)-2025,03: Sakhuna & Dwadasha Bhaavagalu, Cif2K-5lhaM, none
@@ -255,6 +256,7 @@ JYOTISHA(ಕನ್ನಡ)-2025,22: Vidya Sthaana-Practice,ND_o-XMGXQs, none
 JYOTISHA(ಕನ್ನಡ)-2025,23: Course Selection & Common Questions,oxaH2GCVSVg, https://drive.google.com/file/d/1OyX_zNEliaBiWz0OSrbQra3OjFNk74Lx/view?usp=sharing
 JYOTISHA(ಕನ್ನಡ)-2025,24: Higher Education & Remedies,5s_DPNxQcC8, none
 JYOTISHA(ಕನ್ನಡ)-2025,25: Career(Job/Business) - Introduction,D8GCTp7j2Ys, none
+JYOTISHA(ಕನ್ನಡ)-2025,26: Suitable areas for Business/Job,OoTtNyq1Ue8, https://drive.google.com/file/d/1ZBf2qwSdZOWT98gOHvAnY8T3LNBZuWdy/view?usp=sharing
 
 
 JYOTISHA(తెలుగు)-2025,07: Planets-Karakatwas(Part-1),LheeYARsgLE, none
@@ -276,6 +278,7 @@ JYOTISHA(తెలుగు)-2025,22: Vidya Sthaana-Practice, Jqsifw-tabM, none
 JYOTISHA(తెలుగు)-2025,23: Course Selection & Common Questions, AOVylkB7im4, https://drive.google.com/file/d/1udy8yi_fC2sZq6rpavpIqiZoWpEEdjMA/view?usp=drive_link
 JYOTISHA(తెలుగు)-2025,24: Higher Education & Remedies, WhvJYa5LjNg, none
 JYOTISHA(తెలుగు)-2025,25: Career(Job/Business) - Introduction, RNWF_dHUBzg, none
+JYOTISHA(తెలుగు)-2025,26: Suitable areas for Business/Job, S5-tdYUrnY4, https://drive.google.com/file/d/1fdpMyZ7bZ_WUR6qr5-N7GPnLQ9iPl4ZQ/view?usp=sharing
 
 
 
