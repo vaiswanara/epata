@@ -225,10 +225,14 @@ MANA:SHASTRA(ಕನ್ನಡ),83: ಮನಸ್ಸು ನಾನು ಹೇಳಿ�
 MANA:SHASTRA(ಕನ್ನಡ),84: ಬಾಹ್ಯ ಸಾಧನೆ Vs ಅಂತರಂಗ ಸಾಧನೆ,1lmKXPn3qrw, none
 MANA:SHASTRA(ಕನ್ನಡ),85: ಭಗವದ್ಗೀತೆ-ಜ್ಞಾನವಿಜ್ಞಾನಯೋಗ( ದೇವರು ಎಲ್ಲಿ ಇದ್ದಾನೆ....?),P5zK1HR-Yc8, none
 MANA:SHASTRA(ಕನ್ನಡ),86: The glorious forms of God(ಭಗವಂತನ ವಿಭೂತಿ ರೂಪಗಳು),U7BpY9AZGSM, none
+MANA:SHASTRA(ಕನ್ನಡ),87: ಭಗವಂತ – ಜೀವಿಗಳ ಬೀಜ ಮತ್ತು ಬಲ(The Lord – The Seed and Strength of All Beings),3xkfWV2SNLE, none
+MANA:SHASTRA(ಕನ್ನಡ),88: Bhakti in Four Forms: The Gita’s Insight(ಆರ್ಥಿ-ಜಿಜ್ಞಾಸು-ಅರ್ಥಾರ್ಥಿ-ಜ್ಞಾನಿ),5AsYiEqp5SU, none
+MANA:SHASTRA(ಕನ್ನಡ),89: Exclusive devotion(ಏಕಭಕ್ತಿ),Nq2kkh28WCw, none
 
 Prashna(ಕನ್ನಡ)-2025,02: PRASHNA SHASTRA(Pravesha), k4glb2VA1sU, none
 Prashna(ಕನ್ನಡ)-2025,03: Sakhuna & Dwadasha Bhaavagalu, Cif2K-5lhaM, none
 Prashna(ಕನ್ನಡ)-2025,04: Mouna Prashne & Simple Prediction Techniques, 6jy2PS-k8r4, https://drive.google.com/file/d/1rDHKhxaY626nPuXCNq7niJAU9DGQR6kV/view?usp=sharing
+Prashna(ಕನ್ನಡ)-2025,05: ಪ್ರಶ್ನೆ ಶಾಸ್ತ್ರದಲ್ಲಿ ಧನಸ್ಥಾನ (Money Related Questions), RrCuR1ugC0M, none
 
 JYOTISHA(ಕನ್ನಡ)-2022, 105: SHADBHALA(ಷಡ್ಬಲ)-1, mIl3X0Xo5To, none
 JYOTISHA(ಕನ್ನಡ)-2022, 106: SHADBHALA(ಷಡ್ಬಲ)-2, -J5eG8zbOmI, none
@@ -256,7 +260,9 @@ JYOTISHA(ಕನ್ನಡ)-2025,22: Vidya Sthaana-Practice,ND_o-XMGXQs, none
 JYOTISHA(ಕನ್ನಡ)-2025,23: Course Selection & Common Questions,oxaH2GCVSVg, https://drive.google.com/file/d/1OyX_zNEliaBiWz0OSrbQra3OjFNk74Lx/view?usp=sharing
 JYOTISHA(ಕನ್ನಡ)-2025,24: Higher Education & Remedies,5s_DPNxQcC8, none
 JYOTISHA(ಕನ್ನಡ)-2025,25: Career(Job/Business) - Introduction,D8GCTp7j2Ys, none
-JYOTISHA(ಕನ್ನಡ)-2025,26: Suitable areas for Business/Job,OoTtNyq1Ue8, https://drive.google.com/file/d/1ZBf2qwSdZOWT98gOHvAnY8T3LNBZuWdy/view?usp=sharing
+JYOTISHA(ಕನ್ನಡ)-2025,26: Suitable areas for Business/Job,OoTtNyq1Ue8, https://drive.google.com/file/d/1ZBf2qwSdZOWT98gOHvAnY8T3LNBZuWdy/view
+JYOTISHA(ಕನ್ನಡ)-2025,27: About Navaamsha(D9),yEqV7Gta6EA, https://docs.google.com/spreadsheets/d/1NPKxxSyL2vsUO8IO40XVu7PiqOp3EEj-/edit?gid=126754559#gid=126754559
+
 
 
 JYOTISHA(తెలుగు)-2025,07: Planets-Karakatwas(Part-1),LheeYARsgLE, none
@@ -279,6 +285,7 @@ JYOTISHA(తెలుగు)-2025,23: Course Selection & Common Questions, AOVyl
 JYOTISHA(తెలుగు)-2025,24: Higher Education & Remedies, WhvJYa5LjNg, none
 JYOTISHA(తెలుగు)-2025,25: Career(Job/Business) - Introduction, RNWF_dHUBzg, none
 JYOTISHA(తెలుగు)-2025,26: Suitable areas for Business/Job, S5-tdYUrnY4, https://drive.google.com/file/d/1fdpMyZ7bZ_WUR6qr5-N7GPnLQ9iPl4ZQ/view?usp=sharing
+JYOTISHA(తెలుగు)-2025,27: About Navaamsha(D9), B-LZDgQ6yEE, https://docs.google.com/spreadsheets/d/1NPKxxSyL2vsUO8IO40XVu7PiqOp3EEj-/edit?gid=126754559#gid=126754559
 
 
 
