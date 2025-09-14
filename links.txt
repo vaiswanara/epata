@@ -190,6 +190,9 @@ ASTROLOGY APPS,MUHURTHA_FOR_STUDENTS,, https://docs.google.com/spreadsheets/d/1N
 ASTROLOGY APPS,ABOUT JAGANNATHA HORA SOFTWARE,3Z1wx8_TDrc, none
 ASTROLOGY APPS,Graha Role Mapping Sheet(Telugu),DbO0Kdlp7iQ, https://vaiswanara.github.io/read_horoscope/
 ASTROLOGY APPS,Graha Role Mapping Sheet(Kannada),m77jfmMNXjg, https://vaiswanara.github.io/read_horoscope/
+ASTROLOGY APPS,How to Prepare Notes from YouTube Videos(Kannada),IVV-cJDYBF4, none
+ASTROLOGY APPS,How to Prepare Notes from YouTube Videos(Telugu),S5CA1SntEIU, none
+
 
 JYOTISHA(ಕನ್ನಡ)-2025,05: Karma Theory(Part-1), uGOxpIsIt14, https://drive.google.com/file/d/1KCk0sp2ZShcA5DjqldiBKDOW40nmhWMp/view?usp=drive_link
 JYOTISHA(తెలుగు)-2025,05: Karma Theory(Part-1), zFq_tK3sN_o, https://drive.google.com/file/d/1IS8HjBhxCpn2MEdo1KA53TIZWqtZFASX/view?usp=sharing
@@ -228,12 +231,14 @@ MANA:SHASTRA(ಕನ್ನಡ),86: The glorious forms of God(ಭಗವಂತನ �
 MANA:SHASTRA(ಕನ್ನಡ),87: ಭಗವಂತ – ಜೀವಿಗಳ ಬೀಜ ಮತ್ತು ಬಲ(The Lord – The Seed and Strength of All Beings),3xkfWV2SNLE, none
 MANA:SHASTRA(ಕನ್ನಡ),88: Bhakti in Four Forms: The Gita’s Insight(ಆರ್ಥಿ-ಜಿಜ್ಞಾಸು-ಅರ್ಥಾರ್ಥಿ-ಜ್ಞಾನಿ),5AsYiEqp5SU, none
 MANA:SHASTRA(ಕನ್ನಡ),89: Exclusive devotion(ಏಕಭಕ್ತಿ),Nq2kkh28WCw, none
+MANA:SHASTRA(ಕನ್ನಡ),90: Six things a man should know,-1h_bznuTlY, none
 
 Prashna(ಕನ್ನಡ)-2025,02: PRASHNA SHASTRA(Pravesha), k4glb2VA1sU, none
 Prashna(ಕನ್ನಡ)-2025,03: Sakhuna & Dwadasha Bhaavagalu, Cif2K-5lhaM, none
 Prashna(ಕನ್ನಡ)-2025,04: Mouna Prashne & Simple Prediction Techniques, 6jy2PS-k8r4, https://drive.google.com/file/d/1rDHKhxaY626nPuXCNq7niJAU9DGQR6kV/view?usp=sharing
 Prashna(ಕನ್ನಡ)-2025,05: ಪ್ರಶ್ನೆ ಶಾಸ್ತ್ರದಲ್ಲಿ ಧನಸ್ಥಾನ (Money Related Questions), RrCuR1ugC0M, none
-Prashna(ಕನ್ನಡ)-2025,05: 06: Property Related Questions(Buying-Selling-Change…), AKyKidAEJu0, https://drive.google.com/file/d/1GRCEF6mnVrugCsEIGsTEXJKLUXC2daHU/view
+Prashna(ಕನ್ನಡ)-2025,06: Property Related Questions(Buying-Selling-Change…), AKyKidAEJu0, https://drive.google.com/file/d/1GRCEF6mnVrugCsEIGsTEXJKLUXC2daHU/view
+
 
 JYOTISHA(ಕನ್ನಡ)-2022, 105: SHADBHALA(ಷಡ್ಬಲ)-1, mIl3X0Xo5To, none
 JYOTISHA(ಕನ್ನಡ)-2022, 106: SHADBHALA(ಷಡ್ಬಲ)-2, -J5eG8zbOmI, none
@@ -263,6 +268,7 @@ JYOTISHA(ಕನ್ನಡ)-2025,24: Higher Education & Remedies,5s_DPNxQcC8, none
 JYOTISHA(ಕನ್ನಡ)-2025,25: Career(Job/Business) - Introduction,D8GCTp7j2Ys, none
 JYOTISHA(ಕನ್ನಡ)-2025,26: Suitable areas for Business/Job,OoTtNyq1Ue8, https://drive.google.com/file/d/1ZBf2qwSdZOWT98gOHvAnY8T3LNBZuWdy/view
 JYOTISHA(ಕನ್ನಡ)-2025,27: About Navaamsha(D9),yEqV7Gta6EA, https://docs.google.com/spreadsheets/d/1NPKxxSyL2vsUO8IO40XVu7PiqOp3EEj-/edit?gid=126754559#gid=126754559
+JYOTISHA(ಕನ್ನಡ)-2025,28: Income-Savings-Expenditure,8ttluQIc9OU, https://drive.google.com/file/d/1W3jcRCqaADLO52eQDx21x11HnZjD5UKP/view?usp=sharing
 
 
 
@@ -287,6 +293,7 @@ JYOTISHA(తెలుగు)-2025,24: Higher Education & Remedies, WhvJYa5LjNg, 
 JYOTISHA(తెలుగు)-2025,25: Career(Job/Business) - Introduction, RNWF_dHUBzg, none
 JYOTISHA(తెలుగు)-2025,26: Suitable areas for Business/Job, S5-tdYUrnY4, https://drive.google.com/file/d/1fdpMyZ7bZ_WUR6qr5-N7GPnLQ9iPl4ZQ/view?usp=sharing
 JYOTISHA(తెలుగు)-2025,27: About Navaamsha(D9), B-LZDgQ6yEE, https://docs.google.com/spreadsheets/d/1NPKxxSyL2vsUO8IO40XVu7PiqOp3EEj-/edit?gid=126754559#gid=126754559
+JYOTISHA(తెలుగు)-2025,27: Income-Savings-Expenditure, ,
 
 Special Topics,Hidden Beliefs and Myths about the Eclipse(Kannada), 2Yr0V0uzoRk, https://drive.google.com/file/d/1-LeyhyaWk3Hrkp8Iydig_tNQAc-y93Se/view 
 Special Topics,Hidden Beliefs and Myths about the Eclipse(Telugu), 78bwqK81vsQ, https://drive.google.com/file/d/12OHR60cPJjpxIpcmXjBjwMCfPQSG-RsA/view
