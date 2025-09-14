@@ -192,7 +192,6 @@ ASTROLOGY APPS,Graha Role Mapping Sheet(Telugu),DbO0Kdlp7iQ, https://vaiswanara.
 ASTROLOGY APPS,Graha Role Mapping Sheet(Kannada),m77jfmMNXjg, https://vaiswanara.github.io/read_horoscope/
 ASTROLOGY APPS,How to Prepare Notes from YouTube Videos(Kannada),IVV-cJDYBF4, none
 ASTROLOGY APPS,How to Prepare Notes from YouTube Videos(Telugu),S5CA1SntEIU, none
-
 JYOTISHA(ಕನ್ನಡ)-2025,05: Karma Theory(Part-1), uGOxpIsIt14, https://drive.google.com/file/d/1KCk0sp2ZShcA5DjqldiBKDOW40nmhWMp/view?usp=drive_link
 JYOTISHA(తెలుగు)-2025,05: Karma Theory(Part-1), zFq_tK3sN_o, https://drive.google.com/file/d/1IS8HjBhxCpn2MEdo1KA53TIZWqtZFASX/view?usp=sharing
 Questions & Answers,04: Question & Answers,08kNB-Ao69o, none
@@ -288,7 +287,7 @@ JYOTISHA(తెలుగు)-2025,24: Higher Education & Remedies, WhvJYa5LjNg, 
 JYOTISHA(తెలుగు)-2025,25: Career(Job/Business) - Introduction, RNWF_dHUBzg, none
 JYOTISHA(తెలుగు)-2025,26: Suitable areas for Business/Job, S5-tdYUrnY4, https://drive.google.com/file/d/1fdpMyZ7bZ_WUR6qr5-N7GPnLQ9iPl4ZQ/view?usp=sharing
 JYOTISHA(తెలుగు)-2025,27: About Navaamsha(D9), B-LZDgQ6yEE, https://docs.google.com/spreadsheets/d/1NPKxxSyL2vsUO8IO40XVu7PiqOp3EEj-/edit?gid=126754559#gid=126754559
-JYOTISHA(తెలుగు)-2025,27: Income-Savings-Expenditure,none,none
+JYOTISHA(తెలుగు)-2025,28: Income-Savings-Expenditure,none,none
 
 Special Topics,Hidden Beliefs and Myths about the Eclipse(Kannada), 2Yr0V0uzoRk, https://drive.google.com/file/d/1-LeyhyaWk3Hrkp8Iydig_tNQAc-y93Se/view 
 Special Topics,Hidden Beliefs and Myths about the Eclipse(Telugu), 78bwqK81vsQ, https://drive.google.com/file/d/12OHR60cPJjpxIpcmXjBjwMCfPQSG-RsA/view
