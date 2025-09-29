@@ -288,7 +288,6 @@ JYOTISHA(తెలుగు)-2025,25: Career(Job/Business) - Introduction, RNWF_
 JYOTISHA(తెలుగు)-2025,26: Suitable areas for Business/Job, S5-tdYUrnY4, https://drive.google.com/file/d/1fdpMyZ7bZ_WUR6qr5-N7GPnLQ9iPl4ZQ/view?usp=sharing
 JYOTISHA(తెలుగు)-2025,27: About Navaamsha(D9), B-LZDgQ6yEE, https://docs.google.com/spreadsheets/d/1NPKxxSyL2vsUO8IO40XVu7PiqOp3EEj-/edit?gid=126754559#gid=126754559
 JYOTISHA(తెలుగు)-2025,28: Income-Savings-Expenditure,none,none
-
 Special Topics,Hidden Beliefs and Myths about the Eclipse(Kannada), 2Yr0V0uzoRk, https://drive.google.com/file/d/1-LeyhyaWk3Hrkp8Iydig_tNQAc-y93Se/view 
 Special Topics,Hidden Beliefs and Myths about the Eclipse(Telugu), 78bwqK81vsQ, https://drive.google.com/file/d/12OHR60cPJjpxIpcmXjBjwMCfPQSG-RsA/view
 
@@ -296,3 +295,7 @@ Prashna(ಕನ್ನಡ)-2025,07: About Missing Person or Article,Bv4a55j642g,no
 JYOTISHA(తెలుగు)-2025,29: Huge Income-Un-expected Income/Expenditure,2uv2loyP6Ok,https://drive.google.com/file/d/1qYaB47DINXZbiKXCYwjrig3WQCGMIXoz/view
 JYOTISHA(ಕನ್ನಡ)-2025,29: Huge Income-Un-expected Income/Expenditure,JxORPrS1AKk,https://drive.google.com/file/d/17UZr2dHMDhafP32kd5fPejSeaJQ5e1LA/view
 MANA:SHASTRA(ಕನ್ನಡ),91: What Determines the Next Birth?(ಸಾವಿನ ಕ್ಷಣದ ಚಿಂತನೆ ಏನು ತೀರ್ಮಾನಿಸುತ್ತದೆ? ),Aev9cdU6WG0,none
+ASTROLOGY APPS,Ghati-Vighati Conversion (Knnada),B0G_c6zkjPc, none
+ASTROLOGY APPS,Ghati-Vighati Conversion (Telugu),k5lfPAWFDho, none
+
+
