@@ -292,7 +292,7 @@ JYOTISHA(తెలుగు)-2025,28: Income-Savings-Expenditure,none,none
 Special Topics,Hidden Beliefs and Myths about the Eclipse(Kannada), 2Yr0V0uzoRk, https://drive.google.com/file/d/1-LeyhyaWk3Hrkp8Iydig_tNQAc-y93Se/view 
 Special Topics,Hidden Beliefs and Myths about the Eclipse(Telugu), 78bwqK81vsQ, https://drive.google.com/file/d/12OHR60cPJjpxIpcmXjBjwMCfPQSG-RsA/view
 
-PRASHNA SHAASTRA,07: About Missing Person or Article,Bv4a55j642g,none
-JYOTISHA(Telugu)-2025,29: Huge Income-Un-expected Income/Expenditure,2uv2loyP6Ok,https://drive.google.com/file/d/1qYaB47DINXZbiKXCYwjrig3WQCGMIXoz/view
-JYOTISHA(Kannada)-2025,29: Huge Income-Un-expected Income/Expenditure,JxORPrS1AKk,https://drive.google.com/file/d/17UZr2dHMDhafP32kd5fPejSeaJQ5e1LA/view
-MANA: SHASTRA(Kannada),91: What Determines the Next Birth?(ಸಾವಿನ ಕ್ಷಣದ ಚಿಂತನೆ ಏನು ತೀರ್ಮಾನಿಸುತ್ತದೆ? ),Aev9cdU6WG0,none
+Prashna(ಕನ್ನಡ)-2025,07: About Missing Person or Article,Bv4a55j642g,none
+JYOTISHA(తెలుగు)-2025,29: Huge Income-Un-expected Income/Expenditure,2uv2loyP6Ok,https://drive.google.com/file/d/1qYaB47DINXZbiKXCYwjrig3WQCGMIXoz/view
+JYOTISHA(ಕನ್ನಡ)-2025,29: Huge Income-Un-expected Income/Expenditure,JxORPrS1AKk,https://drive.google.com/file/d/17UZr2dHMDhafP32kd5fPejSeaJQ5e1LA/view
+MANA:SHASTRA(ಕನ್ನಡ),91: What Determines the Next Birth?(ಸಾವಿನ ಕ್ಷಣದ ಚಿಂತನೆ ಏನು ತೀರ್ಮಾನಿಸುತ್ತದೆ? ),Aev9cdU6WG0,none
