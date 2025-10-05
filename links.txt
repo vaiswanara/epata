@@ -298,4 +298,7 @@ MANA:SHASTRA(ಕನ್ನಡ),91: What Determines the Next Birth?(ಸಾವಿ�
 ASTROLOGY APPS,Ghati-Vighati Conversion (Knnada),B0G_c6zkjPc, none
 ASTROLOGY APPS,Ghati-Vighati Conversion (Telugu),k5lfPAWFDho, none
 
-
+MANA:SHASTRA(ಕನ್ನಡ),92: Journey Beyond Birth and Death (ಜನನ ಮರಣಾತೀತ ಯಾನ),skgL1tC-gKw,none
+Prashna(ಕನ್ನಡ)-2025,08: Missing Article,c_g18AvJOwo,none
+JYOTISHA(తెలుగు)-2025,30: Possible Remediesfor financial issues (Part-01),7nn4vBymvjw,none
+JYOTISHA(ಕನ್ನಡ)-2025,30: Possible Remediesfor financial issues (Part-01),5KlbsNICDYE,none
