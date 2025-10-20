@@ -291,7 +291,7 @@ JYOTISHA(తెలుగు)-2025,28: Income-Savings-Expenditure,elyJWCFdQhA,non
 Special Topics,Hidden Beliefs and Myths about the Eclipse(Kannada), 2Yr0V0uzoRk, https://drive.google.com/file/d/1-LeyhyaWk3Hrkp8Iydig_tNQAc-y93Se/view 
 Special Topics,Hidden Beliefs and Myths about the Eclipse(Telugu), 78bwqK81vsQ, https://drive.google.com/file/d/12OHR60cPJjpxIpcmXjBjwMCfPQSG-RsA/view
 
-Prashna(ಕನ್ನಡ)-2025,07: About Missing Person or Article,Bv4a55j642g,none
+Prashna(ಕನ್ನಡ)-2025,07: About Missing Person or Article,Bv4a55j642g,https://drive.google.com/file/d/196WRhEd_MTwx6iw4kP6U6t1apfflh6Jy/view
 JYOTISHA(తెలుగు)-2025,29: Huge Income-Un-expected Income/Expenditure,2uv2loyP6Ok,https://drive.google.com/file/d/1qYaB47DINXZbiKXCYwjrig3WQCGMIXoz/view
 JYOTISHA(ಕನ್ನಡ)-2025,29: Huge Income-Un-expected Income/Expenditure,JxORPrS1AKk,https://drive.google.com/file/d/17UZr2dHMDhafP32kd5fPejSeaJQ5e1LA/view
 MANA:SHASTRA(ಕನ್ನಡ),91: What Determines the Next Birth?(ಸಾವಿನ ಕ್ಷಣದ ಚಿಂತನೆ ಏನು ತೀರ್ಮಾನಿಸುತ್ತದೆ? ),Aev9cdU6WG0,none
@@ -302,3 +302,13 @@ MANA:SHASTRA(ಕನ್ನಡ),92: Journey Beyond Birth and Death (ಜನನ ಮ�
 Prashna(ಕನ್ನಡ)-2025,08: Missing Article,c_g18AvJOwo,none
 JYOTISHA(తెలుగు)-2025,30: Possible Remediesfor financial issues (Part-01),7nn4vBymvjw,none
 JYOTISHA(ಕನ್ನಡ)-2025,30: Possible Remediesfor financial issues (Part-01),5KlbsNICDYE,none
+
+Prashna(ಕನ್ನಡ)-2025,09: Roga Prashne(ರೋಗ ಪ್ರಶ್ನೆ),Z0S4DTzelmE, https://drive.google.com/file/d/1POS6PyYLLL3LbOhC7mNZApB2BOiksqo3/view
+MANA:SHASTRA(ಕನ್ನಡ),93: Journey of the Jeeva After Death(ಮರಣದ ನಂತರ ಆತ್ಮದ ಪಥ),-CT4yMpb0MU, none
+JYOTISHA(తెలుగు)-2025,31: Possible Remedies for financial issues (Part-02),iQMeG1FoR5U, none
+JYOTISHA(ಕನ್ನಡ)-2025,31: Possible Remedies for financial issues (Part-02),IcpcQrF_khQ, none
+MANA:SHASTRA(ಕನ್ನಡ),94: Brahma-Jagath Sambandha Yoga,g4fQgoHpoIk, none
+Prashna(ಕನ್ನಡ)-2025,10: Queries related to Marriage(ಕಳತ್ರ ಪ್ರಶ್ನೆ),LlXZQIT-mWo, https://drive.google.com/file/d/1kUsmXOGVDPeHpAa8I3YhCZbkgtyXjBGd/view
+JYOTISHA(తెలుగు)-2025,32: Calculating Vimshothari Dasha,t9B7EO3kHDM, none
+JYOTISHA(ಕನ್ನಡ)-2025,32: Calculating Vimshothari Dasha,9c6ZvlCzhic, none
+
