@@ -300,7 +300,7 @@ ASTROLOGY APPS,Ghati-Vighati Conversion (Telugu),k5lfPAWFDho, none
 
 MANA:SHASTRA(ಕನ್ನಡ),92: Journey Beyond Birth and Death (ಜನನ ಮರಣಾತೀತ ಯಾನ),skgL1tC-gKw,none
 Prashna(ಕನ್ನಡ)-2025,08: Missing Article,c_g18AvJOwo,none
-JYOTISHA(తెలుగు)-2025,30: Possible Remediesfor financial issues (Part-01),7nn4vBymvjw,none
+JYOTISHA(తెలుగు)-2025,30: Possible Remediesfor financial issues (Part-01),7nn4vBymvjw, none
 JYOTISHA(ಕನ್ನಡ)-2025,30: Possible Remediesfor financial issues (Part-01),5KlbsNICDYE,none
 
 Prashna(ಕನ್ನಡ)-2025,09: Roga Prashne(ರೋಗ ಪ್ರಶ್ನೆ),Z0S4DTzelmE, https://drive.google.com/file/d/1POS6PyYLLL3LbOhC7mNZApB2BOiksqo3/view
