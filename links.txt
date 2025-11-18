@@ -324,5 +324,8 @@ Prashna(ಕನ್ನಡ)-2025,11: Miscellaneous Questions,t60PC_v3UEg, none
 MANA:SHASTRA(ಕನ್ನಡ),96: Trai-Vidyara Dharma & Bhagawathara Dharma(ತ್ರೈವ್ವಿದ್ಯರ ಧರ್ಮಮತ್ತುಭಾಗವತರ ಧರ್ಮ),y4oHx7RtoAg,none
 JYOTISHA(తెలుగు)-2025,34: Analysing Vimshothari Dasha(Part-2),wKTj2D66x20,https://drive.google.com/file/d/18C-VfhzpJqwRScBq3AicFqEUdUed2Lf_/view
 JYOTISHA(ಕನ್ನಡ)-2025,34: Analysing Vimshothari Dasha(Part-2),d7WMhjQpZl8,https://drive.google.com/file/d/1JYxXI3uwHOTlgePu6v5IiKkPDWSd-V3d/view
+
 MANA:SHASTRA(ಕನ್ನಡ),97: Upasamhaara (ಭಾಗವತ ಧರ್ಮ ಅನುಷ್ಠಾನದಿಂದ ಎನು ಫಲ..?),RPcqC3-GrfI, none
+JYOTISHA(తెలుగు)-2025,35: Vimshothari Dasha - Practice,yTrKVNGPmKY,none
+JYOTISHA(ಕನ್ನಡ)-2025,35: Vimshothari Dasha - Abhyasa,kbBwdBqs4vw, none
 
