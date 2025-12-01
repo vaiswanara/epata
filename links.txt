@@ -328,4 +328,13 @@ JYOTISHA(ಕನ್ನಡ)-2025,34: Analysing Vimshothari Dasha(Part-2),d7WMhjQpZ
 MANA:SHASTRA(ಕನ್ನಡ),97: Upasamhaara (ಭಾಗವತ ಧರ್ಮ ಅನುಷ್ಠಾನದಿಂದ ಎನು ಫಲ..?),RPcqC3-GrfI, none
 JYOTISHA(తెలుగు)-2025,35: Vimshothari Dasha - Practice,yTrKVNGPmKY,none
 JYOTISHA(ಕನ್ನಡ)-2025,35: Vimshothari Dasha - Abhyasa,kbBwdBqs4vw, none
+Prashna(ಕನ್ನಡ)-2025,13: Miscellaneous Questions-2,iTOjSV-QOPI, none
+
+MANA:SHASTRA(ಕನ್ನಡ),98: What is Shaapa..?(ಶಾಪ ಅಂದರೇ ಏನು..?),6eZarPa6WU, none
+JYOTISHA(తెలుగు)-2025,36: Planetary Transit(గోచారఫల నిర్ణయము),YO1pbbWI4-c,none
+JYOTISHA(ಕನ್ನಡ)-2025,36: Planetary Transit(ಗೋಚಾರ -ಫಲನಿರ್ಣಯ),bQM_7vCREu8, none
+
+MANA:SHASTRA(ಕನ್ನಡ),99: Is There Any Partiality in God’s Grace?(ಭಗವಂತನ ಅನುಗ್ರಹದಲ್ಲಿ ತಾರತಮ್ಯ ಇದೆಯೇ...?),1gmkkLV0ZQc, none
+JYOTISHA(తెలుగు)-2025,37: Planetary Transit(వేద-గురుబలము-శనిప్రభావము),Lw3IvfAh_Ho,none
+JYOTISHA(ಕನ್ನಡ)-2025,37: Planetary Transit(Veda-Guru Bhala-Shani Prabhava),dKfWcc8yZIw, none
 
