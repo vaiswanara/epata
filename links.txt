@@ -338,3 +338,25 @@ MANA:SHASTRA(ಕನ್ನಡ),99: Is There Any Partiality in God’s Grace?(ಭ�
 JYOTISHA(తెలుగు)-2025,37: Planetary Transit-2(వేద-గురుబలము-శనిప్రభావము),Lw3IvfAh_Ho,none
 JYOTISHA(ಕನ್ನಡ)-2025,37: Planetary Transit-2(Veda-Guru Bhala-Shani Prabhava),dKfWcc8yZIw, none
 
+MANA:SHASTRA(ಕನ್ನಡ),101: Divine Qualities(Buddhi, Jnana & Forgiveness),nqKpoGg9nag, none
+
+MANA:SHASTRA(ಕನ್ನಡ),101: From Charity to Austerity: Deep Life Lessons of Bhagavad Gita,USdjuEgr4us, none
+JYOTISHA(తెలుగు)-2025,38: Traditional Marital System(వివాహ వైభవము),w10eDrlrTgM,none
+JYOTISHA(ಕನ್ನಡ)-2025,38: Traditional Marital System(ವಿವಾಹ ವೈಭವ),2CzzWfOwxvA, none
+
+MANA:SHASTRA(ಕನ್ನಡ),102: Dhaana & Thyaga(ದಾನ ಮತ್ತು ತ್ಯಾಗ – ಅಂತರಂಗದ ಪರಿವರ್ತನೆ),ZkNLjc2f4og, none
+JYOTISHA(తెలుగు)-2025,39:  Marrital issues(Divorce),KdunZ4YOlkk,none
+JYOTISHA(ಕನ್ನಡ)-2025,39: Marrital issues(Divorce),1yLhbnHkMS4, none
+
+MANA:SHASTRA(ಕನ್ನಡ),103: The Glory of the Lord — Path of Knowledge & Devotion,fe-9-wfI-bU, none
+
+MANA:SHASTRA(ಕನ್ನಡ), Questions & Answers(03-Jan-2026),VlJ3gH0Xa58, none
+JYOTISHA(ಕನ್ನಡ)-2025,40: Kalatra Sthaana - Graha & Bhaava Role,4aK0Ek2uYUU, none
+JYOTISHA(తెలుగు)-2025,40: Kalatra Sthaana - Graha & Bhaava Role,Y-S964taLAA,none
+
+
+MANA:SHASTRA(ಕನ್ನಡ),104: Arujuna requests Krishna to explain "Vibhuthi"(ಭಗವಂತನ ವಿಭೂತಿ ಜ್ಞಾನಕ್ಕಾಗಿ ವಿನಂತಿ),dsuKJ9ch-mw, none
+JYOTISHA(ಕನ್ನಡ)-2025,41: Sun’s Role in Marriage & Analyzing 7th House,2GSgQ6Fp8Gg, none
+JYOTISHA(తెలుగు)-2025,41: Sun’s Role in Marriage & Analyzing 7th House,FFd5NxQWaZk,none
+
+
