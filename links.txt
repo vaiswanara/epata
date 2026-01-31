@@ -359,4 +359,16 @@ MANA:SHASTRA(ಕನ್ನಡ),104: Arujuna requests Krishna to explain "Vibhuthi
 JYOTISHA(ಕನ್ನಡ)-2025,41: Sun’s Role in Marriage & Analyzing 7th House,2GSgQ6Fp8Gg, none
 JYOTISHA(తెలుగు)-2025,41: Sun’s Role in Marriage & Analyzing 7th House,FFd5NxQWaZk,none
 
+MANA:SHASTRA(ಕನ್ನಡ),105: DIVINE VIBHUTIS EXPLAINED(ವಿಷ್ಣು–ರವಿ–ಮರೀಚಿ–ಶಶಿ ವಿಭೂತಿ), hb9HznxKJSg, none
+JYOTISHA(ಕನ್ನಡ)-2025,42: Three Pillar Formula for Marriage Prediction, cB2BWG0V83A, https://drive.google.com/file/d/1P-LWtChx3VBi93CiIYAyCUM5hVuzPKAz/view
+JYOTISHA(తెలుగు)-2025,42: Three Pillar Formula for Marriage Prediction, emeIZPnVIfs, https://drive.google.com/file/d/1P-LWtChx3VBi93CiIYAyCUM5hVuzPKAz/view
+
+MANA:SHASTRA(ಕನ್ನಡ),106: DIVINE VIBHUTIS EXPLAINED(ಶಂಕರ-ಬೃಹಸ್ಪತಿ-ಸ್ಕಂದ-ಹಿಮಾಲಯ…),YRGItVVIbCI, none
+JYOTISHA(ಕನ್ನಡ)-2025,43: Practicing Kalatra Sthaana,OmNN9_D7tnU, none
+JYOTISHA(తెలుగు)-2025,43: Practicing Kalatra Sthaana,yVLp0caXV5A, none
+
+MANA:SHASTRA(ಕನ್ನಡ),107: DIVINE VIBHUTIS EXPLAINED(ಅಶ್ವತ್ಥಃ-ನಾರದ-ಚಿತ್ರರಥಂ-ಕಪಿಲ-ವಜ್ರಃ…),IK5O8A1xQec,none 
+JYOTISHA(ಕನ್ನಡ)-2025,44:
+JYOTISHA(తెలుగు)-2025,44:
+
 
