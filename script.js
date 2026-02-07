@@ -177,7 +177,13 @@ const DataManager = {
                     rows.slice(1).forEach(row => {
                         const parts = row.split(',').map(f => f.trim());
                         if (parts.length >= 3) {
-                            const [playlist, title, videoId, pdfLink] = parts;
+                            // Handle titles containing commas by grabbing fixed columns first
+                            const playlist = parts[0];
+                            const pdfLink = parts[parts.length - 1];
+                            const videoId = parts[parts.length - 2];
+                            // Join everything between playlist and videoId as the title
+                            const title = parts.slice(1, parts.length - 2).join(', ');
+
                             if (playlist && title) {
                                 playlists.add(playlist);
                                 lessons.push({
@@ -644,7 +650,10 @@ const ViewManager = {
             favorites: 'Favorites',
             progress: 'Progress',
             recent: 'Recent',
-            donate: 'Support Us'
+            donate: 'Support Us',
+            apps: 'Web Apps',
+            privacy: 'Privacy Policy',
+            about: 'About Me'
         };
         const titleEl = document.getElementById('pageTitle');
         if (titleEl) titleEl.textContent = titles[viewName] || 'Dashboard';
@@ -678,6 +687,9 @@ const ViewManager = {
                 this.renderRecentView();
                 break;
             case 'donate':
+            case 'privacy':
+            case 'apps':
+            case 'about':
                 // Donate view is static, no dynamic rendering needed
                 break;
         }
@@ -1011,6 +1023,16 @@ const UIControllers = {
                 if (btn.dataset.view) ViewManager.switchView(btn.dataset.view);
             });
         });
+
+        // External links (APPs, Privacy Policy)
+        document.querySelectorAll('[data-external]').forEach(item => {
+            item.addEventListener('click', () => {
+                window.open(item.dataset.external, '_blank');
+                if (item.classList.contains('drawer-item')) {
+                    this.closeDrawer();
+                }
+            });
+        });
     },
 
     initDrawer() {
@@ -1133,8 +1155,6 @@ const UIControllers = {
 // INITIALIZATION
 // ============================================
 document.addEventListener('DOMContentLoaded', async () => {
-    const loadingScreen = document.getElementById('loadingScreen');
-    
     // Initialize controllers
     UIControllers.init();
     
@@ -1177,15 +1197,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         UIRenderer.populateDrawerCategories();
         UIRenderer.renderQuickActions();
         ViewManager.switchView('dashboard');
-        
-        setTimeout(() => loadingScreen.classList.add('hidden'), 1500);
     } else {
-        loadingScreen.innerHTML = `
-            <div class="loading-content">
-                <div class="logo-pulse"><img src="logo.jpeg" alt="e-PATA" class="loading-logo"></div>
-                <div class="loading-text">Error loading data. Please refresh.</div>
-            </div>
-        `;
+        Utils.showToast('Error loading data. Please refresh.', 'error');
     }
 });
 

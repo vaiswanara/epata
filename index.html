@@ -30,19 +30,6 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Loading Screen -->
-    <div id="loadingScreen" class="loading-screen">
-        <div class="loading-content">
-            <div class="logo-pulse">
-                <img src="logo.jpeg" alt="e-PATA" class="loading-logo">
-            </div>
-            <div class="loading-text">Loading Vedic Wisdom...</div>
-            <div class="loading-bar">
-                <div class="loading-progress"></div>
-            </div>
-        </div>
-    </div>
-
     <!-- Pull to Refresh Indicator -->
     <div id="pullToRefresh" class="pull-to-refresh">
         <div class="pull-spinner">
@@ -119,6 +106,18 @@
                     <i class="fas fa-clock"></i>
                     <span>Recent</span>
                 </li>
+                <li class="nav-item" data-view="apps">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>APPs</span>
+                </li>
+                <li class="nav-item" data-view="privacy">
+                    <i class="fas fa-user-shield"></i>
+                    <span>Privacy Policy</span>
+                </li>
+                <li class="nav-item" data-view="about">
+                    <i class="fas fa-user"></i>
+                    <span>About Me</span>
+                </li>
                 <li class="nav-item nav-item-donate" data-view="donate">
                     <i class="fas fa-hand-holding-heart"></i>
                     <span>Donate</span>
@@ -181,6 +180,18 @@
                     <li class="drawer-item" data-view="recent">
                         <i class="fas fa-clock"></i>
                         <span>Recently Watched</span>
+                    </li>
+                    <li class="drawer-item" data-view="apps">
+                        <i class="fas fa-mobile-alt"></i>
+                        <span>APPs</span>
+                    </li>
+                    <li class="drawer-item" data-view="privacy">
+                        <i class="fas fa-user-shield"></i>
+                        <span>Privacy Policy</span>
+                    </li>
+                    <li class="drawer-item" data-view="about">
+                        <i class="fas fa-user"></i>
+                        <span>About Me</span>
                     </li>
                     <li class="drawer-item drawer-item-donate" data-view="donate">
                         <i class="fas fa-hand-holding-heart"></i>
@@ -438,6 +449,166 @@
             </div>
         </div>
 
+        <!-- Apps View -->
+        <div class="view hidden" id="appsView">
+            <div class="apps-container">
+                <div class="apps-grid">
+                    <div class="app-card">
+                        <h3><a href="https://vaiswanara.github.io/time" target="_blank">1. Time of Birth Converter</a> <span class="pill">Ghatis &harr; Hours</span></h3>
+                        <ul>
+                            <li>Convert time Ghati-Phalas to HH:mm:ss and HH:mm:ss to Ghatis-Phalas.</li>
+                            <li>Date and sunrise time are required.</li>
+                            <li>Ghati-Phala is calculated from sunrise time, not midnight.</li>
+                        </ul>
+                    </div>
+
+                    <div class="app-card">
+                        <h3><a href="https://vaiswanara.github.io/panchanga/" target="_blank">2. Panchanga Shudhi &amp; Tarabhala</a></h3>
+                        <ul>
+                            <li>Upload a Panchanga Excel file (prepared from Jaganatha Hora data).</li>
+                            <li>Filter data by date and calculate Panchanga Shudhi.</li>
+                            <li>Calculate Tarabala for two individuals based on their Nakshatras.</li>
+                        </ul>
+                        <p class="app-note">👉 Sample Panchanga Excel file available: PANCHANGA-2025-26-27 (Location: Bangalore).</p>
+                    </div>
+
+                    <div class="app-card">
+                        <h3><a href="https://vaiswanara.github.io/read_horoscope/" target="_blank">3. Graha Role Mapping Sheet</a></h3>
+                        <ul>
+                            <li>Study different planetary combinations.</li>
+                            <li>Understand house-planet relationships.</li>
+                            <li>Learn about lordship principles.</li>
+                            <li>Master aspect calculations.</li>
+                        </ul>
+                    </div>
+
+                    <div class="app-card">
+                        <h3><a href="https://vaiswanara.github.io/dasha/" target="_blank">4. Dasha Calculation</a></h3>
+                        <ul>
+                            <li>Demonstrates the Vimshottari Dasha system step by step (Nakshatra identification, balance calculation, Mahadasha &rarr; Bhukti breakdown).</li>
+                            <li>Connects astrological rules to numeric computation and date arithmetic.</li>
+                        </ul>
+                    </div>
+
+                    <div class="app-card">
+                        <h3><a href="https://vaiswanara.github.io/jdg/" target="_blank">5. Jataka-Dasha-Gochara</a></h3>
+                        <ul>
+                            <li>Includes Jataka, Dasha, and Gochara tools.</li>
+                            <li>Transit Navigator turns raw planetary transit (Gochara) JSON data into an interactive format.</li>
+                            <li>Explore Panchanga and transit effects by date and Janma Rashi for easy comparison and practice.</li>
+                            <li>Runs in the browser &mdash; no account or server upload required.</li>
+                        </ul>
+                        <p>👉 Optional JSON data periods:</p>
+                        <ul class="sub-list">
+                            <li><a href="https://drive.google.com/file/d/1Y-H36eAO9SyEGlK3FCjgvxYiqQjvpd6C/view?usp=drive_link" target="_blank">01-01-2031_to_31-12-2035.json</a></li>
+                            <li><a href="https://drive.google.com/file/d/1bdhLl4wxLubY0YAbumhOwmlrzw1vvsGf/view?usp=drive_link" target="_blank">01-01-2036_to_31-12-2039.json</a></li>
+                            <li><a href="https://drive.google.com/file/d/1IuSABYO4uB5XJd-lhQVZ23q2AaBEZTfB/view?usp=drive_link" target="_blank">01-01-2040_to_31-12-2045.json</a></li>
+                            <li><a href="https://drive.google.com/file/d/1GqpwjTDnHVb9ONqeaastgZL0GU3i3xhG/view?usp=drive_link" target="_blank">01-01-2046_to_31-12-2050.json</a></li>
+                        </ul>
+                        <p class="app-note">👉 To view Gochara Phala for a particular Rashi from start date to end date with integrated ephemeris data, use the provided link in the app.</p>
+                    </div>
+
+                    <div class="app-card">
+                        <h3><a href="https://vaiswanara.github.io/dt/" target="_blank">6. Double Transit Marriage Timing Analyzer</a></h3>
+                        <ul>
+                            <li>Explains marriage timing using classical Vedic astrology principles.</li>
+                            <li>Analyzes natal chart + transit (Gochara) positions of Guru and Shani.</li>
+                            <li>Checks double transit activation of the 7th house, Lagna, and Janma Rashi.</li>
+                            <li>Evaluates whether Dasha &ndash; Antardasha &ndash; Pratyantara periods support marriage.</li>
+                            <li>Presents results in a structured diagnostic table for learning and research.</li>
+                        </ul>
+                        <p class="app-note">👉 Ideal for: Learning how transit and dasha work together in predicting marriage events.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Privacy View -->
+        <div class="view hidden" id="privacyView">
+            <div class="section-header">
+                <h2><i class="fas fa-user-shield"></i> Privacy Policy</h2>
+            </div>
+            <div class="privacy-container">
+                <div class="privacy-card">
+                    <p class="privacy-date"><strong>Dated:</strong> February 06, 2026</p>
+                    
+                    <p>At Vaiswanara, accessible from https://vaiswanara.com, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by Vaiswanara and how we use it.</p>
+                    
+                    <h3>Information We Collect</h3>
+                    <p>We do not collect any personal information from our users. Our app and website are strictly for educational purposes, providing content related to Astrology and Psychology.</p>
+                    <ul>
+                        <li>No registration or login is required.</li>
+                        <li>No personal data (like names, emails, or phone numbers) is requested or stored.</li>
+                        <li>No tracking cookies or forms are used.</li>
+                    </ul>
+
+                    <h3>Third-Party Services</h3>
+                    <p>Our app may contain links to our YouTube channel (@epata18). These third-party sites have their own privacy policies, and we do not have control over their content or practices.</p>
+                    <p>Our services include educational tools and calculators hosted on GitHub Pages, which also follow this zero-data collection policy.</p>
+
+                    <h3>Consent</h3>
+                    <p>By using our app/website, you hereby consent to our Privacy Policy.</p>
+
+                    <h3>Contact Us</h3>
+                    <p>If you have additional questions or require more information about our Privacy Policy, do not hesitate to contact us at <a href="mailto:vaiswanara@gmail.com">vaiswanara@gmail.com</a>.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- About View -->
+        <div class="view hidden" id="aboutView">
+            <div class="section-header">
+                <h2><i class="fas fa-user"></i> About Me</h2>
+            </div>
+            <div class="about-container">
+                <div class="about-card">
+                    <p>I am a passionate trainer dedicated to empowering individuals through the timeless wisdom of Vedic Astrology and its integration with psychology. My teaching approach combines ancient scriptures like the Bhagavad Gita, Upanishads, and Puranas with practical applications to create a balanced and holistic understanding of life.</p>
+                    
+                    <h4>My Mission</h4>
+                    <p>I believe that Vedic knowledge should be shared freely and without barriers. My mission is to help students:</p>
+                    <ul>
+                        <li>Understand the profound truths of Vedic Astrology and psychology.</li>
+                        <li>Strengthen their minds and build resilience, self-restraint, confidence, and contentment.</li>
+                        <li>Achieve harmony in modern life by fostering peace and clarity in thought and action.</li>
+                    </ul>
+
+                    <h4>What I Offer</h4>
+                    <div class="offer-box">
+                        <h5>Vedic Astrology Classes</h5>
+                        <p><strong>Conducted every Sunday at 7:30 AM IST via Google Meet.</strong></p>
+                        <ul>
+                            <li>A structured course covering 100+ topics, available as free YouTube sessions.</li>
+                            <li>Practical lessons to empower students to protect themselves from exploitation and uncover life’s deeper purpose.</li>
+                        </ul>
+                    </div>
+
+                    <div class="offer-box">
+                        <h5>Psychology Relevant to Astrology</h5>
+                        <p><strong>Conducted every Saturday at 7:30 AM IST via Google Meet.</strong></p>
+                        <ul>
+                            <li>Integrates teachings from the Bhagavad Gita, Upanishads, and Puranas with modern psychology.</li>
+                            <li>Focuses on strengthening the mind, improving self-restraint, building confidence, and achieving peace in life.</li>
+                        </ul>
+                    </div>
+
+                    <h4>My Beliefs</h4>
+                    <p>I encourage students to focus on the knowledge and insights gained through my courses. There is no need to subscribe, like, or share my videos or page. Instead, I am happiest when students apply what they’ve learned and share their knowledge with others, creating a ripple effect of wisdom.</p>
+
+                    <h4>A Charitable Initiative</h4>
+                    <p>All my classes and materials are completely free of charge. This initiative is supported by optional donations, which help me cover basic living expenses such as groceries, utilities, and internet services. Your support ensures the continuation of these free programs for all.</p>
+
+                    <h4>Join Me on This Journey</h4>
+                    <p>Whether you are looking to explore the depths of Vedic Astrology or seeking practical insights to strengthen your mind and improve your life, I invite you to embark on this transformative journey with me. Together, let’s learn how to live with purpose, clarity, and peace in today’s complex world.</p>
+
+                    <div class="about-footer">
+                        <p>With Gratitude,</p>
+                        <strong>Srikanth Dharmavaram (Vaiswanara)</strong>
+                        <span>Vedic Astrology Trainer & Guide</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Donate View -->
         <div class="view hidden" id="donateView">
             <div class="donate-header">
@@ -471,7 +642,7 @@
                 
                 <div class="donate-thanks">
                     <p>Your generous support, no matter the amount, plays a crucial role in keeping this program available to all who seek to learn.</p>
-                    <p class="thank-you-text">🙏 Thank You 🙏</p>
+                    <p class="thank-you-text"> Thank You </p>
                 </div>
                 
                 <div class="donate-author">
