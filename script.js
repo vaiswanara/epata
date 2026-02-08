@@ -11,6 +11,12 @@ window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPrompt = e;
     console.log("PWA Install Event captured!");
+    
+    // Auto-show Install Modal when prompt is ready (after 3 seconds)
+    setTimeout(() => {
+        const installModal = document.getElementById('installModal');
+        if (installModal) installModal.classList.add('active');
+    }, 3000);
 });
 
 // When app installed → reset variable
@@ -1276,12 +1282,9 @@ const UIControllers = {
         const installModal = document.getElementById('installModal');
         const closeInstallModal = document.getElementById('closeInstallModal');
         const androidBtn = document.getElementById('installAndroidBtn');
-        const iosBtn = document.getElementById('installIosBtn');
-        const iosInstructions = document.getElementById('iosInstructions');
 
         const openModal = () => {
             installModal?.classList.add('active');
-            if (iosInstructions) iosInstructions.style.display = 'none';
             UIControllers.closeDrawer();
         };
 
@@ -1319,9 +1322,6 @@ const UIControllers = {
             installModal?.classList.remove('active');
        });
 
-
-
-        iosBtn?.addEventListener('click', () => iosInstructions ? iosInstructions.style.display = 'block' : null);
     },
 
     initDataManagement() {
