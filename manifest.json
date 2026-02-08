@@ -1,8 +1,8 @@
 {
   "name": "e-PATA – Vedic Astrology Learning",
   "short_name": "e-PATA",
-  "start_url": "/index.html",
-  "scope": "/",
+  "start_url": "/epata/index.html",
+  "scope": "/epata/",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#ffffff",

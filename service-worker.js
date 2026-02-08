@@ -1,12 +1,14 @@
+const BASE_PATH = "/epata/";
+
 const CACHE_NAME = "epata2-pwa-v1";
 
 const urlsToCache = [
-  "/",
-  "/index.html",
-  "/style.css",
-  "/script.js",
-  "/icons/icon-192.png",
-  "/icons/icon-512.png"
+  BASE_PATH,
+  BASE_PATH + "index.html",
+  BASE_PATH + "style.css",
+  BASE_PATH + "script.js",
+  BASE_PATH + "icons/icon-192.png",
+  BASE_PATH + "icons/icon-512.png"
 ];
 
 // Install
