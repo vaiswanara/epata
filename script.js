@@ -10,6 +10,7 @@ let deferredPrompt;
 window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPrompt = e;
+    console.log("PWA Install Event captured!");
 });
 
 // When app installed → reset variable
