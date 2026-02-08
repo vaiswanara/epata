@@ -1625,11 +1625,16 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('videoModal').addEventListener('click', (e) => {
         if (e.target.id === 'videoModal') AppActions.closeVideoModal();
     });
+
+    // Close resource modal
+    document.getElementById('closeResourceModal')?.addEventListener('click', AppActions.closeResourceModal);
+    document.getElementById('resourceModalBack')?.addEventListener('click', AppActions.closeResourceModal);
     
     // Escape key
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
             AppActions.closeVideoModal();
+            AppActions.closeResourceModal();
             document.getElementById('shareModal').classList.remove('active');
             document.getElementById('privacyModal').classList.remove('active');
             document.getElementById('installModal').classList.remove('active');
