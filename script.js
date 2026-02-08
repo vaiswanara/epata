@@ -12,11 +12,18 @@ window.addEventListener('beforeinstallprompt', (e) => {
     deferredPrompt = e;
     console.log("PWA Install Event captured!");
     
-    // Auto-show Install Modal when prompt is ready (after 3 seconds)
-    setTimeout(() => {
-        const installModal = document.getElementById('installModal');
-        if (installModal) installModal.classList.add('active');
-    }, 3000);
+    // Check if user dismissed recently (24 hours cooldown)
+    const lastDismissed = localStorage.getItem('epata_install_dismissed');
+    const now = Date.now();
+    const cooldown = 24 * 60 * 60 * 1000; // 24 hours
+
+    if (!lastDismissed || (now - parseInt(lastDismissed)) > cooldown) {
+        // Auto-show Install Modal when prompt is ready (after 3 seconds)
+        setTimeout(() => {
+            const installModal = document.getElementById('installModal');
+            if (installModal) installModal.classList.add('active');
+        }, 3000);
+    }
 });
 
 // When app installed → reset variable
@@ -43,6 +50,7 @@ const AppState = {
     currentVideo: null,
     searchQuery: '',
     filters: { playlist: '', language: '' },
+    resources: [],
     displayCount: 12,
     isOnline: navigator.onLine
 };
@@ -306,6 +314,57 @@ const DataManager = {
             return { success: true, updated: false };
         } else {
             return await fetchFreshData();
+        }
+    },
+
+    async loadResources() {
+        const url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ6RStlHwy-jhwrGCg7JUrE8I3MZxukUqBGqdUxGywRof4WyItHEJZ0FP93GeB_ktBAXte3avGhYEVw/pub?gid=1820721708&single=true&output=csv';
+        try {
+            const response = await fetch(url + '&t=' + Date.now());
+            if (!response.ok) return;
+            const text = await response.text();
+            const rows = Utils.parseCSV(text);
+            
+            if (rows.length < 2) return;
+            
+            // Headers: Date, App_name, app_url, user_guide
+            const headers = rows[0].map(h => h.toLowerCase().trim());
+            const dateIdx = headers.indexOf('date');
+            const nameIdx = headers.indexOf('app_name');
+            const urlIdx = headers.indexOf('app_url');
+            const guideIdx = headers.indexOf('user_guide');
+            
+            if (nameIdx === -1) return;
+
+            const resources = rows.slice(1).map(row => {
+                if (!row[nameIdx]) return null;
+                
+                const dateStr = row[dateIdx] ? row[dateIdx].trim() : '';
+                let timestamp = 0;
+                if (dateStr) {
+                    // Parse DD-MM-YYYY
+                    const parts = dateStr.split(/[-/.]/);
+                    if (parts.length === 3) {
+                        timestamp = new Date(`${parts[2]}-${parts[1]}-${parts[0]}`).getTime();
+                    } else {
+                        timestamp = Date.parse(dateStr) || 0;
+                    }
+                }
+                
+                return {
+                    date: dateStr,
+                    timestamp: timestamp,
+                    name: row[nameIdx],
+                    url: row[urlIdx],
+                    guide: row[guideIdx]
+                };
+            }).filter(Boolean);
+            
+            // Sort descending by date (latest first)
+            resources.sort((a, b) => b.timestamp - a.timestamp);
+            AppState.resources = resources;
+        } catch (e) {
+            console.error('Error loading resources:', e);
         }
     },
 
@@ -943,139 +1002,68 @@ const ViewManager = {
     renderResourcesView() {
         const container = document.getElementById('resourcesContainer');
         if (!container) return;
+        
+        // Reset container class
+        container.className = 'resources-container';
 
-        // Use detailed grid layout
-        container.className = 'resources-grid-detailed';
-
-        // Static content from app.html
-        const tools = [
-            {
-                title: "App User Guide (How to Use)",
-                url: "USER_GUIDE_ENGLISH.md",
-                badge: "Help",
-                icon: "fa-book-open",
-                type: "pdf",
-                desc: [
-                    "Step-by-step guide to using the e-PATA app effectively.",
-                    "Explains Dashboard, Courses, Favorites, and Data Backup features.",
-                    "Choose your preferred language below."
-                ],
-                subLinks: [
-                    { text: "User Guide - English", url: "USER_GUIDE_ENGLISH.md" },
-                    { text: "User Guide - Kannada (ಕನ್ನಡ)", url: "USER_GUIDE_KANNADA.md" },
-                    { text: "User Guide - Telugu (తెలుగు)", url: "USER_GUIDE_TELUGU.md" }
-                ]
-            },
-            {
-                title: "Time of Birth Converter",
-                url: "https://vaiswanara.github.io/time",
-                badge: "Ghatis ↔ Hours",
-                icon: "fa-hourglass-half",
-                type: "tool",
-                desc: [
-                    "Convert time Ghati-Phalas to HH:mm:ss and HH:mm:ss to Ghatis-Phalas.",
-                    "Date and sunrise time are required.",
-                    "Ghati-Phala is calculated from sunrise time, not midnight."
-                ]
-            },
-            {
-                title: "Panchanga Shudhi & Tarabhala",
-                url: "https://vaiswanara.github.io/panchanga/",
-                icon: "fa-calendar-check",
-                type: "sheet",
-                desc: [
-                    "Upload a Panchanga Excel file (prepared from Jaganatha Hora data).",
-                    "Filter data by date and calculate Panchanga Shudhi.",
-                    "Calculate Tarabala for two individuals based on their Nakshatras."
-                ],
-                note: "Sample Panchanga Excel file available: PANCHANGA-2025-26-27 (Location: Bangalore)."
-            },
-            {
-                title: "Graha Role Mapping Sheet",
-                url: "https://vaiswanara.github.io/read_horoscope/",
-                icon: "fa-table",
-                type: "sheet",
-                desc: [
-                    "Study different planetary combinations.",
-                    "Understand house-planet relationships.",
-                    "Learn about lordship principles.",
-                    "Master aspect calculations."
-                ]
-            },
-            {
-                title: "Dasha Calculation",
-                url: "https://vaiswanara.github.io/dasha/",
-                icon: "fa-calculator",
-                type: "tool",
-                desc: [
-                    "Demonstrates the Vimshottari Dasha system step by step (Nakshatra identification, balance calculation, Mahadasha → Bhukti breakdown).",
-                    "Connects astrological rules to numeric computation and date arithmetic."
-                ]
-            },
-            {
-                title: "Jataka-Dasha-Gochara",
-                url: "https://vaiswanara.github.io/jdg/",
-                icon: "fa-chart-pie",
-                type: "app",
-                desc: [
-                    "Includes Jataka, Dasha, and Gochara tools.",
-                    "Transit Navigator turns raw planetary transit (Gochara) JSON data into an interactive format.",
-                    "Explore Panchanga and transit effects by date and Janma Rashi for easy comparison and practice.",
-                    "Runs in the browser — no account or server upload required."
-                ],
-                subLinks: [
-                    { text: "01-01-2031_to_31-12-2035.json", url: "https://drive.google.com/file/d/1Y-H36eAO9SyEGlK3FCjgvxYiqQjvpd6C/view?usp=drive_link" },
-                    { text: "01-01-2036_to_31-12-2039.json", url: "https://drive.google.com/file/d/1bdhLl4wxLubY0YAbumhOwmlrzw1vvsGf/view?usp=drive_link" },
-                    { text: "01-01-2040_to_31-12-2045.json", url: "https://drive.google.com/file/d/1IuSABYO4uB5XJd-lhQVZ23q2AaBEZTfB/view?usp=drive_link" },
-                    { text: "01-01-2046_to_31-12-2050.json", url: "https://drive.google.com/file/d/1GqpwjTDnHVb9ONqeaastgZL0GU3i3xhG/view?usp=drive_link" }
-                ],
-                note: "To view Gochara Phala for a particular Rashi from start date to end date with integrated ephemeris data, use the provided link in the app."
-            },
-            {
-                title: "Double Transit Marriage Timing Analyzer",
-                url: "https://vaiswanara.github.io/dt/",
-                icon: "fa-venus-mars",
-                type: "tool",
-                desc: [
-                    "Explains marriage timing using classical Vedic astrology principles.",
-                    "Analyzes natal chart + transit (Gochara) positions of Guru and Shani.",
-                    "Checks double transit activation of the 7th house, Lagna, and Janma Rashi.",
-                    "Evaluates whether Dasha – Antardasha – Pratyantara periods support marriage.",
-                    "Presents results in a structured diagnostic table for learning and research."
-                ],
-                note: "Ideal for: Learning how transit and dasha work together in predicting marriage events."
-            }
-        ];
-
-        container.innerHTML = tools.map(tool => `
-            <div class="app-card detailed">
-                <div class="app-header">
-                    <div class="app-icon-wrapper ${tool.type}">
-                        <i class="fas ${tool.icon}"></i>
-                    </div>
-                    <div class="app-header-content">
-                        <h3 class="app-title">${tool.title} ${tool.badge ? `<span class="pill">${tool.badge}</span>` : ''}</h3>
-                        <button class="app-link-btn" onclick="AppActions.openResource('${tool.url}', '${tool.title.replace(/'/g, "\\'")}')">
-                            Open Tool <i class="fas fa-external-link-alt"></i>
-                        </button>
-                    </div>
+        if (AppState.resources.length === 0) {
+            container.innerHTML = `
+                <div class="empty-state">
+                    <div class="empty-icon"><i class="fas fa-tools"></i></div>
+                    <h3>Loading Resources...</h3>
                 </div>
-                <div class="app-body">
-                    <ul>
-                        ${tool.desc.map(d => `<li>${d}</li>`).join('')}
-                    </ul>
-                    ${tool.subLinks ? `
-                        <div class="sub-links">
-                            <p>Optional JSON data periods:</p>
-                            <ul>
-                                ${tool.subLinks.map(l => `<li><a href="${l.url}" target="_blank" rel="noopener noreferrer">${l.text}</a></li>`).join('')}
-                            </ul>
-                        </div>
-                    ` : ''}
-                    ${tool.note ? `<div class="app-note"><i class="fas fa-info-circle"></i> ${tool.note}</div>` : ''}
-                </div>
-            </div>
-        `).join('');
+            `;
+            // Try loading if empty
+            DataManager.loadResources().then(() => {
+                if (AppState.resources.length > 0) this.renderResourcesView();
+                else container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-icon"><i class="fas fa-exclamation-circle"></i></div>
+                        <h3>No resources found</h3>
+                    </div>`;
+            });
+            return;
+        }
+
+        let html = `
+            <div class="resources-table-wrapper">
+                <table class="resources-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>App Name</th>
+                            <th>Action</th>
+                            <th>Guide</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+        `;
+
+        AppState.resources.forEach(res => {
+            html += `
+                <tr>
+                    <td class="res-date">${res.date}</td>
+                    <td class="res-name">${res.name}</td>
+                    <td class="res-action">
+                        ${res.url ? `
+                            <button class="res-btn launch" onclick="AppActions.openResource('${res.url}', '${res.name.replace(/'/g, "\\'")}')">
+                                <i class="fas fa-rocket"></i> Launch
+                            </button>
+                        ` : '-'}
+                    </td>
+                    <td class="res-guide">
+                        ${res.guide ? `
+                            <a href="${res.guide}" target="_blank" class="res-btn pdf">
+                                <i class="fas fa-file-pdf"></i> PDF
+                            </a>
+                        ` : ''}
+                    </td>
+                </tr>
+            `;
+        });
+
+        html += `</tbody></table></div>`;
+        container.innerHTML = html;
     }
 };
 
@@ -1291,12 +1279,16 @@ const UIControllers = {
         installBtnDesktop?.addEventListener('click', openModal);
         installBtnMobile?.addEventListener('click', openModal);
 
-        closeInstallModal?.addEventListener('click', () => {
+        const closeModal = () => {
             installModal?.classList.remove('active');
-        });
+            // Save dismissal time to prevent immediate popup on next reload
+            localStorage.setItem('epata_install_dismissed', Date.now().toString());
+        };
+
+        closeInstallModal?.addEventListener('click', closeModal);
 
         installModal?.addEventListener('click', (e) => {
-            if (e.target === installModal) installModal.classList.remove('active');
+            if (e.target === installModal) closeModal();
         });
 
     
@@ -1647,6 +1639,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Load data
     const result = await DataManager.loadData();
     DataManager.loadDailyMessage(); // Load the daily message
+    DataManager.loadResources(); // Load resources
     
     // Hide loading screen with fade out
     const loader = document.getElementById('loadingScreen');
