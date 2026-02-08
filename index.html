@@ -2,22 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="theme-color" content="#1a1a2e">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#8a6a2f">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="description" content="e-PATA - Learn Vedic Astrology through interactive YouTube lessons">
     
     <title>e-PATA - Vedic Astrology Learning</title>
     
     <!-- PWA Manifest -->
-    <link rel="manifest" href="manifest.json">
+    <link rel="manifest" href="/manifest.json">
     
     <!-- Icons -->
-    <link rel="apple-touch-icon" href="logo.jpeg">
-    <link rel="icon" type="image/jpeg" href="logo.jpeg">
-    <link rel="shortcut icon" type="image/jpeg" href="logo.jpeg">
+    <link rel="apple-touch-icon" href="/icons/icon-192.png">
+    <link rel="icon" href="/icons/icon-192.png">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -34,7 +32,7 @@
     <div id="loadingScreen" class="loading-screen">
         <div class="loading-content">
             <div class="logo-pulse">
-                <img src="logo.jpeg" alt="e-PATA" class="loading-logo">
+                <img src="logo.png" alt="e-PATA" class="loading-logo">
             </div>
             <div class="loading-text">Loading Vedic Wisdom...</div>
             <div class="loading-bar">
@@ -57,7 +55,7 @@
             <i class="fas fa-bars"></i>
         </button>
         <div class="header-brand">
-            <img src="logo.jpeg" alt="e-PATA" class="header-logo">
+            <img src="logo.png" alt="e-PATA" class="header-logo">
             <span class="header-title">e-PATA</span>
         </div>
         <button class="search-toggle" id="searchToggle">
@@ -90,7 +88,7 @@
     <!-- Sidebar (Desktop & Tablet) -->
     <nav class="sidebar" id="sidebar">
         <div class="sidebar-header">
-            <img src="logo.jpeg" alt="e-PATA Logo" class="sidebar-logo">
+            <img src="logo.png" alt="e-PATA Logo" class="sidebar-logo">
             <h2 class="sidebar-title">e-PATA</h2>
             <p class="sidebar-subtitle">Learn Vedic Astrology</p>
         </div>
@@ -119,8 +117,20 @@
                     <i class="fas fa-clock"></i>
                     <span>Recent</span>
                 </li>
+                <li class="nav-item" data-view="resources">
+                    <i class="fas fa-tools"></i>
+                    <span>Resources</span>
+                </li>
+                <li class="nav-item" id="installAppBtnDesktop">
+                    <i class="fas fa-download"></i>
+                    <span>Install App</span>
+                </li>
+                <li class="nav-item" data-view="about">
+                    <i class="fas fa-info-circle"></i>
+                    <span>About</span>
+                </li>
                 <li class="nav-item nav-item-donate" data-view="donate">
-                    <i class="fas fa-hand-holding-heart"></i>
+                    <i class="fas fa-circle-dollar-to-slot"></i>
                     <span>Donate</span>
                 </li>
             </ul>
@@ -134,7 +144,15 @@
         </div>
 
         <div class="sidebar-footer">
-            <a href="https://vaiswanara.com" target="_blank" class="home-link">
+            <button class="home-link backup-btn">
+                <i class="fas fa-download"></i>
+                <span>Backup Data</span>
+            </button>
+            <button class="home-link restore-btn">
+                <i class="fas fa-upload"></i>
+                <span>Restore Data</span>
+            </button>
+            <a href="https://vaiswanara.com" target="_blank" rel="noopener" class="home-link">
                 <i class="fas fa-external-link-alt"></i>
                 <span>vaiswanara.com</span>
             </a>
@@ -148,7 +166,7 @@
     <!-- Mobile Drawer Menu -->
     <div class="mobile-drawer" id="mobileDrawer">
         <div class="drawer-header">
-            <img src="logo.jpeg" alt="e-PATA" class="drawer-logo">
+            <img src="logo.png" alt="e-PATA" class="drawer-logo">
             <div class="drawer-info">
                 <h3>e-PATA</h3>
                 <p>Vedic Astrology Learning</p>
@@ -182,8 +200,20 @@
                         <i class="fas fa-clock"></i>
                         <span>Recently Watched</span>
                     </li>
+                    <li class="drawer-item" data-view="resources">
+                        <i class="fas fa-tools"></i>
+                        <span>Resources</span>
+                    </li>
+                    <li class="drawer-item" id="installAppBtnMobile">
+                        <i class="fas fa-download"></i>
+                        <span>Install App</span>
+                    </li>
+                    <li class="drawer-item" data-view="about">
+                        <i class="fas fa-info-circle"></i>
+                        <span>About</span>
+                    </li>
                     <li class="drawer-item drawer-item-donate" data-view="donate">
-                        <i class="fas fa-hand-holding-heart"></i>
+                        <i class="fas fa-circle-dollar-to-slot"></i>
                         <span>Donate</span>
                     </li>
                 </ul>
@@ -195,7 +225,15 @@
                 </ul>
             </div>
             <div class="drawer-footer">
-                <a href="https://vaiswanara.com" target="_blank" class="drawer-link">
+                <button class="drawer-link backup-btn">
+                    <i class="fas fa-download"></i>
+                    <span>Backup Data</span>
+                </button>
+                <button class="drawer-link restore-btn">
+                    <i class="fas fa-upload"></i>
+                    <span>Restore Data</span>
+                </button>
+                <a href="https://vaiswanara.com" target="_blank" rel="noopener" class="drawer-link">
                     <i class="fas fa-external-link-alt"></i>
                     Visit vaiswanara.com
                 </a>
@@ -231,6 +269,17 @@
 
         <!-- Dashboard View -->
         <div class="view" id="dashboardView">
+            <!-- Daily Message (Dynamic) -->
+            <div class="daily-message-card" id="dailyMessageCard" style="display: none;">
+                <div class="daily-message-icon">
+                    <i class="fas fa-quote-left"></i>
+                </div>
+                <div class="daily-message-content">
+                    <p id="dailyMessageText"></p>
+                    <span id="dailyMessageDate" class="daily-message-date"></span>
+                </div>
+            </div>
+
             <!-- Welcome Banner -->
             <div class="welcome-banner" id="welcomeBanner">
                 <div class="welcome-content">
@@ -438,11 +487,109 @@
             </div>
         </div>
 
+        <!-- Resources View -->
+        <div class="view hidden" id="resourcesView">
+            <div class="info-hero">
+                <div class="info-hero-icon">
+                    <i class="fas fa-tools"></i>
+                </div>
+                <div class="info-hero-text">
+                    <h2>Student Resources</h2>
+                    <p>Helpful tools for your astrology practice.</p>
+                </div>
+            </div>
+            <div class="resources-list" id="resourcesContainer">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+
+        <!-- About View -->
+        <div class="view hidden" id="aboutView">
+            <div class="about-hero">
+                <div class="about-profile-img">
+                    <i class="fas fa-user-tie"></i>
+                </div>
+                <h2>Srikanth Dharmavaram</h2>
+                <p class="subtitle">(Vaiswanara)</p>
+                <p class="role">Vedic Astrology Trainer & Guide</p>
+            </div>
+
+            <div class="about-content">
+                <!-- App Intro -->
+                <div class="about-card">
+                    <h3><i class="fas fa-mobile-alt"></i> About e-PATA App</h3>
+                    <p>e-PATA is your digital companion for mastering Vedic Astrology. Designed for seamless learning, it brings together structured video lessons, study materials, and practical tools in one place. Whether you are a beginner or an advanced student, e-PATA helps you track your progress and stay consistent in your journey.</p>
+                </div>
+
+                <!-- About Me -->
+                <div class="about-card">
+                    <h3><i class="fas fa-user"></i> About Me</h3>
+                    <p>Namaste! I am Srikanth Dharmavaram (Vaiswanara), a passionate trainer dedicated to empowering individuals through the timeless wisdom of Vedic Astrology and its integration with psychology. My teaching approach combines ancient scriptures like the Bhagavad Gita, Upanishads, and Puranas with practical applications to create a balanced and holistic understanding of life.</p>
+                </div>
+
+                <!-- Mission -->
+                <div class="about-card">
+                    <h3><i class="fas fa-bullseye"></i> My Mission</h3>
+                    <p>I believe that Vedic knowledge should be shared freely and without barriers. My mission is to help students:</p>
+                    <ul class="about-list">
+                        <li>Understand the profound truths of Vedic Astrology and psychology.</li>
+                        <li>Strengthen their minds and build resilience, self-restraint, confidence, and contentment.</li>
+                        <li>Achieve harmony in modern life by fostering peace and clarity in thought and action.</li>
+                    </ul>
+                </div>
+
+                <!-- What I Offer -->
+                <div class="about-card">
+                    <h3><i class="fas fa-graduation-cap"></i> What I Offer</h3>
+                    
+                    <div class="offer-item">
+                        <h4>Vedic Astrology Classes</h4>
+                        <ul class="about-list">
+                            <li>Conducted every Sunday at 7:30 AM IST via Google Meet.</li>
+                            <li>A structured course covering 100+ topics, available as free YouTube sessions.</li>
+                            <li>Practical lessons to empower students to protect themselves from exploitation and uncover life’s deeper purpose.</li>
+                        </ul>
+                    </div>
+
+                    <div class="offer-item">
+                        <h4>Psychology Relevant to Astrology</h4>
+                        <ul class="about-list">
+                            <li>Conducted every Saturday at 7:30 AM IST via Google Meet.</li>
+                            <li>Integrates teachings from the Bhagavad Gita, Upanishads, and Puranas with modern psychology.</li>
+                            <li>Focuses on strengthening the mind, improving self-restraint, building confidence, and achieving peace in life.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Beliefs -->
+                <div class="about-card">
+                    <h3><i class="fas fa-hands-praying"></i> My Beliefs</h3>
+                    <p>I encourage students to focus on the knowledge and insights gained through my courses. There is no need to subscribe, like, or share my videos or page. Instead, I am happiest when students apply what they’ve learned and share their knowledge with others, creating a ripple effect of wisdom.</p>
+                </div>
+
+                <!-- Charitable Initiative -->
+                <div class="about-card highlight">
+                    <h3><i class="fas fa-hand-holding-heart"></i> A Charitable Initiative</h3>
+                    <p>All my classes and materials are completely free of charge. This initiative is supported by optional donations, which help me cover basic living expenses such as groceries, utilities, and internet services. Your support ensures the continuation of these free programs for all.</p>
+                </div>
+
+                <!-- Footer / Join Me -->
+                <div class="about-footer">
+                    <h3>Join Me on This Journey</h3>
+                    <p>Whether you are looking to explore the depths of Vedic Astrology or seeking practical insights to strengthen your mind and improve your life, I invite you to embark on this transformative journey with me. Together, let’s learn how to live with purpose, clarity, and peace in today’s complex world.</p>
+                    <div class="signature">
+                        <p>With Gratitude,</p>
+                        <strong>Srikanth Dharmavaram (Vaiswanara)</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Donate View -->
         <div class="view hidden" id="donateView">
             <div class="donate-header">
                 <div class="donate-icon">
-                    <img src="logo.jpeg" alt="e-PATA Logo" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
+                    <img src="logo.png" alt="e-PATA Logo" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
                 </div>
                 <h2>Support My Mission</h2>
                 <p>Your contribution helps keep Vedic Astrology education free for everyone</p>
@@ -489,13 +636,23 @@
                         <i class="fas fa-mobile-alt"></i>
                         <span>Copy UPI Number</span>
                     </button>
-                    <a href="https://vaiswanara.com" target="_blank" class="donate-website-btn">
+                    <a href="https://vaiswanara.com" target="_blank" rel="noopener" class="donate-website-btn">
                         <i class="fas fa-globe"></i>
                         <span>Visit vaiswanara.com</span>
                     </a>
                 </div>
             </div>
         </div>
+
+        <!-- Footer -->
+        <footer class="app-footer">
+            <button class="footer-link" id="privacyPolicyLink">
+                Privacy Policy
+            </button>
+            <a class="footer-link footer-link-external" href="https://vaiswanara.com/privacy-policy/" target="_blank" rel="noopener">
+                View Full Policy
+            </a>
+        </footer>
     </main>
 
     <!-- Bottom Navigation (Mobile) -->
@@ -557,6 +714,10 @@
                     <i class="fas fa-file-pdf"></i>
                     <span>Notes</span>
                 </a>
+                <a href="#" class="video-action-btn" id="pdfDownload" download style="display: none;">
+                    <i class="fas fa-download"></i>
+                    <span>Download</span>
+                </a>
                 <button class="video-action-btn" id="shareBtn">
                     <i class="fas fa-share-alt"></i>
                     <span>Share</span>
@@ -591,6 +752,83 @@
         </div>
     </div>
 
+    <!-- Privacy Policy Modal -->
+    <div class="modal privacy-modal" id="privacyModal">
+        <div class="modal-content privacy-content">
+            <div class="modal-header">
+                <h3>Privacy Policy</h3>
+                <button class="modal-close" id="closePrivacyModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="privacy-body">
+                <p class="privacy-updated">Last updated: February 07, 2026</p>
+
+                <p>Vaiswanara values your privacy. Our app and website are for educational content only (Astrology and Psychology).</p>
+
+                <h4>Information We Collect</h4>
+                <p>We do not collect personal information.</p>
+                <p>No registration or login is required.</p>
+                <p>We do not ask for names, emails, or phone numbers.</p>
+                <p>We do not use forms for data collection.</p>
+                <p>We do not use analytics or advertising SDKs.</p>
+
+                <h4>Data Safety</h4>
+                <p>No personal data is collected, shared, or sold.</p>
+                <p>We do not track users or build profiles.</p>
+                <p>Any video progress, favorites, or settings are stored locally on your device only.</p>
+                <p>You can backup your progress to a local file. This data remains on your device and is never transmitted to our servers.</p>
+
+                <h4>Permissions</h4>
+                <p>The app does not require special permissions beyond basic network access to load videos and documents.</p>
+
+                <h4>Third-Party Services</h4>
+                <p>We may link to or embed third-party services such as YouTube. These services have their own privacy policies and may collect data under their terms. We do not control their practices.</p>
+                <p>We use Google Sheets to fetch daily messages and GitHub Pages to host educational tools.</p>
+
+                <h4>Data Sharing</h4>
+                <p>We do not share any personal data with third parties because we do not collect it.</p>
+
+                <h4>Consent</h4>
+                <p>By using our app/website, you consent to this Privacy Policy.</p>
+
+                <h4>Contact Us</h4>
+                <p>If you have questions, contact us at vaiswanara@gmail.com.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Install App Modal -->
+    <div class="modal" id="installModal">
+        <div class="modal-content install-content">
+            <div class="modal-header">
+                <h3>Install e-PATA App</h3>
+                <button class="modal-close" id="closeInstallModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="install-body">
+                <p>Install the app for a better learning experience, offline access, and full-screen mode.</p>
+                <div class="install-buttons">
+                    <button class="install-action-btn android" id="installAndroidBtn">
+                        <i class="fab fa-android"></i> Install for Android
+                    </button>
+                    <button class="install-action-btn ios" id="installIosBtn">
+                        <i class="fab fa-apple"></i> Install for iPhone / iPad
+                    </button>
+                </div>
+                <div class="ios-instructions" id="iosInstructions" style="display: none;">
+                    <h4><i class="fab fa-apple"></i> iOS Installation</h4>
+                    <ol>
+                        <li>Tap the <strong>Share</strong> button <i class="fas fa-share-square"></i> in Safari toolbar.</li>
+                        <li>Scroll down and tap <strong>"Add to Home Screen"</strong> <i class="fas fa-plus-square"></i>.</li>
+                        <li>Tap <strong>Add</strong> in the top right corner.</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Toast Notification -->
     <div class="toast" id="toast">
         <i class="fas fa-check-circle"></i>
@@ -603,6 +841,16 @@
         <span>You're offline</span>
     </div>
 
+    <!-- Hidden File Input for Restore -->
+    <input type="file" id="restoreInput" accept=".json" style="display: none;">
+
     <script src="script.js"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/service-worker.js');
+        });
+      }
+    </script>
 </body>
 </html>

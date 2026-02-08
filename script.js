@@ -4,6 +4,26 @@
  */
 
 // ============================================
+// PWA INSTALL PROMPT
+// ============================================
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+});
+
+// When app installed → reset variable
+window.addEventListener('appinstalled', () => {
+    deferredPrompt = null;
+    console.log("PWA installed successfully");
+});
+
+// Helper: check if install available
+function isInstallAvailable() {
+    return deferredPrompt !== null && deferredPrompt !== undefined;
+}
+
+// ============================================
 // GLOBAL STATE
 // ============================================
 const AppState = {
@@ -52,14 +72,16 @@ const Utils = {
     },
 
     getLanguage(playlistName) {
-        if (playlistName.includes('ಕನ್ನಡ')) return 'kannada';
-        if (playlistName.includes('తెలుగు')) return 'telugu';
+        const name = (playlistName || '').toLowerCase();
+        if (name.includes('ಕನ್ನಡ') || name.includes('kannada')) return 'kannada';
+        if (name.includes('తెలుగు') || name.includes('telugu')) return 'telugu';
         return 'other';
     },
 
     getLanguageDisplay(playlistName) {
-        if (playlistName.includes('ಕನ್ನಡ')) return 'ಕನ್ನಡ';
-        if (playlistName.includes('తెలుగు')) return 'తెలుగు';
+        const name = (playlistName || '').toLowerCase();
+        if (name.includes('ಕನ್ನಡ') || name.includes('kannada')) return 'ಕನ್ನಡ';
+        if (name.includes('తెలుగు') || name.includes('telugu')) return 'తెలుగు';
         return 'Other';
     },
 
@@ -87,6 +109,39 @@ const Utils = {
 
     saveToStorage(key, data) {
         localStorage.setItem(`epata_${key}`, JSON.stringify(data));
+    },
+
+    parseCSV(text) {
+        const rows = [];
+        let current = '';
+        let row = [];
+        let inQuotes = false;
+        for (let i = 0; i < text.length; i++) {
+            const char = text[i];
+            const next = text[i + 1];
+            if (char === '"' && inQuotes && next === '"') {
+                current += '"';
+                i++;
+            } else if (char === '"') {
+                inQuotes = !inQuotes;
+            } else if (char === ',' && !inQuotes) {
+                row.push(current);
+                current = '';
+            } else if ((char === '\n' || char === '\r') && !inQuotes) {
+                if (char === '\r' && next === '\n') i++;
+                row.push(current);
+                if (row.length > 1 || row[0].trim() !== '') rows.push(row);
+                row = [];
+                current = '';
+            } else {
+                current += char;
+            }
+        }
+        if (current.length > 0 || row.length > 0) {
+            row.push(current);
+            if (row.length > 1 || row[0].trim() !== '') rows.push(row);
+        }
+        return rows.map(r => r.map(cell => cell.trim()));
     },
 
     // Share functionality
@@ -125,18 +180,19 @@ const Utils = {
 // DATA MANAGEMENT
 // ============================================
 const DataManager = {
-    async loadData() {
+    async loadData(options = {}) {
+        const { forceRefresh = false } = options;
         const localUrl = 'links.txt';
         const googleSheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ6RStlHwy-jhwrGCg7JUrE8I3MZxukUqBGqdUxGywRof4WyItHEJZ0FP93GeB_ktBAXte3avGhYEVw/pub?gid=0&single=true&output=csv';
         
         // Append timestamp to prevent caching
         const sheetUrlWithCache = googleSheetUrl + '&t=' + new Date().getTime();
 
-        // 1. Check cache and load immediately
+        // 1. Check cache and load immediately (unless force refresh)
         let isCachedLoaded = false;
         const cachedData = localStorage.getItem('epata_cached_lessons');
         
-        if (cachedData) {
+        if (!forceRefresh && cachedData) {
             try {
                 const parsedLessons = JSON.parse(cachedData);
                 if (Array.isArray(parsedLessons) && parsedLessons.length > 0) {
@@ -172,10 +228,12 @@ const DataManager = {
                 let globalIndex = 0;
                 
                 const processCSV = (text) => {
-                    const rows = text.trim().split('\n');
-                    // Skip header row
-                    rows.slice(1).forEach(row => {
-                        const parts = row.split(',').map(f => f.trim());
+                    const rows = Utils.parseCSV(text);
+                    rows.forEach((parts, index) => {
+                        if (index === 0) {
+                            const header = (parts[0] || '').toLowerCase();
+                            if (header.includes('playlist')) return;
+                        }
                         if (parts.length >= 3) {
                             const [playlist, title, videoId, pdfLink] = parts;
                             if (playlist && title) {
@@ -204,16 +262,18 @@ const DataManager = {
                     }
                 });
 
-                if (lessons.length === 0) return false;
+                if (lessons.length === 0) return { success: false, updated: false };
 
                 // Check if data differs from current AppState
                 const currentDataStr = JSON.stringify(AppState.lessons);
                 const newDataStr = JSON.stringify(lessons);
 
+                let updated = false;
                 if (currentDataStr !== newDataStr) {
                     console.log('New data found, updating...');
                     AppState.lessons = lessons;
                     AppState.playlists = Array.from(playlists).sort();
+                    updated = true;
                     
                     // Save to cache
                     localStorage.setItem('epata_cached_lessons', newDataStr);
@@ -226,19 +286,137 @@ const DataManager = {
                         UIRenderer.renderStats();
                     }
                 }
-                return true;
+                return { success: true, updated };
             } catch (error) {
                 console.error('Error loading fresh data:', error);
-                return false;
+                return { success: false, updated: false };
             }
         };
 
         // 3. Return immediately if cached, otherwise wait for fetch
         if (isCachedLoaded) {
             fetchFreshData(); // Run in background
-            return true;
+            return { success: true, updated: false };
         } else {
             return await fetchFreshData();
+        }
+    },
+
+    async loadDailyMessage() {
+        const url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ6RStlHwy-jhwrGCg7JUrE8I3MZxukUqBGqdUxGywRof4WyItHEJZ0FP93GeB_ktBAXte3avGhYEVw/pub?gid=297150943&single=true&output=csv';
+        try {
+            // Add timestamp to avoid caching
+            const response = await fetch(url + '&t=' + Date.now());
+            if (!response.ok) return;
+            const text = await response.text();
+            const rows = Utils.parseCSV(text);
+            
+            if (rows.length < 2) return;
+            
+            // Normalize headers to find columns
+            const headers = rows[0].map(h => h.toLowerCase().trim());
+            const dateIdx = headers.indexOf('date');
+            const msgIdx = headers.indexOf('message');
+            
+            if (dateIdx === -1 || msgIdx === -1) return;
+            
+            let latestDate = -1;
+            let latestMsg = null;
+            let latestDateStr = '';
+
+            for (let i = 1; i < rows.length; i++) {
+                const row = rows[i];
+                if (row.length <= Math.max(dateIdx, msgIdx)) continue;
+                
+                const dateStr = row[dateIdx].trim();
+                const msg = row[msgIdx].trim();
+                
+                if (!dateStr || !msg) continue;
+                
+                // Try parsing date (Handle DD-MM-YYYY or standard formats)
+                let timestamp = Date.parse(dateStr);
+                if (isNaN(timestamp)) {
+                    const parts = dateStr.split(/[-/.]/);
+                    if (parts.length === 3) {
+                        timestamp = new Date(`${parts[2]}-${parts[1]}-${parts[0]}`).getTime();
+                    }
+                }
+
+                if (!isNaN(timestamp) && timestamp > latestDate) {
+                    latestDate = timestamp;
+                    latestMsg = msg;
+                    latestDateStr = dateStr;
+                }
+            }
+            
+            if (latestMsg) {
+                UIRenderer.renderDailyMessage(latestMsg, latestDateStr);
+            }
+        } catch (e) {
+            console.error('Error loading daily message:', e);
+        }
+    },
+
+    // Backup User Data
+    async backupData() {
+        const data = {
+            favorites: AppState.favorites,
+            completed: AppState.completed,
+            recent: AppState.recentlyWatched,
+            timestamp: new Date().toISOString(),
+            version: '1.0'
+        };
+        
+        const fileName = `epata_backup_${new Date().toISOString().slice(0,10)}.json`;
+        const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+        
+        // Try Web Share API first (Optimized for Android App/Mobile)
+        try {
+            const file = new File([blob], fileName, { type: 'application/json' });
+            if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                await navigator.share({
+                    files: [file],
+                    title: 'e-PATA Backup',
+                    text: 'e-PATA User Progress Backup'
+                });
+                return; // Share successful, stop here
+            }
+        } catch (e) {
+            console.log('Web Share API skipped or cancelled, falling back to download');
+        }
+
+        // Fallback to classic download (Desktop / Chrome)
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = fileName;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        Utils.showToast('Progress backed up successfully!');
+    },
+
+    // Restore User Data
+    async restoreData(file) {
+        try {
+            const text = await file.text();
+            const data = JSON.parse(text);
+            
+            if (data.favorites && Array.isArray(data.favorites)) {
+                AppState.favorites = data.favorites;
+                Utils.saveToStorage('favorites', data.favorites);
+            }
+            if (data.completed && Array.isArray(data.completed)) {
+                AppState.completed = data.completed;
+                Utils.saveToStorage('completed', data.completed);
+            }
+            
+            Utils.showToast('Progress restored! Reloading...');
+            setTimeout(() => window.location.reload(), 1500);
+        } catch (e) {
+            Utils.showToast('Invalid backup file', 'error');
+            console.error(e);
         }
     },
 
@@ -364,6 +542,7 @@ const UIRenderer = {
         if (!lesson) {
             section.style.display = 'none';
             document.getElementById('fab').classList.add('hidden');
+            container.onclick = null;
             return;
         }
         
@@ -396,7 +575,7 @@ const UIRenderer = {
             </div>
         `;
         
-        container.addEventListener('click', () => AppActions.openVideo(lesson));
+        container.onclick = () => AppActions.openVideo(lesson);
         
         // FAB action
         document.getElementById('fab').onclick = () => AppActions.openVideo(lesson);
@@ -608,6 +787,18 @@ const UIRenderer = {
         });
     },
 
+    renderDailyMessage(message, date) {
+        const container = document.getElementById('dailyMessageCard');
+        const textEl = document.getElementById('dailyMessageText');
+        const dateEl = document.getElementById('dailyMessageDate');
+        
+        if (container && textEl) {
+            textEl.innerHTML = message.replace(/\n/g, '<br>'); // Support multiline messages
+            if (dateEl) dateEl.textContent = date;
+            container.style.display = 'flex';
+        }
+    },
+
     getCategoryIcon(category) {
         const icons = {
             'Jyotisha': 'fa-star',
@@ -644,7 +835,8 @@ const ViewManager = {
             favorites: 'Favorites',
             progress: 'Progress',
             recent: 'Recent',
-            donate: 'Support Us'
+            donate: 'Support Us',
+            resources: 'Resources'
         };
         const titleEl = document.getElementById('pageTitle');
         if (titleEl) titleEl.textContent = titles[viewName] || 'Dashboard';
@@ -676,6 +868,9 @@ const ViewManager = {
                 break;
             case 'recent':
                 this.renderRecentView();
+                break;
+            case 'resources':
+                this.renderResourcesView();
                 break;
             case 'donate':
                 // Donate view is static, no dynamic rendering needed
@@ -736,6 +931,144 @@ const ViewManager = {
             emptyState.style.display = 'none';
             UIRenderer.renderLessonCards('recentContainer', lessons);
         }
+    },
+
+    renderResourcesView() {
+        const container = document.getElementById('resourcesContainer');
+        if (!container) return;
+
+        // Use detailed grid layout
+        container.className = 'resources-grid-detailed';
+
+        // Static content from app.html
+        const tools = [
+            {
+                title: "App User Guide (How to Use)",
+                url: "USER_GUIDE_ENGLISH.md",
+                badge: "Help",
+                icon: "fa-book-open",
+                type: "pdf",
+                desc: [
+                    "Step-by-step guide to using the e-PATA app effectively.",
+                    "Explains Dashboard, Courses, Favorites, and Data Backup features.",
+                    "Choose your preferred language below."
+                ],
+                subLinks: [
+                    { text: "User Guide - English", url: "USER_GUIDE_ENGLISH.md" },
+                    { text: "User Guide - Kannada (ಕನ್ನಡ)", url: "USER_GUIDE_KANNADA.md" },
+                    { text: "User Guide - Telugu (తెలుగు)", url: "USER_GUIDE_TELUGU.md" }
+                ]
+            },
+            {
+                title: "Time of Birth Converter",
+                url: "https://vaiswanara.github.io/time",
+                badge: "Ghatis ↔ Hours",
+                icon: "fa-hourglass-half",
+                type: "tool",
+                desc: [
+                    "Convert time Ghati-Phalas to HH:mm:ss and HH:mm:ss to Ghatis-Phalas.",
+                    "Date and sunrise time are required.",
+                    "Ghati-Phala is calculated from sunrise time, not midnight."
+                ]
+            },
+            {
+                title: "Panchanga Shudhi & Tarabhala",
+                url: "https://vaiswanara.github.io/panchanga/",
+                icon: "fa-calendar-check",
+                type: "sheet",
+                desc: [
+                    "Upload a Panchanga Excel file (prepared from Jaganatha Hora data).",
+                    "Filter data by date and calculate Panchanga Shudhi.",
+                    "Calculate Tarabala for two individuals based on their Nakshatras."
+                ],
+                note: "Sample Panchanga Excel file available: PANCHANGA-2025-26-27 (Location: Bangalore)."
+            },
+            {
+                title: "Graha Role Mapping Sheet",
+                url: "https://vaiswanara.github.io/read_horoscope/",
+                icon: "fa-table",
+                type: "sheet",
+                desc: [
+                    "Study different planetary combinations.",
+                    "Understand house-planet relationships.",
+                    "Learn about lordship principles.",
+                    "Master aspect calculations."
+                ]
+            },
+            {
+                title: "Dasha Calculation",
+                url: "https://vaiswanara.github.io/dasha/",
+                icon: "fa-calculator",
+                type: "tool",
+                desc: [
+                    "Demonstrates the Vimshottari Dasha system step by step (Nakshatra identification, balance calculation, Mahadasha → Bhukti breakdown).",
+                    "Connects astrological rules to numeric computation and date arithmetic."
+                ]
+            },
+            {
+                title: "Jataka-Dasha-Gochara",
+                url: "https://vaiswanara.github.io/jdg/",
+                icon: "fa-chart-pie",
+                type: "app",
+                desc: [
+                    "Includes Jataka, Dasha, and Gochara tools.",
+                    "Transit Navigator turns raw planetary transit (Gochara) JSON data into an interactive format.",
+                    "Explore Panchanga and transit effects by date and Janma Rashi for easy comparison and practice.",
+                    "Runs in the browser — no account or server upload required."
+                ],
+                subLinks: [
+                    { text: "01-01-2031_to_31-12-2035.json", url: "https://drive.google.com/file/d/1Y-H36eAO9SyEGlK3FCjgvxYiqQjvpd6C/view?usp=drive_link" },
+                    { text: "01-01-2036_to_31-12-2039.json", url: "https://drive.google.com/file/d/1bdhLl4wxLubY0YAbumhOwmlrzw1vvsGf/view?usp=drive_link" },
+                    { text: "01-01-2040_to_31-12-2045.json", url: "https://drive.google.com/file/d/1IuSABYO4uB5XJd-lhQVZ23q2AaBEZTfB/view?usp=drive_link" },
+                    { text: "01-01-2046_to_31-12-2050.json", url: "https://drive.google.com/file/d/1GqpwjTDnHVb9ONqeaastgZL0GU3i3xhG/view?usp=drive_link" }
+                ],
+                note: "To view Gochara Phala for a particular Rashi from start date to end date with integrated ephemeris data, use the provided link in the app."
+            },
+            {
+                title: "Double Transit Marriage Timing Analyzer",
+                url: "https://vaiswanara.github.io/dt/",
+                icon: "fa-venus-mars",
+                type: "tool",
+                desc: [
+                    "Explains marriage timing using classical Vedic astrology principles.",
+                    "Analyzes natal chart + transit (Gochara) positions of Guru and Shani.",
+                    "Checks double transit activation of the 7th house, Lagna, and Janma Rashi.",
+                    "Evaluates whether Dasha – Antardasha – Pratyantara periods support marriage.",
+                    "Presents results in a structured diagnostic table for learning and research."
+                ],
+                note: "Ideal for: Learning how transit and dasha work together in predicting marriage events."
+            }
+        ];
+
+        container.innerHTML = tools.map(tool => `
+            <div class="app-card detailed">
+                <div class="app-header">
+                    <div class="app-icon-wrapper ${tool.type}">
+                        <i class="fas ${tool.icon}"></i>
+                    </div>
+                    <div class="app-header-content">
+                        <h3 class="app-title">${tool.title} ${tool.badge ? `<span class="pill">${tool.badge}</span>` : ''}</h3>
+                        <a href="${tool.url}" target="_blank" rel="noopener noreferrer" class="app-link-btn">
+                            Open Tool <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="app-body">
+                    <ul>
+                        ${tool.desc.map(d => `<li>${d}</li>`).join('')}
+                    </ul>
+                    ${tool.subLinks ? `
+                        <div class="sub-links">
+                            <p>Optional JSON data periods:</p>
+                            <ul>
+                                ${tool.subLinks.map(l => `<li><a href="${l.url}" target="_blank" rel="noopener noreferrer">${l.text}</a></li>`).join('')}
+                            </ul>
+                        </div>
+                    ` : ''}
+                    ${tool.note ? `<div class="app-note"><i class="fas fa-info-circle"></i> ${tool.note}</div>` : ''}
+                </div>
+            </div>
+        `).join('');
     }
 };
 
@@ -757,6 +1090,7 @@ const AppActions = {
         const playlist = document.getElementById('videoPlaylist');
         const language = document.getElementById('videoLanguage');
         const pdfLink = document.getElementById('pdfLink');
+        const pdfDownload = document.getElementById('pdfDownload');
         const markBtn = document.getElementById('markCompleteBtn');
         const favBtn = document.getElementById('addFavBtn');
         
@@ -776,8 +1110,11 @@ const AppActions = {
         if (lesson.pdfLink) {
             pdfLink.href = lesson.pdfLink;
             pdfLink.style.display = 'flex';
+            pdfDownload.href = lesson.pdfLink;
+            pdfDownload.style.display = 'flex';
         } else {
             pdfLink.style.display = 'none';
+            pdfDownload.style.display = 'none';
         }
         
         const isCompleted = AppState.completed.includes(lesson.id);
@@ -876,10 +1213,13 @@ const UIControllers = {
         this.initNavigation();
         this.initDrawer();
         this.initShareModal();
+        this.initPrivacyModal();
         this.initPullToRefresh();
         this.initLoadMore();
         this.initNetworkStatus();
         this.initDonatePage();
+        this.initDataManagement();
+        this.initInstallApp();
     },
 
     initDonatePage() {
@@ -901,6 +1241,81 @@ const UIControllers = {
                     document.body.removeChild(input);
                     Utils.showToast('UPI number copied!');
                 }
+            });
+        }
+    },
+
+    initInstallApp() {
+        const installBtnDesktop = document.getElementById('installAppBtnDesktop');
+        const installBtnMobile = document.getElementById('installAppBtnMobile');
+        const installModal = document.getElementById('installModal');
+        const closeInstallModal = document.getElementById('closeInstallModal');
+        const androidBtn = document.getElementById('installAndroidBtn');
+        const iosBtn = document.getElementById('installIosBtn');
+        const iosInstructions = document.getElementById('iosInstructions');
+
+        const openModal = () => {
+            installModal?.classList.add('active');
+            if (iosInstructions) iosInstructions.style.display = 'none';
+            UIControllers.closeDrawer();
+        };
+
+        installBtnDesktop?.addEventListener('click', openModal);
+        installBtnMobile?.addEventListener('click', openModal);
+
+        closeInstallModal?.addEventListener('click', () => {
+            installModal?.classList.remove('active');
+        });
+
+        installModal?.addEventListener('click', (e) => {
+            if (e.target === installModal) installModal.classList.remove('active');
+        });
+
+    
+        androidBtn?.addEventListener('click', async () => {
+
+            if (!deferredPrompt) {
+                Utils.showToast('Preparing install… please wait a few seconds and try again.', 'info');
+                return;
+            }
+
+            // Show real install dialog
+            deferredPrompt.prompt();
+
+            const choiceResult = await deferredPrompt.userChoice;
+
+            if (choiceResult.outcome === 'accepted') {
+                console.log('User accepted install');
+            } else {
+                console.log('User dismissed install');
+            }
+
+            deferredPrompt = null;
+            installModal?.classList.remove('active');
+       });
+
+
+
+        iosBtn?.addEventListener('click', () => iosInstructions ? iosInstructions.style.display = 'block' : null);
+    },
+
+    initDataManagement() {
+        const restoreInput = document.getElementById('restoreInput');
+
+        document.querySelectorAll('.backup-btn').forEach(btn => {
+            btn.addEventListener('click', () => DataManager.backupData());
+        });
+
+        document.querySelectorAll('.restore-btn').forEach(btn => {
+            btn.addEventListener('click', () => restoreInput && restoreInput.click());
+        });
+
+        if (restoreInput) {
+            restoreInput.addEventListener('change', (e) => {
+                if (e.target.files.length > 0) {
+                    DataManager.restoreData(e.target.files[0]);
+                }
+                e.target.value = ''; // Reset
             });
         }
     },
@@ -950,19 +1365,23 @@ const UIControllers = {
             }, 300));
         }
         
-        // Filter chips
-        document.getElementById('filterKannada').addEventListener('click', function() {
-            this.classList.toggle('active');
-            AppState.filters.language = this.classList.contains('active') ? 'kannada' : '';
-            document.getElementById('languageFilter').value = AppState.filters.language;
+        // Filter chips (mutually exclusive)
+        const kannadaChip = document.getElementById('filterKannada');
+        const teluguChip = document.getElementById('filterTelugu');
+        const setLanguageFilter = (lang) => {
+            AppState.filters.language = lang;
+            kannadaChip.classList.toggle('active', lang === 'kannada');
+            teluguChip.classList.toggle('active', lang === 'telugu');
+            document.getElementById('languageFilter').value = lang;
             ViewManager.switchView('courses');
+        };
+        
+        kannadaChip.addEventListener('click', () => {
+            setLanguageFilter(AppState.filters.language === 'kannada' ? '' : 'kannada');
         });
         
-        document.getElementById('filterTelugu').addEventListener('click', function() {
-            this.classList.toggle('active');
-            AppState.filters.language = this.classList.contains('active') ? 'telugu' : '';
-            document.getElementById('languageFilter').value = AppState.filters.language;
-            ViewManager.switchView('courses');
+        teluguChip.addEventListener('click', () => {
+            setLanguageFilter(AppState.filters.language === 'telugu' ? '' : 'telugu');
         });
         
         document.getElementById('filterFavorites').addEventListener('click', function() {
@@ -978,6 +1397,10 @@ const UIControllers = {
         
         document.getElementById('languageFilter').addEventListener('change', (e) => {
             AppState.filters.language = e.target.value;
+            const kannadaChip = document.getElementById('filterKannada');
+            const teluguChip = document.getElementById('filterTelugu');
+            kannadaChip.classList.toggle('active', AppState.filters.language === 'kannada');
+            teluguChip.classList.toggle('active', AppState.filters.language === 'telugu');
             ViewManager.renderCoursesView();
         });
     },
@@ -1067,20 +1490,42 @@ const UIControllers = {
         });
     },
 
+    initPrivacyModal() {
+        const privacyModal = document.getElementById('privacyModal');
+        const openBtn = document.getElementById('privacyPolicyLink');
+        const closeBtn = document.getElementById('closePrivacyModal');
+
+        if (openBtn) {
+            openBtn.addEventListener('click', () => {
+                privacyModal.classList.add('active');
+            });
+        }
+
+        if (closeBtn) {
+            closeBtn.addEventListener('click', () => {
+                privacyModal.classList.remove('active');
+            });
+        }
+
+        privacyModal.addEventListener('click', (e) => {
+            if (e.target.id === 'privacyModal') privacyModal.classList.remove('active');
+        });
+    },
+
     initPullToRefresh() {
         let startY = 0;
         let isPulling = false;
         const pullIndicator = document.getElementById('pullToRefresh');
-        const mainContent = document.getElementById('mainContent');
+        const canStartPull = () => window.scrollY === 0;
         
-        mainContent.addEventListener('touchstart', (e) => {
-            if (mainContent.scrollTop === 0) {
+        document.addEventListener('touchstart', (e) => {
+            if (canStartPull()) {
                 startY = e.touches[0].clientY;
                 isPulling = true;
             }
         }, { passive: true });
         
-        mainContent.addEventListener('touchmove', (e) => {
+        document.addEventListener('touchmove', (e) => {
             if (!isPulling) return;
             
             const currentY = e.touches[0].clientY;
@@ -1092,15 +1537,20 @@ const UIControllers = {
             }
         }, { passive: true });
         
-        mainContent.addEventListener('touchend', () => {
+        document.addEventListener('touchend', async () => {
             if (pullIndicator.classList.contains('visible')) {
                 pullIndicator.querySelector('span').textContent = 'Refreshing...';
                 
-                setTimeout(() => {
-                    pullIndicator.classList.remove('visible');
+                const result = await DataManager.loadData({ forceRefresh: true });
+                pullIndicator.classList.remove('visible');
+                if (result.success) {
+                    UIRenderer.populateFilters();
+                    UIRenderer.populateDrawerCategories();
                     ViewManager.renderCurrentView();
-                    Utils.showToast('Refreshed!');
-                }, 1000);
+                    Utils.showToast(result.updated ? 'Updated!' : 'No new updates');
+                } else {
+                    Utils.showToast('Refresh failed', 'error');
+                }
             }
             isPulling = false;
         });
@@ -1133,8 +1583,6 @@ const UIControllers = {
 // INITIALIZATION
 // ============================================
 document.addEventListener('DOMContentLoaded', async () => {
-    const loadingScreen = document.getElementById('loadingScreen');
-    
     // Initialize controllers
     UIControllers.init();
     
@@ -1166,30 +1614,28 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (e.key === 'Escape') {
             AppActions.closeVideoModal();
             document.getElementById('shareModal').classList.remove('active');
+            document.getElementById('privacyModal').classList.remove('active');
+            document.getElementById('installModal').classList.remove('active');
         }
     });
     
     // Load data
-    const success = await DataManager.loadData();
+    const result = await DataManager.loadData();
+    DataManager.loadDailyMessage(); // Load the daily message
     
-    if (success) {
+    // Hide loading screen with fade out
+    const loader = document.getElementById('loadingScreen');
+    if (loader) {
+        loader.style.opacity = '0';
+        setTimeout(() => loader.style.display = 'none', 500);
+    }
+    
+    if (result.success) {
         UIRenderer.populateFilters();
         UIRenderer.populateDrawerCategories();
         UIRenderer.renderQuickActions();
         ViewManager.switchView('dashboard');
-        
-        setTimeout(() => loadingScreen.classList.add('hidden'), 1500);
     } else {
-        loadingScreen.innerHTML = `
-            <div class="loading-content">
-                <div class="logo-pulse"><img src="logo.jpeg" alt="e-PATA" class="loading-logo"></div>
-                <div class="loading-text">Error loading data. Please refresh.</div>
-            </div>
-        `;
+        Utils.showToast('Error loading data. Please refresh.', 'error');
     }
 });
-
-// Service Worker for PWA
-if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js').catch(console.error);
-}
