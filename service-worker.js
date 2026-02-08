@@ -1,6 +1,10 @@
-const BASE_PATH = "/epata/";
+/* ===============================
+   e-PATA PWA Service Worker
+   Works on GitHub Pages + Subdomain
+   =============================== */
 
-const CACHE_NAME = "epata2-pwa-v1";
+const BASE_PATH = self.location.pathname.replace("service-worker.js", "");
+const CACHE_NAME = "epata2-pwa-v3";
 
 const urlsToCache = [
   BASE_PATH,
@@ -11,18 +15,16 @@ const urlsToCache = [
   BASE_PATH + "icons/icon-512.png"
 ];
 
-// Install
+/* INSTALL */
 self.addEventListener("install", event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
-      .then(cache => {
-        return cache.addAll(urlsToCache);
-      })
+      .then(cache => cache.addAll(urlsToCache))
   );
   self.skipWaiting();
 });
 
-// Activate
+/* ACTIVATE */
 self.addEventListener("activate", event => {
   event.waitUntil(
     caches.keys().then(cacheNames => {
@@ -38,16 +40,18 @@ self.addEventListener("activate", event => {
   self.clients.claim();
 });
 
-// Fetch (offline support)
+/* FETCH */
 self.addEventListener("fetch", event => {
   event.respondWith(
-    caches.match(event.request)
-      .then(response => {
-        return response || fetch(event.request).catch(() => {
-          if (event.request.mode === "navigate") {
-            return caches.match("/index.html");
-          }
-        });
-      })
+    caches.match(event.request).then(response => {
+      if (response) return response;
+
+      return fetch(event.request).catch(() => {
+        // Offline navigation fallback
+        if (event.request.mode === "navigate") {
+          return caches.match(BASE_PATH + "index.html");
+        }
+      });
+    })
   );
 });
