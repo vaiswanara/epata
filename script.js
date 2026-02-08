@@ -1049,9 +1049,9 @@ const ViewManager = {
                     </div>
                     <div class="app-header-content">
                         <h3 class="app-title">${tool.title} ${tool.badge ? `<span class="pill">${tool.badge}</span>` : ''}</h3>
-                        <a href="${tool.url}" target="_blank" rel="noopener noreferrer" class="app-link-btn">
+                        <button class="app-link-btn" onclick="AppActions.openResource('${tool.url}', '${tool.title.replace(/'/g, "\\'")}')">
                             Open Tool <i class="fas fa-external-link-alt"></i>
-                        </a>
+                        </button>
                     </div>
                 </div>
                 <div class="app-body">
@@ -1187,6 +1187,30 @@ const AppActions = {
         modal.classList.remove('active');
         document.body.style.overflow = '';
         AppState.currentVideo = null;
+    },
+
+    openResource(url, title) {
+        const modal = document.getElementById('resourceModal');
+        const frame = document.getElementById('resourceFrame');
+        const titleEl = document.getElementById('resourceTitle');
+        
+        if (modal && frame) {
+            titleEl.textContent = title;
+            frame.src = url;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+    },
+
+    closeResourceModal() {
+        const modal = document.getElementById('resourceModal');
+        const frame = document.getElementById('resourceFrame');
+        
+        if (modal) {
+            modal.classList.remove('active');
+            if (frame) frame.src = ''; // Clear src to stop loading
+            document.body.style.overflow = '';
+        }
     },
 
     toggleTheme() {

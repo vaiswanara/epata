@@ -2527,6 +2527,21 @@ select:focus-visible {
     -webkit-line-clamp: unset;
 }
 
+/* Resource Modal Styles */
+.resource-container {
+    flex: 1;
+    width: 100%;
+    background: #fff;
+    position: relative;
+    overflow: hidden;
+}
+
+.resource-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
 .app-link-btn {
     font-size: 12px;
     color: var(--primary);
@@ -2535,6 +2550,15 @@ select:focus-visible {
     display: inline-flex;
     align-items: center;
     gap: 4px;
+}
+
+/* Reset button styles if app-link-btn is used on a button */
+button.app-link-btn {
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font-family: inherit;
 }
 
 .app-body {
