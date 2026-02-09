@@ -107,9 +107,17 @@
                     <i class="fas fa-home"></i>
                     <span>Dashboard</span>
                 </li>
+                <li class="nav-item" data-view="updates">
+                    <i class="fas fa-bullhorn"></i>
+                    <span>Latest News</span>
+                </li>
                 <li class="nav-item" data-view="courses">
                     <i class="fas fa-graduation-cap"></i>
                     <span>All Courses</span>
+                </li>
+                <li class="nav-item" data-view="recent">
+                    <i class="fas fa-clock"></i>
+                    <span>Recent</span>
                 </li>
                 <li class="nav-item" data-view="favorites">
                     <i class="fas fa-heart"></i>
@@ -119,10 +127,6 @@
                 <li class="nav-item" data-view="progress">
                     <i class="fas fa-chart-line"></i>
                     <span>Progress</span>
-                </li>
-                <li class="nav-item" data-view="recent">
-                    <i class="fas fa-clock"></i>
-                    <span>Recent</span>
                 </li>
                 <li class="nav-item" data-view="quiz">
                     <i class="fas fa-brain"></i>
@@ -206,6 +210,10 @@
                     <li class="drawer-item" data-view="progress">
                         <i class="fas fa-chart-line"></i>
                         <span>My Progress</span>
+                    </li>
+                    <li class="drawer-item" data-view="updates">
+                        <i class="fas fa-bullhorn"></i>
+                        <span>Latest News</span>
                     </li>
                     <li class="drawer-item" data-view="recent">
                         <i class="fas fa-clock"></i>
@@ -770,6 +778,17 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <!-- Updates View -->
+        <div class="view hidden" id="updatesView">
+            <div class="page-header" style="padding: 20px 16px 0;">
+                <h2 style="font-size: 20px; font-weight: 700;">Latest News & Updates</h2>
+            </div>
+        
+            <div id="updatesContainer" class="updates-container">
+                <p class="loading-text">Loading updates...</p>
             </div>
         </div>
 

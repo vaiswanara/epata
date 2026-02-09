@@ -3495,3 +3495,55 @@ button.app-link-btn {
 .support-language {
     animation: fadeIn 0.4s ease;
 }
+
+/* ============================================
+   UPDATES VIEW
+   ============================================ */
+.updates-container {
+    padding: 16px;
+}
+
+.update-card {
+    background: var(--bg-card);
+    border-radius: 12px;
+    padding: 14px;
+    margin-bottom: 14px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    border: 1px solid var(--border);
+}
+
+.update-date {
+    font-size: 13px;
+    opacity: 0.7;
+    margin-bottom: 6px;
+}
+
+.update-title {
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: var(--primary);
+}
+
+.update-message {
+    line-height: 1.5;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.update-link {
+    display: inline-block;
+    padding: 6px 12px;
+    background: #2e7d32;
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.separator {
+    height: 1px;
+    background: var(--border);
+    margin: 18px 0;
+    display: none; /* Hidden as cards have margins */
+}

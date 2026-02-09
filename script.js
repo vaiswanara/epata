@@ -4,6 +4,21 @@
  */
 
 // ============================================
+// CONFIG LOADER
+// ============================================
+let APP_CONFIG = null;
+
+async function loadAppConfig() {
+    try {
+        const res = await fetch('config.json?t=' + Date.now());
+        APP_CONFIG = await res.json();
+        console.log("CONFIG LOADED", APP_CONFIG);
+    } catch (e) {
+        console.error("Failed to load config.json", e);
+    }
+}
+
+// ============================================
 // PWA INSTALL PROMPT
 // ============================================
 let deferredPrompt;
@@ -197,9 +212,10 @@ const Utils = {
 // ============================================
 const DataManager = {
     async loadData(options = {}) {
+        if (!APP_CONFIG) return { success: false, updated: false };
         const { forceRefresh = false } = options;
         const localUrl = 'links.txt';
-        const googleSheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ6RStlHwy-jhwrGCg7JUrE8I3MZxukUqBGqdUxGywRof4WyItHEJZ0FP93GeB_ktBAXte3avGhYEVw/pub?gid=0&single=true&output=csv';
+        const googleSheetUrl = APP_CONFIG.urls;
         
         // Append timestamp to prevent caching
         const sheetUrlWithCache = googleSheetUrl + '&t=' + new Date().getTime();
@@ -319,7 +335,8 @@ const DataManager = {
     },
 
     async loadResources() {
-        const url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ6RStlHwy-jhwrGCg7JUrE8I3MZxukUqBGqdUxGywRof4WyItHEJZ0FP93GeB_ktBAXte3avGhYEVw/pub?gid=1820721708&single=true&output=csv';
+        if (!APP_CONFIG) return;
+        const url = APP_CONFIG.app_urls;
         try {
             const response = await fetch(url + '&t=' + Date.now());
             if (!response.ok) return;
@@ -370,7 +387,8 @@ const DataManager = {
     },
 
     async loadQuizData() {
-        const url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ6RStlHwy-jhwrGCg7JUrE8I3MZxukUqBGqdUxGywRof4WyItHEJZ0FP93GeB_ktBAXte3avGhYEVw/pub?gid=517003738&single=true&output=csv';
+        if (!APP_CONFIG) return false;
+        const url = APP_CONFIG.quiz;
         try {
             const response = await fetch(url + '&t=' + Date.now());
             if (!response.ok) throw new Error('Failed to load quiz');
@@ -404,7 +422,8 @@ const DataManager = {
     },
 
     async loadDailyMessage() {
-        const url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ6RStlHwy-jhwrGCg7JUrE8I3MZxukUqBGqdUxGywRof4WyItHEJZ0FP93GeB_ktBAXte3avGhYEVw/pub?gid=297150943&single=true&output=csv';
+        if (!APP_CONFIG) return;
+        const url = APP_CONFIG.welcome;
         try {
             // Add timestamp to avoid caching
             const response = await fetch(url + '&t=' + Date.now());
@@ -602,6 +621,59 @@ const DataManager = {
 
     getContinueLesson() {
         return AppState.lessons.find(l => l.videoId && !AppState.completed.includes(l.id));
+    },
+
+    async loadUpdates() {
+        if (!APP_CONFIG || !APP_CONFIG.updates) return;
+
+        const container = document.getElementById("updatesContainer");
+        if (!container) return;
+        container.innerHTML = '<p class="loading-text">Loading updates...</p>';
+
+        try {
+            const res = await fetch(APP_CONFIG.updates + "&t=" + Date.now());
+            const text = await res.text();
+
+            // Use Utils.parseCSV for robust handling of quotes/commas
+            const rows = Utils.parseCSV(text).slice(1); // Skip header
+
+            let html = "";
+            const today = new Date();
+
+            rows.forEach(cols => {
+                if (cols.length < 5) return;
+
+                const status = cols[0]?.trim();
+                // const batch = cols[1]?.trim();
+                const date = cols[2]?.trim();
+                const title = cols[3]?.trim();
+                const message = cols[4]?.trim();
+                const link = cols[5]?.trim();
+                const expiry = cols[6]?.trim();
+
+                if (status !== "ON") return;
+
+                if (expiry) {
+                    const expDate = new Date(expiry);
+                    if (!isNaN(expDate) && today > expDate) return;
+                }
+
+                html += `
+                <div class="update-card">
+                    <div class="update-date"><i class="far fa-calendar-alt"></i> ${date}</div>
+                    <div class="update-title">${title}</div>
+                    <div class="update-message">${message}</div>
+                    ${link ? `<a class="update-link" href="${link}" target="_blank">Open Link <i class="fas fa-external-link-alt"></i></a>` : ``}
+                </div>
+                `;
+            });
+
+            container.innerHTML = html || '<div class="empty-state"><p>No current updates.</p></div>';
+
+        } catch (e) {
+            container.innerHTML = "<p>Unable to load updates.</p>";
+            console.error(e);
+        }
     }
 };
 
@@ -938,7 +1010,8 @@ const ViewManager = {
             quiz: 'Daily Quiz',
             recent: 'Recent',
             donate: 'Support Us',
-            resources: 'Resources'
+            resources: 'Resources',
+            updates: 'Latest News'
         };
         const titleEl = document.getElementById('pageTitle');
         if (titleEl) titleEl.textContent = titles[viewName] || 'Dashboard';
@@ -976,6 +1049,9 @@ const ViewManager = {
                 break;
             case 'resources':
                 this.renderResourcesView();
+                break;
+            case 'updates':
+                DataManager.loadUpdates();
                 break;
             case 'donate':
                 // Donate view is static, no dynamic rendering needed
@@ -1877,6 +1953,8 @@ const UIControllers = {
 // INITIALIZATION
 // ============================================
 document.addEventListener('DOMContentLoaded', async () => {
+    await loadAppConfig();
+
     // Initialize controllers
     UIControllers.init();
     
