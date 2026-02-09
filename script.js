@@ -2019,29 +2019,24 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('./service-worker.js').then(reg => {
+    let refreshing = false;
 
-    // Check update every time app opens
-    reg.update();
-
-    reg.onupdatefound = () => {
-      const newWorker = reg.installing;
-
-      newWorker.onstatechange = () => {
-        if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-
-          // Ask user to refresh
-          if (confirm("A new version of e-PATA is available. Update now?")) {
-            newWorker.postMessage("SKIP_WAITING");
-
-            newWorker.addEventListener('statechange', () => {
-              if (newWorker.state === 'activated') {
-                window.location.reload();
-              }
-            });
-          }
+    // Listen for the "controlling" service worker to change
+    // This triggers when the new SW takes over (after skipWaiting)
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+        if (!refreshing) {
+            refreshing = true;
+            window.location.reload();
         }
-      };
-    };
-  });
+    });
+
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./service-worker.js')
+            .then(reg => {
+                // Check for updates on load
+                reg.update();
+                console.log("Service Worker registered");
+            })
+            .catch(err => console.error('SW Registration failed:', err));
+    });
 }
