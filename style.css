@@ -3096,8 +3096,8 @@ button.app-link-btn {
     list-style: none;
     padding: 0;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px 12px;
+    grid-template-columns: 1fr;
+    gap: 8px;
 }
 
 .safety-list li {
@@ -3112,6 +3112,19 @@ button.app-link-btn {
 .safety-list li i {
     color: var(--success);
     font-size: 12px;
+}
+
+.safety-reassurance {
+    font-weight: 600;
+    color: var(--success) !important;
+    margin-top: 12px !important;
+    margin-bottom: 4px !important;
+}
+
+.safety-tech-note {
+    font-size: 11px !important;
+    color: var(--text-secondary) !important;
+    margin-bottom: 0 !important;
 }
 
 @media (min-width: 769px) {
