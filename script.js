@@ -60,6 +60,8 @@ const AppState = {
     playlists: [],
     favorites: JSON.parse(localStorage.getItem('epata_favorites') || '[]'),
     completed: JSON.parse(localStorage.getItem('epata_completed') || '[]'),
+    enrolledCourse: JSON.parse(localStorage.getItem('epata_enrolled_course') || 'null'),
+    coursesMeta: [],
     recentlyWatched: JSON.parse(localStorage.getItem('epata_recent') || '[]'),
     currentView: 'dashboard',
     currentVideo: null,
@@ -207,6 +209,20 @@ const Utils = {
     }
 };
 
+async function loadCoursesMeta(){
+    try{
+        const res = await fetch('courses.json?t=' + Date.now());
+        const data = await res.json();
+        AppState.coursesMeta = data.courses || [];
+        if(ViewManager && typeof ViewManager.renderCurrentView === 'function'){
+            ViewManager.renderCurrentView();
+        }
+        console.log("Courses loaded", AppState.coursesMeta);
+    }catch(e){
+        console.error("courses.json load failed", e);
+    }
+}
+
 // ============================================
 // DATA MANAGEMENT
 // ============================================
@@ -230,7 +246,7 @@ const DataManager = {
                 if (Array.isArray(parsedLessons) && parsedLessons.length > 0) {
                     AppState.lessons = parsedLessons;
                     // Reconstruct playlists from lessons
-                    const playlists = new Set(parsedLessons.map(l => l.playlist));
+                    const playlists = new Set(parsedLessons.map(l => l.playlistId || l.playlist));
                     AppState.playlists = Array.from(playlists).sort();
                     isCachedLoaded = true;
                     console.log('Loaded lessons from cache');
@@ -272,7 +288,8 @@ const DataManager = {
                                 playlists.add(playlist);
                                 lessons.push({
                                     id: `lesson_${globalIndex++}`,
-                                    playlist,
+                                    playlistId: playlist,
+                                    playlist: Utils.formatPlaylistName(playlist),
                                     title,
                                     videoId: videoId?.length === 11 ? videoId : null,
                                     pdfLink: pdfLink && pdfLink !== 'none' ? pdfLink : null,
@@ -305,6 +322,9 @@ const DataManager = {
                     console.log('New data found, updating...');
                     AppState.lessons = lessons;
                     AppState.playlists = Array.from(playlists).sort();
+                    if(ViewManager && typeof ViewManager.renderCurrentView === 'function'){
+                        ViewManager.renderCurrentView();
+                    }
                     updated = true;
                     
                     // Save to cache
@@ -541,14 +561,14 @@ const DataManager = {
     },
 
     getLessonsByPlaylist(playlist) {
-        return AppState.lessons.filter(l => l.playlist === playlist);
+        return AppState.lessons.filter(l => l.playlistId === playlist);
     },
 
     getFilteredLessons() {
         let filtered = [...AppState.lessons];
         
         if (AppState.filters.playlist) {
-            filtered = filtered.filter(l => l.playlist === AppState.filters.playlist);
+            filtered = filtered.filter(l => l.playlistId === AppState.filters.playlist);
         }
         if (AppState.filters.language) {
             filtered = filtered.filter(l => l.language === AppState.filters.language);
@@ -598,6 +618,10 @@ const DataManager = {
         }
         AppState.completed.push(lessonId);
         Utils.saveToStorage('completed', AppState.completed);
+        if(isEnrolledCourseCompleted()){
+            const modal = document.getElementById('courseCompleteModal');
+            if(modal) modal.style.display = 'flex';
+        }
         return true;
     },
 
@@ -682,10 +706,7 @@ const DataManager = {
 // ============================================
 const UIRenderer = {
     renderWelcomeStats() {
-        const total = AppState.lessons.filter(l => l.videoId).length;
-        const completed = AppState.completed.length;
-        const percent = total > 0 ? Math.round((completed / total) * 100) : 0;
-        document.getElementById('welcomeProgress').textContent = `${percent}%`;
+        document.getElementById('welcomeProgress').textContent = getEnrolledCourseProgress() + "%";
     },
 
     renderQuickActions() {
@@ -693,6 +714,11 @@ const UIRenderer = {
             btn.addEventListener('click', () => {
                 const action = btn.dataset.action;
                 if (action === 'continue') {
+                    const nextLesson = getNextLessonForEnrolledCourse();
+                    if(nextLesson){
+                        AppActions.openVideo(nextLesson);
+                        return;
+                    }
                     const lesson = DataManager.getContinueLesson();
                     if (lesson) AppActions.openVideo(lesson);
                     else Utils.showToast('All lessons completed!');
@@ -710,7 +736,12 @@ const UIRenderer = {
     renderContinueCard() {
         const section = document.getElementById('continueSection');
         const container = document.getElementById('continueCard');
-        const lesson = DataManager.getContinueLesson();
+        let lesson = DataManager.getContinueLesson();
+
+        const enrolledNext = getNextLessonForEnrolledCourse();
+        if(enrolledNext){
+            lesson = enrolledNext;
+        }
         
         if (!lesson) {
             section.style.display = 'none';
@@ -755,16 +786,73 @@ const UIRenderer = {
     },
 
     renderStats() {
-        const total = AppState.lessons.filter(l => l.videoId).length;
-        const completed = AppState.completed.length;
-        const percent = total > 0 ? Math.round((completed / total) * 100) : 0;
+        let syllabusLessons = [];
+
+        if(AppState.enrolledCourse){
+
+            // STUDY MODE → only enrolled course
+            const course = AppState.coursesMeta.find(c => c.id === AppState.enrolledCourse);
+
+            if(course){
+                syllabusLessons = AppState.lessons.filter(l => l.playlistId === course.playlist);
+            }
+
+        }else{
+
+            // CURRICULUM MODE → all courses
+            const coursePlaylists = AppState.coursesMeta.map(c => c.playlist);
+            syllabusLessons = AppState.lessons.filter(l => coursePlaylists.includes(l.playlistId));
+
+        }
+
+        // completed lessons inside current scope
+        const syllabusCompleted = syllabusLessons.filter(l => AppState.completed.includes(l.id));
+
+        const totalLessons = syllabusLessons.length;
+        const doneLessons = syllabusCompleted.length;
+        const progressPercent = totalLessons > 0 ? Math.round((doneLessons / totalLessons) * 100) : 0;
         
-        document.getElementById('totalLessons').textContent = total;
-        document.getElementById('totalPlaylists').textContent = AppState.playlists.length;
-        document.getElementById('completedLessons').textContent = completed;
-        document.getElementById('progressPercent').textContent = `${percent}%`;
+        document.getElementById('totalLessons').textContent = totalLessons;
+        
+        const nameEl = document.getElementById('activeCourseNameValue');
+        const statusEl = document.getElementById('activeCourseStatus');
+
+        if(nameEl && statusEl){
+
+            if(AppState.enrolledCourse){
+
+                const course = AppState.coursesMeta.find(c => c.id === AppState.enrolledCourse);
+
+                nameEl.textContent = course ? course.name : "";
+                statusEl.textContent = "Enrolled";
+                statusEl.style.color = "var(--primary)";
+
+            }else{
+
+                nameEl.textContent = "";
+                statusEl.textContent = "Not Enrolled";
+                statusEl.style.color = "#d9534f";
+            }
+        }
+        document.getElementById('completedLessons').textContent = doneLessons;
+        document.getElementById('progressPercent').textContent = `${progressPercent}%`;
         document.getElementById('favCount').textContent = AppState.favorites.length;
         document.getElementById('drawerFavCount').textContent = AppState.favorites.length;
+
+        const label = document.getElementById('activeCourseLabel');
+
+        if(label){
+            if(AppState.enrolledCourse){
+                const course = AppState.coursesMeta.find(c => c.id === AppState.enrolledCourse);
+                if(course){
+                    label.textContent = "(" + course.name + ")";
+                }else{
+                    label.textContent = "";
+                }
+            }else{
+                label.textContent = "No course enrolled";
+            }
+        }
     },
 
     renderFeaturedPlaylists() {
@@ -775,6 +863,9 @@ const UIRenderer = {
             const lessons = DataManager.getLessonsByPlaylist(playlist);
             const progress = DataManager.getPlaylistProgress(playlist);
             
+            const coursePlaylists = AppState.coursesMeta.map(c => c.playlist);
+            const isCourse = coursePlaylists.includes(playlist);
+            
             return `
                 <div class="playlist-card" data-playlist="${playlist}">
                     <div class="playlist-header" style="background: ${Utils.getCategoryColor(playlist)}">
@@ -782,8 +873,8 @@ const UIRenderer = {
                         <div class="playlist-name">${Utils.formatPlaylistName(playlist)}</div>
                     </div>
                     <div class="playlist-body">
-                        <div class="playlist-count"><i class="fas fa-video"></i> ${lessons.length} lessons</div>
-                        ${progress.percent > 0 ? `<div class="playlist-progress">${progress.percent}% complete</div>` : ''}
+                        <div class="playlist-count"><i class="fas fa-video"></i> ${lessons.length} videos</div>
+                        ${(isCourse && progress.percent > 0) ? `<div class="playlist-progress">${progress.percent}% complete</div>` : ''}
                     </div>
                 </div>
             `;
@@ -840,6 +931,10 @@ const UIRenderer = {
             const isCompleted = AppState.completed.includes(lesson.id);
             const isFavorite = AppState.favorites.includes(lesson.id);
             
+            const coursePlaylists = AppState.coursesMeta.map(c => c.playlist);
+            const isCourseVideo = coursePlaylists.includes(lesson.playlistId);
+            const labelText = isCourseVideo ? "Lesson" : "Video";
+            
             return `
                 <div class="lesson-card ${isCompleted ? 'completed' : ''}" data-id="${lesson.id}">
                     <div class="lesson-thumbnail">
@@ -850,7 +945,7 @@ const UIRenderer = {
                         ${lesson.hasNotes ? '<span class="lesson-badge"><i class="fas fa-file-pdf"></i></span>' : ''}
                     </div>
                     <div class="lesson-content">
-                        <div class="lesson-card-title">${lesson.title}</div>
+                        <div class="lesson-card-title">${labelText}: ${lesson.title}</div>
                         <div class="lesson-card-meta">
                             <span class="lesson-playlist-name">${Utils.formatPlaylistName(lesson.playlist)}</span>
                             ${lesson.hasNotes ? '<span class="lesson-has-notes"><i class="fas fa-file-alt"></i></span>' : ''}
@@ -858,7 +953,7 @@ const UIRenderer = {
                     </div>
                     <div class="lesson-actions-row">
                         <button class="lesson-action-btn primary" onclick="event.stopPropagation(); AppActions.playVideo('${lesson.id}')">
-                            <i class="fas fa-play"></i> Watch
+                            <i class="fas fa-play"></i> Watch ${labelText}
                         </button>
                         <button class="lesson-action-btn favorite ${isFavorite ? 'active' : ''}" onclick="event.stopPropagation(); AppActions.toggleFavorite('${lesson.id}')">
                             <i class="${isFavorite ? 'fas' : 'far'} fa-heart"></i>
@@ -885,8 +980,15 @@ const UIRenderer = {
     },
 
     renderProgressView() {
-        const total = AppState.lessons.filter(l => l.videoId).length;
-        const completed = AppState.completed.length;
+        // 1. Get playlists defined in courses.json
+        const coursePlaylists = AppState.coursesMeta.map(c => c.playlist);
+        
+        // 2. Filter lessons to only include those in the official courses
+        const courseLessons = AppState.lessons.filter(l => coursePlaylists.includes(l.playlistId) && l.videoId);
+        
+        // 3. Recalculate total progress based on course lessons only
+        const total = courseLessons.length;
+        const completed = courseLessons.filter(l => AppState.completed.includes(l.id)).length;
         const percent = total > 0 ? Math.round((completed / total) * 100) : 0;
         
         // Update circle
@@ -901,7 +1003,7 @@ const UIRenderer = {
         
         // Render by playlist
         const container = document.getElementById('progressByPlaylist');
-        const progressData = AppState.playlists.map(p => ({
+        const progressData = coursePlaylists.map(p => ({
             playlist: p,
             ...DataManager.getPlaylistProgress(p)
         })).filter(p => p.total > 0).sort((a, b) => b.percent - a.percent);
@@ -984,6 +1086,125 @@ const UIRenderer = {
     }
 };
 
+function renderEnrollCourses(){
+    const container = document.getElementById('coursesContainer');
+    if(!container) return;
+
+    if(!AppState.coursesMeta.length){
+        container.innerHTML = "<p>No courses available</p>";
+        return;
+    }
+
+    container.innerHTML = '';
+
+    AppState.coursesMeta.forEach(course=>{
+        const enrolled = AppState.enrolledCourse === course.id;
+
+        const div = document.createElement('div');
+        div.className = 'course-card';
+
+        div.innerHTML = `
+            <h3>${course.name}</h3>
+            <p>${course.description}</p>
+            <button class="enroll-btn" data-id="${course.id}">
+                ${enrolled ? "Enrolled ✓" : "Enroll"}
+            </button>
+        `;
+
+        container.appendChild(div);
+    });
+
+    document.querySelectorAll('.enroll-btn').forEach(btn=>{
+        btn.addEventListener('click', ()=>{
+            enrollCourse(btn.dataset.id);
+        });
+    });
+}
+
+let pendingCourseSwitch = null;
+
+function enrollCourse(courseId){
+    if(AppState.enrolledCourse && AppState.enrolledCourse !== courseId){
+        pendingCourseSwitch = courseId;
+        const modal = document.getElementById('switchCourseModal');
+        if(modal) modal.style.display = 'flex';
+        return;
+    }
+    AppState.enrolledCourse = courseId;
+    localStorage.setItem('epata_enrolled_course', JSON.stringify(courseId));
+    Utils.showToast("Course Enrolled Successfully!");
+    renderEnrollCourses();
+    ViewManager.renderCurrentView();
+}
+
+function getEnrolledCourseProgress(){
+    if(!AppState.enrolledCourse) return 0;
+
+    const course = AppState.coursesMeta.find(c=>c.id===AppState.enrolledCourse);
+    if(!course) return 0;
+
+    const lessons = AppState.lessons.filter(l=>l.playlistId===course.playlist);
+    const completed = lessons.filter(l=>AppState.completed.includes(l.id));
+
+    if(!lessons.length) return 0;
+    return Math.round((completed.length/lessons.length)*100);
+}
+
+function getNextLessonForEnrolledCourse(){
+    if(!AppState.enrolledCourse) return null;
+
+    const course = AppState.coursesMeta.find(c=>c.id===AppState.enrolledCourse);
+    if(!course) return null;
+
+    const lessons = AppState.lessons
+        .filter(l => l.playlistId === course.playlist)
+        .sort((a,b)=>{
+            const na = parseInt(a.title);
+            const nb = parseInt(b.title);
+            return na - nb;
+        });
+
+    for(const lesson of lessons){
+        if(!AppState.completed.includes(lesson.id)){
+            return lesson;
+        }
+    }
+
+    return null;
+}
+
+function isEnrolledCourseCompleted(){
+    if(!AppState.enrolledCourse) return false;
+
+    const course = AppState.coursesMeta.find(c=>c.id===AppState.enrolledCourse);
+    if(!course) return false;
+
+    const lessons = AppState.lessons.filter(l => l.playlistId === course.playlist);
+    if(!lessons.length) return false;
+
+    return lessons.every(l => AppState.completed.includes(l.id));
+}
+
+function renderTodayLesson(){
+    if(!AppState.enrolledCourse) return;
+
+    const nextLesson = getNextLessonForEnrolledCourse();
+    if(!nextLesson) return;
+
+    const card = document.getElementById('todayLessonCard');
+    const title = document.getElementById('todayLessonTitle');
+
+    if(card && title){
+        title.textContent = nextLesson.title;
+        card.style.display = 'block';
+
+        const btn = document.getElementById('startTodayLesson');
+        btn.onclick = () => {
+            AppActions.openVideo(nextLesson);
+        };
+    }
+}
+
 // ============================================
 // VIEW MANAGER
 // ============================================
@@ -1031,6 +1252,8 @@ const ViewManager = {
                 UIRenderer.renderStats();
                 UIRenderer.renderFeaturedPlaylists();
                 UIRenderer.renderRecentLessons();
+                renderEnrollCourses();
+                renderTodayLesson();
                 break;
             case 'courses':
                 this.renderCoursesView();
@@ -1379,28 +1602,35 @@ const AppActions = {
             pdfDownload.style.display = 'none';
         }
         
-        const isCompleted = AppState.completed.includes(lesson.id);
+        const coursePlaylists = AppState.coursesMeta.map(c => c.playlist);
+        const isCourseVideo = coursePlaylists.includes(lesson.playlistId);
         const isFavorite = AppState.favorites.includes(lesson.id);
-        
-        markBtn.innerHTML = `<i class="fas ${isCompleted ? 'fa-check-circle' : 'fa-check'}"></i><span>${isCompleted ? 'Completed' : 'Complete'}</span>`;
-        markBtn.classList.toggle('primary', isCompleted);
         
         favBtn.innerHTML = `<i class="${isFavorite ? 'fas' : 'far'} fa-heart"></i><span>${isFavorite ? 'Saved' : 'Save'}</span>`;
         favBtn.classList.toggle('active', isFavorite);
         
+        if (isCourseVideo) {
+            const isCompleted = AppState.completed.includes(lesson.id);
+            markBtn.style.display = 'flex';
+            markBtn.innerHTML = `<i class="fas ${isCompleted ? 'fa-check-circle' : 'fa-check'}"></i><span>${isCompleted ? 'Completed' : 'Complete'}</span>`;
+            markBtn.classList.toggle('primary', isCompleted);
+        } else {
+            markBtn.style.display = 'none';
+        }
+
         modal.classList.add('active');
         document.body.style.overflow = 'hidden';
         
         DataManager.addToRecent(lesson.id);
         
         // Button handlers
-        markBtn.onclick = () => {
+        markBtn.onclick = isCourseVideo ? () => {
             const completed = DataManager.toggleCompleted(lesson.id);
             markBtn.innerHTML = `<i class="fas ${completed ? 'fa-check-circle' : 'fa-check'}"></i><span>${completed ? 'Completed' : 'Complete'}</span>`;
             markBtn.classList.toggle('primary', completed);
             Utils.showToast(completed ? 'Marked complete!' : 'Removed from completed');
             UIRenderer.renderStats();
-        };
+        } : null;
         
         favBtn.onclick = () => {
             const favorited = DataManager.toggleFavorite(lesson.id);
@@ -1975,6 +2205,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Close video modal
     document.getElementById('closeVideoModal').addEventListener('click', AppActions.closeVideoModal);
     document.getElementById('modalBack').addEventListener('click', AppActions.closeVideoModal);
+
+    // Close Course Complete Modal
+    document.getElementById('closeCourseComplete')?.addEventListener('click', () => {
+        document.getElementById('courseCompleteModal').style.display = 'none';
+    });
     
     // Close modal on backdrop
     document.getElementById('videoModal').addEventListener('click', (e) => {
@@ -1996,7 +2231,41 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
     
+    document.addEventListener('click', function(e){
+        if(e.target && e.target.id === 'closeCourseComplete'){
+            const modal = document.getElementById('courseCompleteModal');
+            if(modal) modal.style.display = 'none';
+        }
+    });
+
+    document.addEventListener('click', function(e){
+
+        if(e.target && e.target.id === 'cancelSwitchCourse'){
+            const modal = document.getElementById('switchCourseModal');
+            if(modal) modal.style.display = 'none';
+            pendingCourseSwitch = null;
+        }
+
+        if(e.target && e.target.id === 'confirmSwitchCourse'){
+            const modal = document.getElementById('switchCourseModal');
+            if(modal) modal.style.display = 'none';
+
+            if(pendingCourseSwitch){
+                const courseId = pendingCourseSwitch;
+                pendingCourseSwitch = null;
+
+                AppState.enrolledCourse = courseId;
+                localStorage.setItem('epata_enrolled_course', JSON.stringify(courseId));
+                Utils.showToast("Course Switched Successfully!");
+                renderEnrollCourses();
+                ViewManager.renderCurrentView();
+            }
+        }
+
+    });
+    
     // Load data
+    await loadCoursesMeta();
     const result = await DataManager.loadData();
     DataManager.loadDailyMessage(); // Load the daily message
     DataManager.loadResources(); // Load resources

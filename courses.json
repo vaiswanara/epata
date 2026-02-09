@@ -1,0 +1,16 @@
+{
+  "courses": [
+    {
+      "id": "jyotisha_kn_2025",
+      "name": "Jyotisha Kannada – 2025",
+      "playlist": "JYOTISHA(ಕನ್ನಡ)-2025",
+      "description": "Foundation course in Vedic Astrology"
+    },
+    {
+      "id": "jyotisha_te_2025",
+      "name": "Jyotisha Telugu – 2025",
+      "playlist": "JYOTISHA(తెలుగు)-2025",
+      "description": "Structured learning of Vedic Astrology"
+    }
+  ]
+}
