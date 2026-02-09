@@ -1,25 +1,20 @@
-/* ===============================
-   e-PATA PWA Service Worker
-   Works on GitHub Pages + Subdomain
-   =============================== */
+const CACHE_VERSION = "epata-v4";
+const STATIC_CACHE = "static-" + CACHE_VERSION;
+const DYNAMIC_CACHE = "dynamic-" + CACHE_VERSION;
 
-const BASE_PATH = self.location.pathname.replace("service-worker.js", "");
-const CACHE_NAME = "epata2-pwa-v3";
-
-const urlsToCache = [
-  BASE_PATH,
-  BASE_PATH + "index.html",
-  BASE_PATH + "style.css",
-  BASE_PATH + "script.js",
-  BASE_PATH + "icons/icon-192.png",
-  BASE_PATH + "icons/icon-512.png"
+const STATIC_FILES = [
+  "./",
+  "./style.css",
+  "./script.js",
+  "./icons/icon-192.png",
+  "./icons/icon-512.png"
 ];
 
 /* INSTALL */
 self.addEventListener("install", event => {
   event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(cache => cache.addAll(urlsToCache))
+    caches.open(STATIC_CACHE)
+      .then(cache => cache.addAll(STATIC_FILES))
   );
   self.skipWaiting();
 });
@@ -27,11 +22,11 @@ self.addEventListener("install", event => {
 /* ACTIVATE */
 self.addEventListener("activate", event => {
   event.waitUntil(
-    caches.keys().then(cacheNames => {
+    caches.keys().then(keys => {
       return Promise.all(
-        cacheNames.map(cache => {
-          if (cache !== CACHE_NAME) {
-            return caches.delete(cache);
+        keys.map(key => {
+          if (!key.includes(CACHE_VERSION)) {
+            return caches.delete(key);
           }
         })
       );
@@ -42,16 +37,38 @@ self.addEventListener("activate", event => {
 
 /* FETCH */
 self.addEventListener("fetch", event => {
-  event.respondWith(
-    caches.match(event.request).then(response => {
-      if (response) return response;
 
-      return fetch(event.request).catch(() => {
-        // Offline navigation fallback
-        if (event.request.mode === "navigate") {
-          return caches.match(BASE_PATH + "index.html");
-        }
-      });
-    })
+  // 1️⃣ HTML pages → NETWORK FIRST (MOST IMPORTANT FIX)
+  if (event.request.mode === "navigate") {
+    event.respondWith(
+      fetch(event.request)
+        .then(res => {
+          return caches.open(DYNAMIC_CACHE).then(cache => {
+            cache.put(event.request, res.clone());
+            return res;
+          });
+        })
+        .catch(() => caches.match("./index.html"))
+    );
+    return;
+  }
+
+  // 2️⃣ CSS/JS/Images → CACHE FIRST
+  event.respondWith(
+    caches.match(event.request)
+      .then(cacheRes => {
+        return cacheRes || fetch(event.request).then(fetchRes => {
+          return caches.open(DYNAMIC_CACHE).then(cache => {
+            cache.put(event.request, fetchRes.clone());
+            return fetchRes;
+          });
+        });
+      })
   );
+});
+
+self.addEventListener("message", event => {
+  if (event.data === "SKIP_WAITING") {
+    self.skipWaiting();
+  }
 });

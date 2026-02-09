@@ -2017,3 +2017,31 @@ document.addEventListener('DOMContentLoaded', async () => {
         Utils.showToast('Error loading data. Please refresh.', 'error');
     }
 });
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./service-worker.js').then(reg => {
+
+    // Check update every time app opens
+    reg.update();
+
+    reg.onupdatefound = () => {
+      const newWorker = reg.installing;
+
+      newWorker.onstatechange = () => {
+        if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+
+          // Ask user to refresh
+          if (confirm("A new version of e-PATA is available. Update now?")) {
+            newWorker.postMessage("SKIP_WAITING");
+
+            newWorker.addEventListener('statechange', () => {
+              if (newWorker.state === 'activated') {
+                window.location.reload();
+              }
+            });
+          }
+        }
+      };
+    };
+  });
+}
