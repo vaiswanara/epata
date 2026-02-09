@@ -52,6 +52,7 @@ const AppState = {
     filters: { playlist: '', language: '' },
     resources: [],
     displayCount: 12,
+    quiz: { questions: [], current: 0, score: 0, date: null, loaded: false },
     isOnline: navigator.onLine
 };
 
@@ -365,6 +366,40 @@ const DataManager = {
             AppState.resources = resources;
         } catch (e) {
             console.error('Error loading resources:', e);
+        }
+    },
+
+    async loadQuizData() {
+        const url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ6RStlHwy-jhwrGCg7JUrE8I3MZxukUqBGqdUxGywRof4WyItHEJZ0FP93GeB_ktBAXte3avGhYEVw/pub?gid=517003738&single=true&output=csv';
+        try {
+            const response = await fetch(url + '&t=' + Date.now());
+            if (!response.ok) throw new Error('Failed to load quiz');
+            const text = await response.text();
+            const rows = Utils.parseCSV(text);
+            
+            // Headers: Question, Option A, Option B, Option C, Option D, Answer, Explanation, QuizDate
+            // Assuming row 0 is header
+            const questions = rows.slice(1).map(row => {
+                if (row.length < 6) return null;
+                return {
+                    question: row[0],
+                    options: [row[1], row[2], row[3], row[4]],
+                    answer: row[5], // Can be 'A', 'B' or full text
+                    explanation: row[6] || '',
+                    date: row[7] || ''
+                };
+            }).filter(q => q && q.question);
+
+            if (questions.length > 0) {
+                AppState.quiz.questions = questions;
+                AppState.quiz.date = questions[0].date;
+                AppState.quiz.loaded = true;
+                return true;
+            }
+            return false;
+        } catch (e) {
+            console.error('Quiz load error:', e);
+            return false;
         }
     },
 
@@ -900,6 +935,7 @@ const ViewManager = {
             courses: 'All Courses',
             favorites: 'Favorites',
             progress: 'Progress',
+            quiz: 'Daily Quiz',
             recent: 'Recent',
             donate: 'Support Us',
             resources: 'Resources'
@@ -931,6 +967,9 @@ const ViewManager = {
                 break;
             case 'progress':
                 UIRenderer.renderProgressView();
+                break;
+            case 'quiz':
+                QuizController.init();
                 break;
             case 'recent':
                 this.renderRecentView();
@@ -1064,6 +1103,158 @@ const ViewManager = {
 
         html += `</tbody></table></div>`;
         container.innerHTML = html;
+    }
+};
+
+// ============================================
+// QUIZ CONTROLLER
+// ============================================
+const QuizController = {
+    async init() {
+        const container = document.getElementById('quizWrapper');
+        
+        if (!AppState.quiz.loaded) {
+            container.innerHTML = `
+                <div class="empty-state">
+                    <div class="pull-spinner" style="font-size: 30px; color: var(--primary); margin-bottom: 16px;"><i class="fas fa-spinner"></i></div>
+                    <h3>Loading Quiz...</h3>
+                </div>`;
+            
+            const success = await DataManager.loadQuizData();
+            if (!success) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                        <h3>Quiz Unavailable</h3>
+                        <p>Please check your internet connection.</p>
+                        <button class="empty-action-btn" onclick="QuizController.init()">Retry</button>
+                    </div>`;
+                return;
+            }
+        }
+        
+        // Reset state if starting fresh
+        if (AppState.quiz.current === 0 && AppState.quiz.score === 0) {
+            this.renderQuestion();
+        } else {
+            this.renderQuestion(); // Resume or show current state
+        }
+    },
+
+    renderQuestion() {
+        const container = document.getElementById('quizWrapper');
+        const qData = AppState.quiz.questions[AppState.quiz.current];
+        const total = AppState.quiz.questions.length;
+        
+        if (!qData) {
+            this.renderResult();
+            return;
+        }
+
+        container.innerHTML = `
+            <div class="quiz-header-card">
+                <div class="quiz-date"><i class="far fa-calendar-alt"></i> ${AppState.quiz.date || 'Today'}</div>
+                <div class="quiz-progress-text">Question ${AppState.quiz.current + 1} / ${total}</div>
+            </div>
+            <div class="question-card">
+                <div class="question-text">${qData.question}</div>
+                <div class="options-grid" id="optionsGrid">
+                    ${qData.options.map((opt, idx) => `
+                        <button class="option-btn" onclick="QuizController.handleAnswer(${idx})">
+                            ${opt}
+                        </button>
+                    `).join('')}
+                </div>
+                <div id="explanationContainer"></div>
+                <div class="quiz-footer" id="quizFooter" style="display:none;">
+                    <button class="quiz-next-btn" onclick="QuizController.nextQuestion()">
+                        ${AppState.quiz.current + 1 === total ? 'Finish Quiz' : 'Next Question'} <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        `;
+    },
+
+    handleAnswer(selectedIndex) {
+        const qData = AppState.quiz.questions[AppState.quiz.current];
+        const optionsGrid = document.getElementById('optionsGrid');
+        const buttons = optionsGrid.querySelectorAll('.option-btn');
+        const explanationContainer = document.getElementById('explanationContainer');
+        const quizFooter = document.getElementById('quizFooter');
+
+        // Determine correct index
+        // Answer column might be "A", "B", "C", "D" or the full text
+        let correctIndex = -1;
+        const ans = qData.answer.trim().toUpperCase();
+        if (['A', 'B', 'C', 'D'].includes(ans)) {
+            correctIndex = ans.charCodeAt(0) - 65;
+        } else {
+            // Try to match text
+            correctIndex = qData.options.findIndex(opt => opt.trim().toLowerCase() === qData.answer.trim().toLowerCase());
+        }
+
+        // Disable all buttons
+        buttons.forEach((btn, idx) => {
+            btn.disabled = true;
+            if (idx === correctIndex) btn.classList.add('correct');
+            else if (idx === selectedIndex) btn.classList.add('wrong');
+        });
+
+        if (selectedIndex === correctIndex) AppState.quiz.score++;
+
+        // Show explanation
+        if (qData.explanation) {
+            explanationContainer.innerHTML = `<div class="explanation-box"><strong>Explanation:</strong> ${qData.explanation}</div>`;
+        }
+
+        quizFooter.style.display = 'flex';
+    },
+
+    nextQuestion() {
+        AppState.quiz.current++;
+        if (AppState.quiz.current >= AppState.quiz.questions.length) {
+            this.renderResult();
+        } else {
+            this.renderQuestion();
+        }
+    },
+
+    renderResult() {
+        const container = document.getElementById('quizWrapper');
+        const total = AppState.quiz.questions.length;
+        const score = AppState.quiz.score;
+        const percent = Math.round((score / total) * 100);
+        
+        let message = 'Good Effort!';
+        if (percent >= 80) message = 'Excellent!';
+        else if (percent >= 50) message = 'Well Done!';
+
+        container.innerHTML = `
+            <div class="question-card quiz-result-card">
+                <div class="stat-icon purple" style="margin: 0 auto 20px; width: 80px; height: 80px; font-size: 32px;">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <h2>Quiz Completed</h2>
+                <p style="margin-bottom: 20px; color: var(--text-secondary);">${message}</p>
+                
+                <div style="font-size: 48px; font-weight: 700; color: var(--primary); margin-bottom: 8px;">
+                    ${score} / ${total}
+                </div>
+                <div style="font-size: 18px; color: var(--text-secondary); margin-bottom: 30px;">
+                    ${percent}% Score
+                </div>
+
+                <button class="quiz-restart-btn" style="margin: 0 auto;" onclick="QuizController.restart()">
+                    <i class="fas fa-redo"></i> Restart Quiz
+                </button>
+            </div>
+        `;
+    },
+
+    restart() {
+        AppState.quiz.current = 0;
+        AppState.quiz.score = 0;
+        this.renderQuestion();
     }
 };
 
@@ -1239,7 +1430,52 @@ const UIControllers = {
         this.initDonatePage();
         this.initDataManagement();
         this.initInstallApp();
+        this.initSupportTabs();
     },
+
+    switchSupportLang(lang, btn) {
+        // Hide all containers
+        ['en', 'kn', 'te'].forEach(l => {
+            const el = document.getElementById(`support-${l}`);
+            if (el) el.style.display = 'none';
+        });
+
+        // Show selected container
+        const selected = document.getElementById(`support-${lang}`);
+        if (selected) selected.style.display = 'block';
+
+        // Highlight active button
+        if (btn) {
+            const buttons = btn.parentElement.querySelectorAll('button');
+            buttons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
+    },
+
+    initSupportTabs() {
+        const tabs = document.querySelectorAll('.tab-btn');
+        const contents = document.querySelectorAll('.support-language');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs
+                tabs.forEach(t => t.classList.remove('active'));
+                // Add active to clicked
+                tab.classList.add('active');
+
+                // Hide all contents
+                contents.forEach(c => c.style.display = 'none');
+
+                // Show target
+                const lang = tab.dataset.lang;
+                const target = document.getElementById(`support-${lang}`);
+                if (target) {
+                    target.style.display = 'block';
+                }
+            });
+        });
+    },
+
 
     initDonatePage() {
         // Copy UPI button

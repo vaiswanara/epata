@@ -2980,6 +2980,150 @@ button.app-link-btn {
 }
 
 /* ============================================
+   SERVICE TRANSPARENCY VIEW
+   ============================================ */
+.support-view-wrapper {
+    padding: 20px 16px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.support-header-minimal {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.support-header-minimal h2 {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.support-info-card {
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border);
+}
+
+.support-section {
+    margin-bottom: 20px;
+}
+
+.support-section:last-child {
+    margin-bottom: 0;
+}
+
+.support-section h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 6px;
+    opacity: 0.9;
+}
+
+.support-section p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text);
+    opacity: 0.9;
+}
+
+.support-section.assurance {
+    background: rgba(108, 92, 231, 0.05);
+    padding: 12px;
+    border-radius: var(--radius);
+    border-left: 3px solid var(--primary);
+}
+
+.support-section.personal-note {
+    background: rgba(0, 0, 0, 0.02);
+    padding: 16px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+}
+
+.support-section.personal-note p {
+    margin-bottom: 12px;
+}
+
+.support-section.personal-note p:last-child {
+    margin-bottom: 0;
+}
+
+.support-section.closing p {
+    font-style: italic;
+    color: var(--text-secondary);
+}
+
+.support-qr-container {
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.support-qr-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+}
+
+.optional-support-wrapper {
+    margin-top: 24px;
+    text-align: center;
+}
+
+.optional-support-details summary {
+    font-size: 13px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    list-style: none;
+    text-decoration: underline;
+    opacity: 0.8;
+}
+
+.optional-support-details summary::-webkit-details-marker {
+    display: none;
+}
+
+.support-reveal-content {
+    margin-top: 16px;
+    padding: 16px;
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    animation: fadeIn 0.3s ease;
+}
+
+.support-reveal-content p {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.support-links-row {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    font-size: 13px;
+}
+
+.text-link-action {
+    background: none;
+    border: none;
+    color: var(--primary);
+    cursor: pointer;
+    font-weight: 500;
+    padding: 0;
+    font-family: inherit;
+}
+
+.separator {
+    color: var(--text-muted);
+}
+
+/* ============================================
    INSTALL MODAL STYLES
    ============================================ */
 .install-body {
@@ -3183,4 +3327,171 @@ button.app-link-btn {
         height: auto;
         max-height: 80vh;
     }
+}
+
+/* ============================================
+   QUIZ VIEW STYLES
+   ============================================ */
+.quiz-wrapper {
+    padding: 16px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.quiz-header-card {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: #fff;
+    padding: 20px;
+    border-radius: var(--radius-lg);
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: var(--shadow);
+}
+
+.quiz-date {
+    font-size: 13px;
+    opacity: 0.9;
+    font-weight: 500;
+}
+
+.quiz-progress-text {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.question-card {
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border);
+    margin-bottom: 20px;
+    animation: fadeIn 0.3s ease;
+}
+
+.question-text {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 24px;
+    line-height: 1.6;
+}
+
+.options-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.option-btn {
+    padding: 16px;
+    border: 2px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--bg);
+    color: var(--text);
+    font-size: 14px;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.option-btn:hover:not(:disabled) {
+    border-color: var(--primary);
+    background: rgba(108, 92, 231, 0.05);
+}
+
+.option-btn.correct {
+    border-color: var(--success);
+    background: rgba(0, 184, 148, 0.1);
+    color: var(--success);
+    font-weight: 600;
+}
+
+.option-btn.wrong {
+    border-color: var(--danger);
+    background: rgba(225, 112, 85, 0.1);
+    color: var(--danger);
+}
+
+.explanation-box {
+    margin-top: 20px;
+    padding: 16px;
+    background: rgba(253, 203, 110, 0.1);
+    border-left: 4px solid var(--warning);
+    border-radius: 4px;
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.6;
+    animation: slideUp 0.3s ease;
+}
+
+.quiz-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.quiz-next-btn, .quiz-restart-btn {
+    padding: 12px 24px;
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius);
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.quiz-result-card {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+/* ============================================
+   SUPPORT TABS SYSTEM
+   ============================================ */
+.support-tabs {
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 24px;
+    gap: 16px;
+}
+
+.tab-btn {
+    background: none;
+    border: none;
+    padding: 12px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    cursor: pointer;
+    position: relative;
+    transition: color 0.3s ease;
+    font-family: inherit;
+}
+
+.tab-btn.active {
+    color: var(--success);
+    font-weight: 600;
+}
+
+.tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--success);
+    border-radius: 3px 3px 0 0;
+}
+
+.support-language {
+    animation: fadeIn 0.4s ease;
 }

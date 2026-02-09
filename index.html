@@ -120,6 +120,10 @@
                     <i class="fas fa-chart-line"></i>
                     <span>Progress</span>
                 </li>
+                <li class="nav-item" data-view="quiz">
+                    <i class="fas fa-brain"></i>
+                    <span>Quiz</span>
+                </li>
                 <li class="nav-item" data-view="recent">
                     <i class="fas fa-clock"></i>
                     <span>Recent</span>
@@ -202,6 +206,10 @@
                     <li class="drawer-item" data-view="progress">
                         <i class="fas fa-chart-line"></i>
                         <span>My Progress</span>
+                    </li>
+                    <li class="drawer-item" data-view="quiz">
+                        <i class="fas fa-brain"></i>
+                        <span>Quiz</span>
                     </li>
                     <li class="drawer-item" data-view="recent">
                         <i class="fas fa-clock"></i>
@@ -479,6 +487,13 @@
             </div>
         </div>
 
+        <!-- Quiz View -->
+        <div class="view hidden" id="quizView">
+            <div class="quiz-wrapper" id="quizWrapper">
+                <!-- Dynamically populated by JS -->
+            </div>
+        </div>
+
         <!-- Recent View -->
         <div class="view hidden" id="recentView">
             <div class="empty-state" id="recentEmptyState">
@@ -594,59 +609,200 @@
 
         <!-- Donate View -->
         <div class="view hidden" id="donateView">
-            <div class="donate-header">
-                <div class="donate-icon">
-                    <img src="logo.png" alt="e-PATA Logo" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
+            <div class="support-view-wrapper">
+                <!-- Language Tabs -->
+                <div class="support-tabs">
+                    <button class="tab-btn active" data-lang="en">English</button>
+                    <button class="tab-btn" data-lang="kn">Kannada</button>
+                    <button class="tab-btn" data-lang="te">Telugu</button>
                 </div>
-                <h2>Support My Mission</h2>
-                <p>Your contribution helps keep Vedic Astrology education free for everyone</p>
-            </div>
-            
-            <div class="donate-content">
-                <div class="donate-message">
-                    <p>I am dedicated to sharing the authentic knowledge of Vedic Astrology with anyone eager to learn, <strong>without seeking any monetary gain</strong>. My mission is to make this ancient wisdom accessible to all, enabling students to understand life better, protect themselves from false astrologers, and live with peace and harmony.</p>
+                
+                <!-- English Content -->
+                <div id="support-en" class="support-language support-lang-content">
+                    <div class="support-header-minimal">
+                        <h2>About This Service</h2>
+                    </div>
                     
-                    <p>While this course and all future classes are <strong>completely free of charge</strong>, I humbly invite those who wish to support this initiative to consider making a donation. Your contributions will help me meet essential living expenses such as groceries, utilities, and internet services, ensuring that this program continues to serve the community.</p>
+                    <div class="support-info-card">
+                        <div class="support-section">
+                            <h4>Introduction</h4>
+                            <p>This learning platform is offered as a free service. The intention of this work is to make traditional knowledge available to anyone who sincerely wishes to learn, without fee, membership, or obligation. All lessons and materials are accessible equally to everyone. No payment is required.</p>
+                        </div>
+
+                        <div class="support-section">
+                            <h4>Why this page exists</h4>
+                            <p>Some students occasionally ask how they may support the continuation of this work. This page exists only to provide clarity. It is not a request and not an expectation. Whether you contribute or not, learning access remains the same.</p>
+                        </div>
+
+                        <div class="support-section">
+                            <h4>How the service runs</h4>
+                            <p>The platform is maintained personally and requires time and basic resources such as internet, hosting, electricity, and preparation of learning materials. No advertisements are placed and no courses are sold.</p>
+                        </div>
+
+                        <div class="support-section personal-note">
+                            <h4>A small personal note</h4>
+                            <p>This work is not done as a hobby or alongside another profession. I am not engaged in a job, business, or paid consultations, including astrology consultations. My time is fully dedicated to teaching, preparing learning resources, and personal spiritual study and practice.</p>
+                            <p>For simple living needs — family maintenance, internet, electricity, and teaching time — I depend only on voluntary support offered by students. I do not see such support as payment for knowledge, but as help that allows this service to continue.</p>
+                            <p>At the same time, the purpose of this platform is not the collection of money. Only what is necessary for a simple and steady life is sufficient.</p>
+                            <p>Learning here is never linked to whether someone contributes or not.</p>
+                        </div>
+
+                        <div class="support-section">
+                            <h4>If you feel to contribute</h4>
+                            <p>If a natural feeling arises to support, you may do so voluntarily. There is no fixed amount and no frequency. You may contribute once, occasionally, or not at all.</p>
+                        </div>
+
+                        <div class="support-section assurance">
+                            <h4>Important assurance</h4>
+                            <p>Contribution does not provide special access, faster responses, or priority. Teaching remains equal for everyone.</p>
+                        </div>
+
+                        <div class="support-section">
+                            <h4>Transparency</h4>
+                            <p>A simple monthly summary may be displayed only for openness and clarity.</p>
+                        </div>
+
+                        <div class="support-section closing">
+                            <p>If you support, it is received with gratitude. If not, please continue learning comfortably. Your sincere study itself is valuable.</p>
+                        </div>
+                    </div>
+
+                    <div class="optional-support-wrapper">
+                        <div class="support-reveal-content">
+                            <div class="support-qr-container">
+                                <img src="donate.png" alt="Voluntary Support Details" class="support-qr-image">
+                            </div>
+                            <p>UPI: 9482094290</p>
+                            <div class="support-links-row">
+                                <button id="copyUpiBtn" class="text-link-action">Copy UPI</button>
+                                <span class="separator">•</span>
+                                <a href="https://vaiswanara.com" target="_blank" class="text-link-action">Visit Website</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                
-                <div class="donate-benefits">
-                    <h3><i class="fas fa-heart"></i> How Your Donation Helps</h3>
-                    <ul>
-                        <li><i class="fas fa-check-circle"></i> Supports the ongoing creation and maintenance of educational content</li>
-                        <li><i class="fas fa-check-circle"></i> Helps cover the costs of House Maintenance and internet</li>
-                        <li><i class="fas fa-check-circle"></i> Enables me to continue offering this knowledge freely</li>
-                    </ul>
+
+                <!-- Kannada Content (Placeholder) -->
+                <div id="support-kn" class="support-language support-lang-content" style="display: none;">
+                    <div class="support-header-minimal">
+                        <h2>ಈ ಸೇವೆಯ ಬಗ್ಗೆ</h2>
+                    </div>
+                    
+                    <div class="support-info-card">
+                        <div class="support-section">
+                            <h4>ಪರಿಚಯ</h4>
+                            <p>ಈ ಕಲಿಕಾ ವೇದಿಕೆಯು ಉಚಿತ ಸೇವೆಯಾಗಿ ನೀಡಲಾಗುತ್ತಿದೆ. ಸಾಂಪ್ರದಾಯಿಕ ಜ್ಞಾನವನ್ನು ಕಲಿಯಲು ಪ್ರಾಮಾಣಿಕವಾಗಿ ಬಯಸುವವರಿಗೆ, ಯಾವುದೇ ಶುಲ್ಕ, ಸದಸ್ಯತ್ವ ಅಥವಾ ನಿರ್ಬಂಧವಿಲ್ಲದೆ ಲಭ್ಯವಾಗುವಂತೆ ಮಾಡುವುದು ಈ ಕೆಲಸದ ಉದ್ದೇಶವಾಗಿದೆ. ಎಲ್ಲಾ ಪಾಠಗಳು ಮತ್ತು ಸಾಮಗ್ರಿಗಳು ಎಲ್ಲರಿಗೂ ಸಮಾನವಾಗಿ ಲಭ್ಯವಿವೆ. ಯಾವುದೇ ಪಾವತಿ ಅಗತ್ಯವಿಲ್ಲ.</p>
+                        </div>
+
+                        <div class="support-section">
+                            <h4>ಈ ಪುಟ ಏಕೆ ಇದೆ</h4>
+                            <p>ಈ ಕೆಲಸದ ಮುಂದುವರಿಕೆಗೆ ತಾವು ಹೇಗೆ ಬೆಂಬಲ ನೀಡಬಹುದು ಎಂದು ಕೆಲವು ವಿದ್ಯಾರ್ಥಿಗಳು ಆಗಾಗ್ಗೆ ಕೇಳುತ್ತಾರೆ. ಈ ಪುಟವು ಸ್ಪಷ್ಟತೆಯನ್ನು ನೀಡಲು ಮಾತ್ರ ಇದೆ. ಇದು ವಿನಂತಿಯಲ್ಲ ಮತ್ತು ನಿರೀಕ್ಷೆಯಲ್ಲ. ನೀವು ಕೊಡುಗೆ ನೀಡಲಿ ಅಥವಾ ನೀಡದಿರಲಿ, ಕಲಿಕೆಯ ಪ್ರವೇಶವು ಒಂದೇ ಆಗಿರುತ್ತದೆ.</p>
+                        </div>
+
+                        <div class="support-section">
+                            <h4>ಸೇವೆ ಹೇಗೆ ನಡೆಯುತ್ತದೆ</h4>
+                            <p>ಈ ವೇದಿಕೆಯನ್ನು ವೈಯಕ್ತಿಕವಾಗಿ ನಿರ್ವಹಿಸಲಾಗುತ್ತಿದೆ ಮತ್ತು ಇದಕ್ಕೆ ಸಮಯ ಹಾಗೂ ಇಂಟರ್ನೆಟ್, ಹೋಸ್ಟಿಂಗ್, ವಿದ್ಯುತ್ ಮತ್ತು ಕಲಿಕಾ ಸಾಮಗ್ರಿಗಳ ತಯಾರಿಕೆಯಂತಹ ಮೂಲಭೂತ ಸಂಪನ್ಮೂಲಗಳ ಅಗತ್ಯವಿದೆ. ಯಾವುದೇ ಜಾಹೀರಾತುಗಳನ್ನು ಹಾಕಲಾಗಿಲ್ಲ ಮತ್ತು ಯಾವುದೇ ಕೋರ್ಸ್‌ಗಳನ್ನು ಮಾರಾಟ ಮಾಡಲಾಗುವುದಿಲ್ಲ.</p>
+                        </div>
+
+                        <div class="support-section personal-note">
+                            <h4>ಒಂದು ಸಣ್ಣ ವೈಯಕ್ತಿಕ ಟಿಪ್ಪಣಿ</h4>
+                            <p>ಈ ಕೆಲಸವನ್ನು ಹವ್ಯಾಸವಾಗಿ ಅಥವಾ ಇನ್ನೊಂದು ವೃತ್ತಿಯ ಜೊತೆಗೆ ಮಾಡುತ್ತಿಲ್ಲ. ನಾನು ಯಾವುದೇ ಉದ್ಯೋಗ, ವ್ಯವಹಾರ ಅಥವಾ ಜ್ಯೋತಿಷ್ಯ ಸಮಾಲೋಚನೆಗಳು ಸೇರಿದಂತೆ ಪಾವತಿಸಿದ ಸಮಾಲೋಚನೆಗಳಲ್ಲಿ ತೊಡಗಿಲ್ಲ. ನನ್ನ ಸಮಯವು ಬೋಧನೆ, ಕಲಿಕಾ ಸಂಪನ್ಮೂಲಗಳನ್ನು ಸಿದ್ಧಪಡಿಸುವುದು ಮತ್ತು ವೈಯಕ್ತಿಕ ಆಧ್ಯಾತ್ಮಿಕ ಅಧ್ಯಯನ ಮತ್ತು ಅಭ್ಯಾಸಕ್ಕೆ ಸಂಪೂರ್ಣವಾಗಿ ಮೀಸಲಾಗಿರುತ್ತದೆ.</p>
+                            <p>ಸರಳ ಜೀವನದ ಅಗತ್ಯಗಳಿಗಾಗಿ — ಕುಟುಂಬ ನಿರ್ವಹಣೆ, ಇಂಟರ್ನೆಟ್, ವಿದ್ಯುತ್ ಮತ್ತು ಬೋಧನಾ ಸಮಯ — ನಾನು ವಿದ್ಯಾರ್ಥಿಗಳು ನೀಡುವ ಸ್ವಯಂಪ್ರೇರಿತ ಬೆಂಬಲವನ್ನು ಮಾತ್ರ ಅವಲಂಬಿಸಿದ್ದೇನೆ. ಅಂತಹ ಬೆಂಬಲವನ್ನು ನಾನು ಜ್ಞಾನಕ್ಕೆ ಪಾವತಿಯಾಗಿ ನೋಡುವುದಿಲ್ಲ, ಆದರೆ ಈ ಸೇವೆಯನ್ನು ಮುಂದುವರಿಸಲು ಅನುವು ಮಾಡಿಕೊಡುವ ಸಹಾಯವಾಗಿ ನೋಡುತ್ತೇನೆ.</p>
+                            <p>ಅದೇ ಸಮಯದಲ್ಲಿ, ಹಣ ಸಂಗ್ರಹಿಸುವುದು ಈ ವೇದಿಕೆಯ ಉದ್ದೇಶವಲ್ಲ. ಸರಳ ಮತ್ತು ಸ್ಥಿರ ಜೀವನಕ್ಕೆ ಏನು ಅಗತ್ಯವೋ ಅದು ಮಾತ್ರ ಸಾಕು.</p>
+                            <p>ಯಾರಾದರೂ ಕೊಡುಗೆ ನೀಡುತ್ತಾರೆಯೇ ಅಥವಾ ಇಲ್ಲವೇ ಎಂಬುದಕ್ಕೆ ಇಲ್ಲಿನ ಕಲಿಕೆ ಎಂದಿಗೂ ಸಂಬಂಧಿಸಿಲ್ಲ.</p>
+                        </div>
+
+                        <div class="support-section">
+                            <h4>ನೀವು ಕೊಡುಗೆ ನೀಡಲು ಬಯಸಿದರೆ</h4>
+                            <p>ಬೆಂಬಲಿಸಲು ಸಹಜವಾದ ಭಾವನೆ ಉಂಟಾದರೆ, ನೀವು ಸ್ವಯಂಪ್ರೇರಣೆಯಿಂದ ಹಾಗೆ ಮಾಡಬಹುದು. ಯಾವುದೇ ನಿಗದಿತ ಮೊತ್ತವಿಲ್ಲ ಮತ್ತು ಯಾವುದೇ ಆವರ್ತನವಿಲ್ಲ. ನೀವು ಒಮ್ಮೆ, ಸಾಂದರ್ಭಿಕವಾಗಿ ಅಥವಾ ನೀಡದೆಯೂ ಇರಬಹುದು.</p>
+                        </div>
+
+                        <div class="support-section assurance">
+                            <h4>ಪ್ರಮುಖ ಭರವಸೆ</h4>
+                            <p>ಕೊಡುಗೆ ನೀಡುವುದರಿಂದ ವಿಶೇಷ ಪ್ರವೇಶ, ತ್ವರಿತ ಪ್ರತಿಕ್ರಿಯೆಗಳು ಅಥವಾ ಆದ್ಯತೆ ಸಿಗುವುದಿಲ್ಲ. ಬೋಧನೆ ಎಲ್ಲರಿಗೂ ಸಮಾನವಾಗಿರುತ್ತದೆ.</p>
+                        </div>
+
+
+                        <div class="support-section closing">
+                            <p>ನೀವು ಬೆಂಬಲಿಸಿದರೆ, ಅದನ್ನು ಕೃತಜ್ಞತೆಯಿಂದ ಸ್ವೀಕರಿಸಲಾಗುತ್ತದೆ. ಇಲ್ಲದಿದ್ದರೆ, ದಯವಿಟ್ಟು ಆರಾಮವಾಗಿ ಕಲಿಯುವುದನ್ನು ಮುಂದುವರಿಸಿ. ನಿಮ್ಮ ಪ್ರಾಮಾಣಿಕ ಅಧ್ಯಯನವೇ ಮೌಲ್ಯಯುತವಾಗಿದೆ.</p>
+                        </div>
+                    </div>
+
+                    <div class="optional-support-wrapper">
+                        <div class="support-reveal-content">
+                            <div class="support-qr-container">
+                                <img src="donate.png" alt="Voluntary Support Details" class="support-qr-image">
+                            </div>
+                            <p>UPI: 9482094290</p>
+                            <div class="support-links-row">
+                                <button id="copyUpiBtnKn" class="text-link-action">UPI ನಕಲಿಸಿ</button>
+                                <span class="separator">•</span>
+                                <a href="https://vaiswanara.com" target="_blank" class="text-link-action">ವೆಬ್‌ಸೈಟ್‌ಗೆ ಭೇಟಿ ನೀಡಿ</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                
-                <div class="donate-note">
-                    <i class="fas fa-info-circle"></i>
-                    <p>I want to make it clear that students are <strong>not required</strong> to subscribe, like, or share my YouTube videos or page. However, I would be truly happy if you share the knowledge you gain with others, as that will help spread the essence of this course and its teachings.</p>
-                </div>
-                
-                <div class="donate-thanks">
-                    <p>Your generous support, no matter the amount, plays a crucial role in keeping this program available to all who seek to learn.</p>
-                    <p class="thank-you-text">🙏 Thank You 🙏</p>
-                </div>
-                
-                <div class="donate-author">
-                    <p>With Gratitude,</p>
-                    <h4>Srikanth Dharmavaram (Vaiswanara)</h4>
-                    <span>Vedic Astrology Trainer & Guide</span>
-                </div>
-                
-                <div class="donate-image-container">
-                    <img src="donate.png" alt="Donation Details - Bank and UPI" class="donate-image">
-                </div>
-                
-                <div class="donate-actions">
-                    <button class="donate-upi-btn" id="copyUpiBtn">
-                        <i class="fas fa-mobile-alt"></i>
-                        <span>Copy UPI Number</span>
-                    </button>
-                    <a href="https://vaiswanara.com" target="_blank" rel="noopener" class="donate-website-btn">
-                        <i class="fas fa-globe"></i>
-                        <span>Visit vaiswanara.com</span>
-                    </a>
+
+                <!-- Telugu Content (Placeholder) -->
+                <div id="support-te" class="support-language support-lang-content" style="display: none;">
+                    <div class="support-header-minimal">
+                        <h2>ఈ సేవ గురించి</h2>
+                    </div>
+                    
+                    <div class="support-info-card">
+                        <div class="support-section">
+                            <h4>పరిచయం</h4>
+                            <p>ఈ అభ్యాస వేదిక ఉచిత సేవగా అందించబడుతోంది. సాంప్రదాయ జ్ఞానాన్ని నిజాయితీగా నేర్చుకోవాలనుకునే ఎవరికైనా, ఎటువంటి రుసుము, సభ్యత్వం లేదా బాధ్యత లేకుండా అందుబాటులో ఉంచడమే ఈ పని యొక్క ఉద్దేశ్యం. అన్ని పాఠాలు మరియు మెటీరియల్స్ అందరికీ సమానంగా అందుబాటులో ఉంటాయి. ఎటువంటి చెల్లింపు అవసరం లేదు.</p>
+                        </div>
+
+                        <div class="support-section">
+                            <h4>ఈ పేజీ ఎందుకు ఉంది</h4>
+                            <p>ఈ సేవను కొనసాగించడానికి తాము ఎలా మద్దతు ఇవ్వగలమని కొంతమంది విద్యార్థులు అప్పుడప్పుడు అడుగుతుంటారు. ఈ పేజీ ద్వారా మరింత స్పష్టతనిచ్చే ప్రయత్నం చేస్తున్నాను. ఇది డొనేషన్ అభ్యర్థన కాదు మరియు నిరీక్షణ కాదు. మీరు డొనేట్ చేసినా లేదా చేయకపోయినా, అందించే సేవ ఒకేలా ఉంటుంది.</p>
+                        </div>
+
+                        <div class="support-section">
+                            <h4>సేవ ఎలా నడుస్తుంది?</h4>
+                            <p>ఈ ప్లాట్‌ఫారమ్ వ్యక్తిగతంగా నిర్వహించబడుతుంది మరియు దీనికి సమయం మరియు ఇంటర్నెట్, హోస్టింగ్, విద్యుత్ మరియు అభ్యాస సామగ్రి తయారీ వంటి ప్రాథమిక వనరులు అవసరం. ఇచట ఎటువంటి ప్రకటనలు ఉంచబడలేదు మరియు ఎటువంటి కోర్సులు విక్రయించబడవు.</p>
+                        </div>
+
+                        <div class="support-section personal-note">
+                            <h4>ఒక చిన్న వ్యక్తిగత గమనిక</h4>
+                            <p>ఈ బోధనా సేవను నేను వ్యాపకంగా లేదా మరొక వృత్తితో పాటు చేయడం లేదు. నేను ఏ ఉద్యోగం, వ్యాపారం లేదా జ్యోతిష్యం కన్సల్టేషన్ లాంటివి చేయడం లేదు. నా సమయం పూర్తిగా బోధన, విద్యార్థులకోసం Astrology Resources సిద్ధం చేయడం మరియు వ్యక్తిగత ఆధ్యాత్మిక అధ్యయనం మరియు సాధన కోసం అంకితం చేయబడింది.</p>
+                            <p>సాధారణ జీవన అవసరాల కోసం — కుటుంబ నిర్వహణ, ఇంటర్నెట్, విద్యుత్ మరియు బోధనా సమయం — నేను విద్యార్థులు అందించే స్వచ్ఛంద మద్దతుపై మాత్రమే ఆధారపడతాను. అటువంటి మద్దతును నేను జ్ఞానానికి చెల్లింపుగా చూడను, కానీ ఈ సేవను కొనసాగించడానికి అనుమతించే సహాయంగా చూస్తాను.</p>
+                            <p>అదే సమయంలో, ధనాన్ని వసూలు చేయడం ఈ ప్లాట్‌ఫారమ్ ఉద్దేశ్యం కాదు. సరళమైన మరియు స్థిరమైన జీవితానికి ఏది అవసరమో అది మాత్రమే సరిపోతుంది.</p>
+                            <p>ఎవరైనా సహకరిస్తారా లేదా అనేది ఇక్కడ నేర్చుకోవడానికి ఎప్పుడూ లింక్ చేయబడదు.</p>
+                        </div>
+
+                        <div class="support-section">
+                            <h4>మీరు సహకరించాలని భావిస్తే</h4>
+                            <p>మద్దతు ఇవ్వాలనే సహజమైన భావన కలిగితే, మీరు స్వచ్ఛందంగా చేయవచ్చు. నిర్ణీత ధనం ఇవ్వాలనిగాని నిర్ణీత సమయంలోనే ఇవ్వలగాని లేదు. మీరు ఒకసారి, అప్పుడప్పుడు లేదా అసలు ఇవ్వకపోయినా పర్వాలేదు.</p>
+                        </div>
+
+                        <div class="support-section assurance">
+                            <h4>ముఖ్యమైన హామీ</h4>
+                            <p>సహకారం అందించడం వల్ల ప్రత్యేకమైన ప్రాధాన్యత, వేగవంతమైన ప్రతిస్పందనలు లాంటివి నిరీక్షించవద్దని మనవి. ఈ బోధన అందరికీ సమానంగా ఉంటుంది.</p>
+                        </div>
+
+                        
+
+                        <div class="support-section closing">
+                            <p>మీవంతు సేవ చేయాలనే సంకల్పం కలిగితే దానిని కృతజ్ఞతతో స్వీకరించబడుతుంది. సేవ అందించకపోయినా పర్వాలేదు, నేర్చుకోవడం కొనసాగించవచ్చు. మీ నిజాయితీ గల అధ్యయనమే విలువైనది.</p>
+                        </div>
+                    </div>
+
+                    <div class="optional-support-wrapper">
+                        <div class="support-reveal-content">
+                            <div class="support-qr-container">
+                                <img src="donate.png" alt="Voluntary Support Details" class="support-qr-image">
+                            </div>
+                            <p>UPI: 9482094290</p>
+                            <div class="support-links-row">
+                                <button id="copyUpiBtnTe" class="text-link-action">UPI కాపీ చేయండి</button>
+                                <span class="separator">•</span>
+                                <a href="https://vaiswanara.com" target="_blank" class="text-link-action">వెబ్‌సైట్‌ను సందర్శించండి</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
