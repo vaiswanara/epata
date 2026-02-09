@@ -1270,10 +1270,43 @@ const UIControllers = {
         const installModal = document.getElementById('installModal');
         const closeInstallModal = document.getElementById('closeInstallModal');
         const androidBtn = document.getElementById('installAndroidBtn');
+        const iosBtn = document.getElementById('installIOSBtn');
+        const iosInstructions = document.getElementById('iosInstructions');
+        const alreadyInstalledMsg = document.getElementById('alreadyInstalledMsg');
+
+        // Detect iOS (iPhone, iPad, iPod) including iPads with OS 13+ (MacIntel)
+        const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent) || 
+                      (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 
         const openModal = () => {
             installModal?.classList.add('active');
             UIControllers.closeDrawer();
+            
+            // Check if running in standalone mode (Already Installed)
+            const isStandalone = window.matchMedia('(display-mode: standalone)').matches || 
+                                 window.navigator.standalone === true;
+
+            if (isStandalone) {
+                if (androidBtn) androidBtn.style.display = 'none';
+                if (iosBtn) iosBtn.style.display = 'none';
+                if (iosInstructions) iosInstructions.style.display = 'none';
+                if (alreadyInstalledMsg) alreadyInstalledMsg.style.display = 'block';
+                return;
+            } else {
+                if (alreadyInstalledMsg) alreadyInstalledMsg.style.display = 'none';
+            }
+            
+            // Toggle buttons based on OS
+            if (isIOS) {
+                if (androidBtn) androidBtn.style.display = 'none';
+                if (iosBtn) iosBtn.style.display = 'flex';
+            } else {
+                if (androidBtn) androidBtn.style.display = 'flex';
+                if (iosBtn) iosBtn.style.display = 'none';
+            }
+            
+            // Reset instructions visibility
+            if (iosInstructions) iosInstructions.style.display = 'none';
         };
 
         installBtnDesktop?.addEventListener('click', openModal);
@@ -1312,6 +1345,14 @@ const UIControllers = {
 
             deferredPrompt = null;
             installModal?.classList.remove('active');
+       });
+
+       // iOS Button Logic
+       iosBtn?.addEventListener('click', () => {
+           if (iosInstructions) {
+               iosInstructions.style.display = 'block';
+               iosInstructions.scrollIntoView({ behavior: 'smooth' });
+           }
        });
 
     },

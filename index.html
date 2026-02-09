@@ -835,10 +835,34 @@
             <div class="install-body">
                 <img src="icons/icon-192.png" alt="App Logo" style="width: 64px; height: 64px; margin-bottom: 16px; border-radius: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
                 <p>Install the app for a better learning experience, offline access, and full-screen mode.</p>
+                <p id="alreadyInstalledMsg" style="display: none; color: var(--success); font-weight: 600; margin-bottom: 16px;">
+                    <i class="fas fa-check-circle"></i> App is already installed
+                </p>
                 <div class="install-buttons">
                     <button class="install-action-btn android" id="installAndroidBtn">
                         <i class="fab fa-android"></i> Install for Android
                     </button>
+                    <button class="install-action-btn ios" id="installIOSBtn" style="display: none;">
+                        <i class="fab fa-apple"></i> Install for iPhone / iPad
+                    </button>
+                </div>
+                <div id="iosInstructions" class="ios-instructions" style="display: none;">
+                    <h4><i class="fab fa-apple"></i> How to Install on iOS</h4>
+                    <ol>
+                        <li>Tap the <strong>Share</strong> button <i class="fas fa-share-square"></i> in Safari.</li>
+                        <li>Scroll down and tap <strong>Add to Home Screen</strong> <i class="fas fa-plus-square"></i>.</li>
+                        <li>Tap <strong>Add</strong> on the top-right corner.</li>
+                    </ol>
+                </div>
+                <div class="safety-info">
+                    <h4><i class="fas fa-shield-alt"></i> Safety Information</h4>
+                    <p>This is not an APK file or Play Store app. It simply adds a website shortcut to your home screen.</p>
+                    <ul class="safety-list">
+                        <li><i class="fas fa-check-circle"></i> No files downloaded</li>
+                        <li><i class="fas fa-check-circle"></i> No permissions requested</li>
+                        <li><i class="fas fa-check-circle"></i> No personal data collected</li>
+                        <li><i class="fas fa-check-circle"></i> Safe & easy to remove</li>
+                    </ul>
                 </div>
             </div>
         </div>
