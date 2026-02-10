@@ -7,16 +7,68 @@
 // CONFIG LOADER
 // ============================================
 let APP_CONFIG = null;
+let configRetryTimer = null;
+let configRetryActive = false;
+const CONFIG_RETRY_INTERVAL_MS = 20000;
+let appInitialized = false;
+
+function scheduleConfigRetry() {
+    if (configRetryTimer) return;
+    configRetryActive = true;
+    configRetryTimer = setTimeout(() => {
+        configRetryTimer = null;
+        loadAppConfig();
+    }, CONFIG_RETRY_INTERVAL_MS);
+}
+
+function clearConfigRetry() {
+    if (configRetryTimer) {
+        clearTimeout(configRetryTimer);
+        configRetryTimer = null;
+    }
+    configRetryActive = false;
+}
 
 async function loadAppConfig() {
     try {
         const res = await fetch('config.json?t=' + Date.now());
+        if (!res.ok) throw new Error("Config fetch failed");
         APP_CONFIG = await res.json();
         console.log("CONFIG LOADED", APP_CONFIG);
+        if (configRetryActive) {
+            clearConfigRetry();
+        }
+        initializeAppAfterConfig();
     } catch (e) {
         console.error("Failed to load config.json", e);
+        showConfigError();
+        scheduleConfigRetry();
     }
 }
+
+
+
+async function initializeAppAfterConfig() {
+    if (appInitialized) return;
+    appInitialized = true;
+
+    try {
+        await loadCoursesMeta();
+    } catch (e) {
+        console.error("Courses load failed", e);
+    }
+
+    try {
+        await DataManager.loadData();
+    } catch (e) {
+        console.error("Lessons load failed", e);
+    }
+
+    // Always render UI even if partial data
+    ViewManager.renderCurrentView();
+}
+
+
 
 // ============================================
 // PWA INSTALL PROMPT
@@ -243,9 +295,13 @@ function isCourseActive(course) {
 }
 
 async function loadCoursesFromSheet() {
-    const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ6RStlHwy-jhwrGCg7JUrE8I3MZxukUqBGqdUxGywRof4WyItHEJZ0FP93GeB_ktBAXte3avGhYEVw/pub?gid=8305808&single=true&output=csv';
+    if (!APP_CONFIG || !APP_CONFIG.std_courses) {
+        console.error("std_courses URL missing in config.json");
+        return;
+    }
+
     try {
-        const res = await fetch(sheetUrl + '&t=' + Date.now());
+        const res = await fetch(APP_CONFIG.std_courses + '&t=' + Date.now());
         const text = await res.text();
         const rows = Utils.parseCSV(text);
         
@@ -568,12 +624,28 @@ const DataManager = {
 
     // Backup User Data
     async backupData() {
+        // Helper to get data safely
+        const getLocal = (k) => localStorage.getItem(k);
+        const getLocalJSON = (k) => {
+            try { return JSON.parse(getLocal(k)); } catch(e){ return null; }
+        };
+
         const data = {
             favorites: AppState.favorites,
             completed: AppState.completed,
             recent: AppState.recentlyWatched,
+            
+            // Extended Data (v2.0)
+            enrolledCourse: getLocalJSON('epata_enrolled_course'),
+            videoPositions: getLocalJSON('epata_video_positions') || {},
+            theme: getLocal('epata_theme'),
+            quiz: {
+                score: getLocal('epata_quiz_score'),
+                date: getLocal('epata_quiz_date'),
+                completed: getLocal('epata_quiz_completed')
+            },
             timestamp: new Date().toISOString(),
-            version: '1.0'
+            version: '2.0'
         };
         
         const fileName = `epata_backup_${new Date().toISOString().slice(0,10)}.json`;
@@ -619,6 +691,25 @@ const DataManager = {
             if (data.completed && Array.isArray(data.completed)) {
                 AppState.completed = data.completed;
                 Utils.saveToStorage('completed', data.completed);
+            }
+
+            // Restore Extended Data (v2.0)
+            if (data.enrolledCourse != null) {
+                Utils.saveToStorage('enrolled_course', data.enrolledCourse);
+            }
+
+            if (data.videoPositions) {
+                Utils.saveToStorage('video_positions', data.videoPositions);
+            }
+
+            if (data.theme) {
+                localStorage.setItem('epata_theme', data.theme);
+            }
+
+            if (data.quiz) {
+                if (data.quiz.score != null) localStorage.setItem('epata_quiz_score', data.quiz.score);
+                if (data.quiz.date != null) localStorage.setItem('epata_quiz_date', data.quiz.date);
+                if (data.quiz.completed != null) localStorage.setItem('epata_quiz_completed', data.quiz.completed);
             }
             
             Utils.showToast('Progress restored! Reloading...');
@@ -710,6 +801,25 @@ const DataManager = {
             completed,
             percent: lessons.length > 0 ? Math.round((completed / lessons.length) * 100) : 0
         };
+    },
+
+    getVideoPosition(lessonId) {
+        const positions = JSON.parse(localStorage.getItem('epata_video_positions') || '{}');
+        return positions[lessonId] || 0;
+    },
+
+    saveVideoPosition(lessonId, time) {
+        const positions = JSON.parse(localStorage.getItem('epata_video_positions') || '{}');
+        positions[lessonId] = Math.floor(time);
+        localStorage.setItem('epata_video_positions', JSON.stringify(positions));
+    },
+
+    removeVideoPosition(lessonId) {
+        const positions = JSON.parse(localStorage.getItem('epata_video_positions') || '{}');
+        if (positions[lessonId]) {
+            delete positions[lessonId];
+            localStorage.setItem('epata_video_positions', JSON.stringify(positions));
+        }
     },
 
     getContinueLesson() {
@@ -1766,12 +1876,43 @@ const AppActions = {
         
         // Dynamically create iframe to optimize performance
         videoContainer.innerHTML = ''; // Clear any existing content
+        
+        // 1. Load YouTube API if missing
+        if (!window.YT) {
+            const tag = document.createElement('script');
+            tag.src = "https://www.youtube.com/iframe_api";
+            const firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        }
+
         const iframe = document.createElement('iframe');
-        iframe.src = `https://www.youtube.com/embed/${lesson.videoId}?autoplay=1&rel=0`;
+        iframe.id = 'epata-video-frame';
+        // 2. Enable JS API
+        iframe.src = `https://www.youtube.com/embed/${lesson.videoId}?autoplay=1&rel=0&enablejsapi=1`;
         iframe.setAttribute('frameborder', '0');
         iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
         iframe.setAttribute('allowfullscreen', '');
         videoContainer.appendChild(iframe);
+        
+        // 3. Initialize Player Wrapper
+        const initPlayer = () => {
+            if (!document.getElementById('epata-video-frame')) return; // Safety check if modal closed
+            this.player = new YT.Player('epata-video-frame', {
+                events: {
+                    'onReady': (e) => {
+                        this.player = e.target;
+                        this.hasResumed = false;
+                    },
+                    'onStateChange': (e) => this.handlePlayerState(e, lesson.id)
+                }
+            });
+        };
+
+        if (window.YT && window.YT.Player) {
+            initPlayer();
+        } else {
+            window.onYouTubeIframeAPIReady = initPlayer;
+        }
         
         title.textContent = lesson.title;
         playlist.innerHTML = `<i class="fas fa-list"></i> ${Utils.formatPlaylistName(lesson.playlist)}`;
@@ -1854,6 +1995,12 @@ const AppActions = {
     },
 
     closeVideoModal() {
+        this.stopSaveTimer(); // Stop saving
+        if (this.player && typeof this.player.destroy === 'function') {
+            this.player.destroy(); // Cleanup player
+            this.player = null;
+        }
+
         const modal = document.getElementById('videoModal');
         const videoContainer = document.getElementById('videoContainer');
         
@@ -1886,6 +2033,59 @@ const AppActions = {
             modal.classList.remove('active');
             if (frame) frame.src = ''; // Clear src to stop loading
             document.body.style.overflow = '';
+        }
+    },
+
+    // ============================================
+    // PLAYER HELPERS
+    // ============================================
+    resumeVideoPosition(lessonId) {
+        const pos = DataManager.getVideoPosition(lessonId);
+        if (pos > 10) {
+            setTimeout(() => {
+                if (this.player && typeof this.player.seekTo === 'function') {
+                    this.player.seekTo(pos, true);
+                    Utils.showToast('Resumed from ' + Math.floor(pos/60) + ':' + ('0'+Math.floor(pos%60)).slice(-2));
+                }
+            }, 1000);
+        }
+    },
+
+    handlePlayerState(event, lessonId) {
+        if (event.data === YT.PlayerState.PLAYING) {
+            if (!this.hasResumed) {
+                this.resumeVideoPosition(lessonId);
+                this.hasResumed = true;
+            }
+            this.startSaveTimer(lessonId);
+        } else {
+            this.stopSaveTimer();
+        }
+        if (event.data === YT.PlayerState.ENDED) {
+            DataManager.removeVideoPosition(lessonId);
+        }
+    },
+
+    startSaveTimer(lessonId) {
+        this.stopSaveTimer();
+        this.saveInterval = setInterval(() => {
+            if (this.player && typeof this.player.getCurrentTime === 'function') {
+                const time = this.player.getCurrentTime();
+                const duration = this.player.getDuration();
+                // Reset rule: > 90% complete
+                if (duration > 0 && (time / duration) >= 0.9) {
+                    DataManager.removeVideoPosition(lessonId);
+                } else {
+                    DataManager.saveVideoPosition(lessonId, time);
+                }
+            }
+        }, 5000); // Save every 5s
+    },
+
+    stopSaveTimer() {
+        if (this.saveInterval) {
+            clearInterval(this.saveInterval);
+            this.saveInterval = null;
         }
     },
 
@@ -2000,6 +2200,12 @@ const UIControllers = {
         const iosBtn = document.getElementById('installIOSBtn');
         const iosInstructions = document.getElementById('iosInstructions');
         const alreadyInstalledMsg = document.getElementById('alreadyInstalledMsg');
+
+        if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone) {
+            console.log("Running as installed app");
+            if (installBtnDesktop) installBtnDesktop.style.display = 'none';
+            if (installBtnMobile) installBtnMobile.style.display = 'none';
+        }
 
         // Detect iOS (iPhone, iPad, iPod) including iPads with OS 13+ (MacIntel)
         const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent) || 
@@ -2391,8 +2597,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('themeToggleMobile').addEventListener('click', AppActions.toggleTheme);
     
     // Close video modal
-    document.getElementById('closeVideoModal').addEventListener('click', AppActions.closeVideoModal);
-    document.getElementById('modalBack').addEventListener('click', AppActions.closeVideoModal);
+    document.getElementById('closeVideoModal').addEventListener('click', () => AppActions.closeVideoModal());
+    document.getElementById('modalBack').addEventListener('click', () => AppActions.closeVideoModal());
 
     // Close Course Complete Modal
     document.getElementById('closeCourseComplete')?.addEventListener('click', () => {
@@ -2492,6 +2698,9 @@ if ('serviceWorker' in navigator) {
             .then(reg => {
                 // Check for updates on load
                 reg.update();
+                if (reg.waiting) {
+                    reg.waiting.postMessage({ type: "SKIP_WAITING" });
+                }
                 console.log("Service Worker registered");
             })
             .catch(err => console.error('SW Registration failed:', err));

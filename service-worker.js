@@ -1,11 +1,14 @@
-const CACHE_VERSION = "epata-v9";
+const CACHE_VERSION = "epata-v10";
 const STATIC_CACHE = "static-" + CACHE_VERSION;
 const DYNAMIC_CACHE = "dynamic-" + CACHE_VERSION;
 
 const STATIC_FILES = [
   "./",
+  "./index.html",
   "./style.css",
   "./script.js",
+  "./config.json",
+  "./manifest.json",
   "./icons/icon-192.png",
   "./icons/icon-512.png"
 ];
@@ -43,6 +46,7 @@ self.addEventListener("fetch", event => {
     event.respondWith(
       fetch(event.request)
         .then(res => {
+          if (!res.ok || res.status !== 200) return res;
           return caches.open(DYNAMIC_CACHE).then(cache => {
             cache.put(event.request, res.clone());
             return res;
@@ -50,6 +54,18 @@ self.addEventListener("fetch", event => {
         })
         .catch(() => caches.match("./index.html"))
     );
+    return;
+  }
+
+  const url = new URL(event.request.url);
+
+  // 🚫 NEVER CACHE: config.json & Google Sheets (Always Network)
+  if (
+    url.pathname.endsWith("config.json") || 
+    url.hostname.includes("docs.google.com") || 
+    url.hostname.includes("googleusercontent.com")
+  ) {
+    event.respondWith(fetch(event.request));
     return;
   }
 
