@@ -1,4 +1,4 @@
-const CACHE_VERSION = "epata-v10";
+const CACHE_VERSION = "epata-v11";
 const STATIC_CACHE = "static-" + CACHE_VERSION;
 const DYNAMIC_CACHE = "dynamic-" + CACHE_VERSION;
 

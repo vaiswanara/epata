@@ -351,6 +351,8 @@ async function loadCoursesMeta() {
 // ============================================
 // DATA MANAGEMENT
 // ============================================
+let activeFetches = 0;
+const MAX_FETCH_TIME = 15000; // 15 seconds
 const DataManager = {
     async loadData(options = {}) {
         if (!APP_CONFIG) return { success: false, updated: false };
@@ -383,18 +385,30 @@ const DataManager = {
 
         // 2. Define fetch logic for background update
         const fetchFreshData = async () => {
+            activeFetches += 1;
+            if (activeFetches === 1) {
+                UIRenderer.showUpdatingBadge();
+            }
+            let timeoutFired = false;
+            const timeoutId = setTimeout(() => {
+                timeoutFired = true;
+                activeFetches = Math.max(0, activeFetches - 1);
+                if (activeFetches === 0) {
+                    UIRenderer.hideUpdatingBadge();
+                }
+            }, MAX_FETCH_TIME);
             try {
-                // Fetch both sources in parallel
-                const results = await Promise.allSettled([
-                    fetch(localUrl).then(res => {
-                        if (!res.ok) throw new Error('Failed to load local file');
-                        return res.text();
-                    }),
-                    fetch(sheetUrlWithCache).then(res => {
-                        if (!res.ok) throw new Error('Failed to load Google Sheet');
-                        return res.text();
-                    })
-                ]);
+                let primaryText = null;
+                try {
+                    const sheetRes = await fetch(sheetUrlWithCache);
+                    if (!sheetRes.ok) throw new Error('Failed to load Google Sheet');
+                    primaryText = await sheetRes.text();
+                } catch (sheetError) {
+                    console.warn('Google Sheets failed, falling back to local file:', sheetError);
+                    const localRes = await fetch(localUrl);
+                    if (!localRes.ok) throw new Error('Failed to load local file');
+                    primaryText = await localRes.text();
+                }
 
                 const lessons = [];
                 const playlists = new Set();
@@ -427,14 +441,7 @@ const DataManager = {
                     });
                 };
                 
-                // Process results from both sources
-                results.forEach((result, index) => {
-                    if (result.status === 'fulfilled') {
-                        processCSV(result.value);
-                    } else {
-                        console.warn(`Source ${index === 0 ? 'Local' : 'Google Sheets'} failed:`, result.reason);
-                    }
-                });
+                processCSV(primaryText);
 
                 if (lessons.length === 0) return { success: false, updated: false };
 
@@ -461,22 +468,51 @@ const DataManager = {
                         UIRenderer.populateDrawerCategories();
                         ViewManager.renderCurrentView();
                         UIRenderer.renderStats();
+                    } else {
+                        UIRenderer.populateFilters();
+                        UIRenderer.populateDrawerCategories();
+                        UIRenderer.renderQuickActions();
+                        UIRenderer.renderStats();
+                        ViewManager.renderCurrentView();
                     }
                 }
                 return { success: true, updated };
             } catch (error) {
                 console.error('Error loading fresh data:', error);
                 return { success: false, updated: false };
+            } finally {
+                if (!timeoutFired) {
+                    clearTimeout(timeoutId);
+                    activeFetches = Math.max(0, activeFetches - 1);
+                    if (activeFetches === 0) {
+                        UIRenderer.hideUpdatingBadge();
+                    }
+                }
             }
         };
 
-        // 3. Return immediately if cached, otherwise wait for fetch
-        if (isCachedLoaded) {
-            fetchFreshData(); // Run in background
-            return { success: true, updated: false };
-        } else {
+        const scheduleBackgroundFetch = () => {
+            const runFetch = () => {
+                fetchFreshData().catch((error) => {
+                    console.error('Error loading fresh data:', error);
+                });
+            };
+
+            // Defer until after current render cycle
+            if (typeof requestAnimationFrame === 'function') {
+                requestAnimationFrame(() => setTimeout(runFetch, 0));
+            } else {
+                setTimeout(runFetch, 0);
+            }
+        };
+
+        // 3. Force refresh should block; otherwise always return immediately
+        if (forceRefresh) {
             return await fetchFreshData();
         }
+
+        scheduleBackgroundFetch();
+        return { success: true, updated: false };
     },
 
     async loadResources() {
