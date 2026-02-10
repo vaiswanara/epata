@@ -113,6 +113,10 @@
                 </li>
                 <li class="nav-item" data-view="courses">
                     <i class="fas fa-graduation-cap"></i>
+                    <span>Courses</span>
+                </li>
+                <li class="nav-item" data-view="all">
+                    <i class="fas fa-play-circle"></i>
                     <span>All Videos</span>
                 </li>
                 <li class="nav-item" data-view="recent">
@@ -198,9 +202,21 @@
                         <i class="fas fa-home"></i>
                         <span>Dashboard</span>
                     </li>
+                    <li class="drawer-item" data-view="updates">
+                        <i class="fas fa-bullhorn"></i>
+                        <span>Latest News</span>
+                    </li>
                     <li class="drawer-item" data-view="courses">
                         <i class="fas fa-graduation-cap"></i>
-                        <span>All Courses</span>
+                        <span>Courses</span>
+                    </li>
+                    <li class="drawer-item" data-view="all">
+                        <i class="fas fa-play-circle"></i>
+                        <span>All Videos</span>
+                    </li>
+                    <li class="drawer-item" data-view="recent">
+                        <i class="fas fa-clock"></i>
+                        <span>Recently Watched</span>
                     </li>
                     <li class="drawer-item" data-view="favorites">
                         <i class="fas fa-heart"></i>
@@ -210,14 +226,6 @@
                     <li class="drawer-item" data-view="progress">
                         <i class="fas fa-chart-line"></i>
                         <span>My Progress</span>
-                    </li>
-                    <li class="drawer-item" data-view="updates">
-                        <i class="fas fa-bullhorn"></i>
-                        <span>Latest News</span>
-                    </li>
-                    <li class="drawer-item" data-view="recent">
-                        <i class="fas fa-clock"></i>
-                        <span>Recently Watched</span>
                     </li>
                     <li class="drawer-item" data-view="quiz">
                         <i class="fas fa-brain"></i>
@@ -349,7 +357,7 @@
                 </button>
                 <button class="quick-action-btn" data-action="all">
                     <div class="quick-icon" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
-                        <i class="fas fa-th-large"></i>
+                        <i class="fas fa-play-circle"></i>
                     </div>
                     <span>All</span>
                 </button>
@@ -435,8 +443,11 @@
             </section>
         </div>
 
-        <!-- Courses View -->
-        <div class="view hidden" id="coursesView">
+        <!-- Courses View (List of Courses) -->
+        <div class="view hidden" id="coursesView"></div>
+
+        <!-- All Videos View (List of Videos) -->
+        <div class="view hidden" id="allView">
             <div class="filter-bar">
                 <div class="filter-group">
                     <select id="playlistFilter">
@@ -475,7 +486,7 @@
                 </div>
                 <h3>No Favorites Yet</h3>
                 <p>Tap the heart icon on any lesson to save it here</p>
-                <button class="empty-action-btn" data-view="courses">Browse Courses</button>
+                <button class="empty-action-btn" data-view="all">Browse Videos</button>
             </div>
             <div class="lessons-container grid-view" id="favoritesContainer">
                 <!-- Dynamically populated -->
@@ -528,7 +539,7 @@
                 </div>
                 <h3>No Recently Watched</h3>
                 <p>Start watching lessons to see them here</p>
-                <button class="empty-action-btn" data-view="courses">Start Learning</button>
+                <button class="empty-action-btn" data-view="all">Start Learning</button>
             </div>
             <div class="lessons-container grid-view" id="recentContainer">
                 <!-- Dynamically populated -->

@@ -884,7 +884,7 @@ const UIRenderer = {
             card.addEventListener('click', () => {
                 AppState.filters.playlist = card.dataset.playlist;
                 document.getElementById('playlistFilter').value = card.dataset.playlist;
-                ViewManager.switchView('courses');
+                ViewManager.switchView('all');
             });
         });
     },
@@ -1056,7 +1056,7 @@ const UIRenderer = {
             item.addEventListener('click', () => {
                 AppState.filters.playlist = item.dataset.playlist;
                 document.getElementById('playlistFilter').value = item.dataset.playlist;
-                ViewManager.switchView('courses');
+                ViewManager.switchView('all');
                 UIControllers.closeDrawer();
             });
         });
@@ -1209,6 +1209,10 @@ function renderTodayLesson(){
 // VIEW MANAGER
 // ============================================
 const ViewManager = {
+    views: {},
+    navigate(view) {
+        this.switchView(view);
+    },
     switchView(viewName) {
         // Update nav items
         document.querySelectorAll('.bottom-nav-item, .drawer-item, .nav-item').forEach(item => {
@@ -1226,6 +1230,7 @@ const ViewManager = {
         const titles = {
             dashboard: 'Dashboard',
             courses: 'All Courses',
+            all: 'All Videos',
             favorites: 'Favorites',
             progress: 'Progress',
             quiz: 'Daily Quiz',
@@ -1245,6 +1250,11 @@ const ViewManager = {
     },
 
     renderCurrentView() {
+        if (this.views[AppState.currentView]) {
+            this.views[AppState.currentView]();
+            return;
+        }
+
         switch (AppState.currentView) {
             case 'dashboard':
                 UIRenderer.renderWelcomeStats();
@@ -1255,7 +1265,7 @@ const ViewManager = {
                 renderEnrollCourses();
                 renderTodayLesson();
                 break;
-            case 'courses':
+            case 'all':
                 this.renderCoursesView();
                 break;
             case 'favorites':
@@ -1283,14 +1293,48 @@ const ViewManager = {
     },
 
     renderCoursesView() {
-        const lessons = DataManager.getFilteredLessons();
+        const playlistDropdown = document.getElementById('playlistFilter');
+        const languageDropdown = document.getElementById('languageFilter');
+
+        // sync dropdown with course selection
+        if(AppState.selectedCourse){
+            playlistDropdown.value = AppState.selectedCourse;
+        } else {
+            AppState.selectedCourse = playlistDropdown.value;
+        }
+
+        let lessonsToShow = AppState.lessons;
+
+        // filter by playlist/course
+        if(AppState.selectedCourse && AppState.selectedCourse !== "all"){
+            lessonsToShow = lessonsToShow.filter(
+                l => l.playlistId === AppState.selectedCourse
+            );
+        }
+
+        // filter by language
+        if(languageDropdown.value && languageDropdown.value !== "all"){
+            lessonsToShow = lessonsToShow.filter(
+                l => l.language === languageDropdown.value
+            );
+        }
+
+        // filter by search
+        if (AppState.searchQuery) {
+            const query = AppState.searchQuery.toLowerCase();
+            lessonsToShow = lessonsToShow.filter(l => 
+                l.title.toLowerCase().includes(query) ||
+                l.playlist.toLowerCase().includes(query)
+            );
+        }
+
         const container = document.getElementById('lessonsContainer');
         const resultsCount = document.getElementById('resultsCount');
         const loadMoreContainer = document.getElementById('loadMoreContainer');
         
-        resultsCount.textContent = `${lessons.length} lesson${lessons.length !== 1 ? 's' : ''}`;
+        resultsCount.textContent = `${lessonsToShow.length} lesson${lessonsToShow.length !== 1 ? 's' : ''}`;
         
-        if (lessons.length === 0) {
+        if (lessonsToShow.length === 0) {
             container.innerHTML = `
                 <div class="empty-state" style="grid-column: 1/-1;">
                     <div class="empty-icon"><i class="fas fa-search"></i></div>
@@ -1302,11 +1346,11 @@ const ViewManager = {
             return;
         }
         
-        const displayLessons = lessons.slice(0, AppState.displayCount);
+        const displayLessons = lessonsToShow.slice(0, AppState.displayCount);
         UIRenderer.renderLessonCards('lessonsContainer', displayLessons);
         
         // Show/hide load more
-        loadMoreContainer.style.display = lessons.length > AppState.displayCount ? 'block' : 'none';
+        loadMoreContainer.style.display = lessonsToShow.length > AppState.displayCount ? 'block' : 'none';
     },
 
     renderFavoritesView() {
@@ -1403,6 +1447,43 @@ const ViewManager = {
         html += `</tbody></table></div>`;
         container.innerHTML = html;
     }
+};
+
+ViewManager.views.courses = function(){
+
+    const container = document.getElementById('coursesView');
+    container.innerHTML = '';
+
+    const title = document.createElement('h2');
+    title.textContent = "Courses";
+    title.style.margin = "12px 16px";
+    container.appendChild(title);
+
+    const list = document.createElement('div');
+    list.className = "course-list";
+
+    AppState.coursesMeta.forEach(course => {
+
+        const card = document.createElement('div');
+        card.className = "course-card";
+
+        card.innerHTML = `
+            <div class="course-icon">🎓</div>
+            <div class="course-title">${course.name}</div>
+            <div class="course-sub">Tap to open lessons</div>
+        `;
+
+        card.onclick = () => {
+            // filter videos belonging to this course
+            AppState.selectedCourse = course.playlist;
+            AppState.selectedLanguage = "all";
+            ViewManager.navigate('all');
+        };
+
+        list.appendChild(card);
+    });
+
+    container.appendChild(list);
 };
 
 // ============================================
@@ -1938,8 +2019,8 @@ const UIControllers = {
             AppState.searchQuery = e.target.value;
             searchClear.classList.toggle('visible', e.target.value.length > 0);
             
-            if (AppState.currentView !== 'courses') {
-                ViewManager.switchView('courses');
+            if (AppState.currentView !== 'all') {
+                ViewManager.switchView('all');
             } else {
                 ViewManager.renderCoursesView();
             }
@@ -1957,8 +2038,8 @@ const UIControllers = {
         if (desktopSearch) {
             desktopSearch.addEventListener('input', Utils.debounce((e) => {
                 AppState.searchQuery = e.target.value;
-                if (AppState.currentView !== 'courses') {
-                    ViewManager.switchView('courses');
+                if (AppState.currentView !== 'all') {
+                    ViewManager.switchView('all');
                 } else {
                     ViewManager.renderCoursesView();
                 }
@@ -1973,7 +2054,7 @@ const UIControllers = {
             kannadaChip.classList.toggle('active', lang === 'kannada');
             teluguChip.classList.toggle('active', lang === 'telugu');
             document.getElementById('languageFilter').value = lang;
-            ViewManager.switchView('courses');
+            ViewManager.switchView('all');
         };
         
         kannadaChip.addEventListener('click', () => {
@@ -1990,17 +2071,16 @@ const UIControllers = {
     },
 
     initFilters() {
-        document.getElementById('playlistFilter').addEventListener('change', (e) => {
-            AppState.filters.playlist = e.target.value;
+        const playlistDropdown = document.getElementById('playlistFilter');
+        const languageDropdown = document.getElementById('languageFilter');
+
+        playlistDropdown.addEventListener('change', () => {
+            AppState.selectedCourse = playlistDropdown.value;
             ViewManager.renderCoursesView();
         });
         
-        document.getElementById('languageFilter').addEventListener('change', (e) => {
-            AppState.filters.language = e.target.value;
-            const kannadaChip = document.getElementById('filterKannada');
-            const teluguChip = document.getElementById('filterTelugu');
-            kannadaChip.classList.toggle('active', AppState.filters.language === 'kannada');
-            teluguChip.classList.toggle('active', AppState.filters.language === 'telugu');
+        languageDropdown.addEventListener('change', () => {
+            AppState.selectedLanguage = languageDropdown.value;
             ViewManager.renderCoursesView();
         });
     },
@@ -2009,7 +2089,11 @@ const UIControllers = {
         // Bottom nav
         document.querySelectorAll('.bottom-nav-item').forEach(item => {
             item.addEventListener('click', () => {
-                ViewManager.switchView(item.dataset.view);
+                if (item.dataset.view === 'all') {
+                    ViewManager.switchView('all');
+                } else {
+                    ViewManager.switchView(item.dataset.view);
+                }
             });
         });
         
