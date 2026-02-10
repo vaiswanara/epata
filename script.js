@@ -209,18 +209,87 @@ const Utils = {
     }
 };
 
-async function loadCoursesMeta(){
-    try{
-        const res = await fetch('courses.json?t=' + Date.now());
-        const data = await res.json();
-        AppState.coursesMeta = data.courses || [];
+function parseFlexibleDate(str) {
+    if (!str) return null;
+    const s = str.trim();
+    if (!s) return null;
+    
+    // Handle DD-MM-YYYY or DD/MM/YYYY
+    const dmy = s.match(/^(\d{1,2})[-/.](\d{1,2})[-/.](\d{4})$/);
+    if (dmy) {
+        return new Date(`${dmy[3]}-${dmy[2]}-${dmy[1]}`).getTime();
+    }
+    
+    // Handle YYYY-MM-DD
+    const ymd = s.match(/^(\d{4})[-/.](\d{1,2})[-/.](\d{1,2})$/);
+    if (ymd) {
+        return new Date(`${ymd[1]}-${ymd[2]}-${ymd[3]}`).getTime();
+    }
+    
+    return null;
+}
+
+function isCourseActive(course) {
+    if ((course.course_status || '').toUpperCase() !== 'ON') return false;
+    
+    const now = Date.now();
+    const start = parseFlexibleDate(course.start_date);
+    const end = parseFlexibleDate(course.end_date);
+    
+    if (start && now < start) return false;
+    if (end && now > end) return false;
+    
+    return true;
+}
+
+async function loadCoursesFromSheet() {
+    const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ6RStlHwy-jhwrGCg7JUrE8I3MZxukUqBGqdUxGywRof4WyItHEJZ0FP93GeB_ktBAXte3avGhYEVw/pub?gid=8305808&single=true&output=csv';
+    try {
+        const res = await fetch(sheetUrl + '&t=' + Date.now());
+        const text = await res.text();
+        const rows = Utils.parseCSV(text);
+        
+        if (rows.length < 2) return;
+        
+        // Map headers dynamically
+        const headers = rows[0].map(h => h.toLowerCase().trim());
+        const getIdx = (key) => headers.indexOf(key);
+        
+        const courses = [];
+        
+        for (let i = 1; i < rows.length; i++) {
+            const row = rows[i];
+            if (row.length < 2) continue;
+            
+            const course = {
+                id: row[getIdx('id')] || '',
+                name: row[getIdx('name')] || '',
+                playlist: row[getIdx('playlist')] || '',
+                description: row[getIdx('description')] || '',
+                course_type: row[getIdx('course_type')] || '',
+                start_date: row[getIdx('start_date')] || '',
+                end_date: row[getIdx('end_date')] || '',
+                course_status: row[getIdx('course_status')] || 'OFF'
+            };
+            
+            if ((course.course_status || '').toUpperCase() === 'ON') {
+                courses.push(course);
+            }
+        }
+        
+        AppState.coursesMeta = courses;
+        console.log("Courses loaded from Sheet", AppState.coursesMeta);
+        
         if(ViewManager && typeof ViewManager.renderCurrentView === 'function'){
             ViewManager.renderCurrentView();
         }
-        console.log("Courses loaded", AppState.coursesMeta);
-    }catch(e){
-        console.error("courses.json load failed", e);
+    } catch (e) {
+        console.error("Failed to load courses from sheet", e);
     }
+}
+
+async function loadCoursesMeta() {
+    await loadCoursesFromSheet();
 }
 
 // ============================================
@@ -1090,14 +1159,16 @@ function renderEnrollCourses(){
     const container = document.getElementById('coursesContainer');
     if(!container) return;
 
-    if(!AppState.coursesMeta.length){
+    const displayCourses = AppState.coursesMeta.filter(c => c.course_type === 'Lessons');
+
+    if(!displayCourses.length){
         container.innerHTML = "<p>No courses available</p>";
         return;
     }
 
     container.innerHTML = '';
 
-    AppState.coursesMeta.forEach(course=>{
+    displayCourses.forEach(course=>{
         const enrolled = AppState.enrolledCourse === course.id;
 
         const div = document.createElement('div');
@@ -1454,36 +1525,69 @@ ViewManager.views.courses = function(){
     const container = document.getElementById('coursesView');
     container.innerHTML = '';
 
-    const title = document.createElement('h2');
-    title.textContent = "Courses";
-    title.style.margin = "12px 16px";
-    container.appendChild(title);
+    const now = Date.now();
+    const live = [];
+    const future = [];
+    const offline = [];
 
-    const list = document.createElement('div');
-    list.className = "course-list";
-
-    AppState.coursesMeta.forEach(course => {
-
-        const card = document.createElement('div');
-        card.className = "course-card";
-
-        card.innerHTML = `
-            <div class="course-icon">🎓</div>
-            <div class="course-title">${course.name}</div>
-            <div class="course-sub">Tap to open lessons</div>
-        `;
-
-        card.onclick = () => {
-            // filter videos belonging to this course
-            AppState.selectedCourse = course.playlist;
-            AppState.selectedLanguage = "all";
-            ViewManager.navigate('all');
-        };
-
-        list.appendChild(card);
+    AppState.coursesMeta.forEach(c => {
+        const start = parseFlexibleDate(c.start_date);
+        const end = parseFlexibleDate(c.end_date);
+        
+        if (start && now < start) {
+            future.push(c);
+        } else if (end && now > end) {
+            offline.push(c);
+        } else {
+            live.push(c);
+        }
     });
 
-    container.appendChild(list);
+    const renderSection = (title, courses) => {
+        if (!courses.length) return;
+
+        const header = document.createElement('h2');
+        header.textContent = title;
+        header.style.margin = "20px 16px 10px";
+        header.style.fontSize = "18px";
+        header.style.color = "var(--primary)";
+        container.appendChild(header);
+
+        const list = document.createElement('div');
+        list.className = "course-list";
+
+        courses.forEach(course => {
+            const card = document.createElement('div');
+            card.className = "course-card";
+
+            let subText = "Tap to open lessons";
+            if (title === "Future Courses" && course.start_date) subText = `Starts: ${course.start_date}`;
+            if (title === "Completed Courses" && course.end_date) subText = `Ended: ${course.end_date}`;
+
+            card.innerHTML = `
+                <div class="course-icon">🎓</div>
+                <div class="course-title">${course.name}</div>
+                <div class="course-sub">${subText}</div>
+            `;
+
+            card.onclick = () => {
+                AppState.selectedCourse = course.playlist;
+                AppState.selectedLanguage = "all";
+                ViewManager.navigate('all');
+            };
+
+            list.appendChild(card);
+        });
+        container.appendChild(list);
+    };
+
+    renderSection("Live Courses", live);
+    renderSection("Future Courses", future);
+    renderSection("Completed Courses", offline);
+
+    if (!live.length && !future.length && !offline.length) {
+        container.innerHTML = '<div class="empty-state"><p>No courses available</p></div>';
+    }
 };
 
 // ============================================
