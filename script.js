@@ -7,68 +7,16 @@
 // CONFIG LOADER
 // ============================================
 let APP_CONFIG = null;
-let configRetryTimer = null;
-let configRetryActive = false;
-const CONFIG_RETRY_INTERVAL_MS = 20000;
-let appInitialized = false;
-
-function scheduleConfigRetry() {
-    if (configRetryTimer) return;
-    configRetryActive = true;
-    configRetryTimer = setTimeout(() => {
-        configRetryTimer = null;
-        loadAppConfig();
-    }, CONFIG_RETRY_INTERVAL_MS);
-}
-
-function clearConfigRetry() {
-    if (configRetryTimer) {
-        clearTimeout(configRetryTimer);
-        configRetryTimer = null;
-    }
-    configRetryActive = false;
-}
 
 async function loadAppConfig() {
     try {
-        const res = await fetch('config.json?t=' + Date.now());
-        if (!res.ok) throw new Error("Config fetch failed");
+        const res = await fetch('config.json');
         APP_CONFIG = await res.json();
         console.log("CONFIG LOADED", APP_CONFIG);
-        if (configRetryActive) {
-            clearConfigRetry();
-        }
-        initializeAppAfterConfig();
     } catch (e) {
         console.error("Failed to load config.json", e);
-        showConfigError();
-        scheduleConfigRetry();
     }
 }
-
-
-
-async function initializeAppAfterConfig() {
-    if (appInitialized) return;
-    appInitialized = true;
-
-    try {
-        await loadCoursesMeta();
-    } catch (e) {
-        console.error("Courses load failed", e);
-    }
-
-    try {
-        await DataManager.loadData();
-    } catch (e) {
-        console.error("Lessons load failed", e);
-    }
-
-    // Always render UI even if partial data
-    ViewManager.renderCurrentView();
-}
-
-
 
 // ============================================
 // PWA INSTALL PROMPT
@@ -117,6 +65,7 @@ const AppState = {
     recentlyWatched: JSON.parse(localStorage.getItem('epata_recent') || '[]'),
     currentView: 'dashboard',
     currentVideo: null,
+    videoProgress: JSON.parse(localStorage.getItem('epata_video_progress') || '{}'),
     searchQuery: '',
     filters: { playlist: '', language: '' },
     resources: [],
@@ -195,6 +144,16 @@ const Utils = {
     saveToStorage(key, data) {
         localStorage.setItem(`epata_${key}`, JSON.stringify(data));
     },
+    
+    saveVideoProgress(videoId, time) {
+        if (!videoId || time < 5) return; // Don't save if less than 5 seconds
+        AppState.videoProgress[videoId] = Math.floor(time);
+        Utils.saveToStorage('video_progress', AppState.videoProgress);
+    },
+
+    getVideoProgress(videoId) {
+        return AppState.videoProgress[videoId] || 0;
+    },
 
     parseCSV(text) {
         const rows = [];
@@ -229,20 +188,6 @@ const Utils = {
         return rows.map(r => r.map(cell => cell.trim()));
     },
 
-    // Share functionality
-    async shareLesson(lesson) {
-        const url = lesson.videoId ? `https://youtube.com/watch?v=${lesson.videoId}` : '';
-        const text = `Check out this Vedic Astrology lesson: ${lesson.title}`;
-        
-        if (navigator.share) {
-            try {
-                await navigator.share({ title: lesson.title, text, url });
-            } catch (err) {
-                // User cancelled
-            }
-        }
-    },
-
     // Copy to clipboard
     async copyToClipboard(text) {
         try {
@@ -261,107 +206,32 @@ const Utils = {
     }
 };
 
-function parseFlexibleDate(str) {
-    if (!str) return null;
-    const s = str.trim();
-    if (!s) return null;
-    
-    // Handle DD-MM-YYYY or DD/MM/YYYY
-    const dmy = s.match(/^(\d{1,2})[-/.](\d{1,2})[-/.](\d{4})$/);
-    if (dmy) {
-        return new Date(`${dmy[3]}-${dmy[2]}-${dmy[1]}`).getTime();
-    }
-    
-    // Handle YYYY-MM-DD
-    const ymd = s.match(/^(\d{4})[-/.](\d{1,2})[-/.](\d{1,2})$/);
-    if (ymd) {
-        return new Date(`${ymd[1]}-${ymd[2]}-${ymd[3]}`).getTime();
-    }
-    
-    return null;
-}
-
-function isCourseActive(course) {
-    if ((course.course_status || '').toUpperCase() !== 'ON') return false;
-    
-    const now = Date.now();
-    const start = parseFlexibleDate(course.start_date);
-    const end = parseFlexibleDate(course.end_date);
-    
-    if (start && now < start) return false;
-    if (end && now > end) return false;
-    
-    return true;
-}
-
-async function loadCoursesFromSheet() {
-    if (!APP_CONFIG || !APP_CONFIG.std_courses) {
-        console.error("std_courses URL missing in config.json");
-        return;
-    }
-
-    try {
-        const res = await fetch(APP_CONFIG.std_courses + '&t=' + Date.now());
-        const text = await res.text();
-        const rows = Utils.parseCSV(text);
-        
-        if (rows.length < 2) return;
-        
-        // Map headers dynamically
-        const headers = rows[0].map(h => h.toLowerCase().trim());
-        const getIdx = (key) => headers.indexOf(key);
-        
-        const courses = [];
-        
-        for (let i = 1; i < rows.length; i++) {
-            const row = rows[i];
-            if (row.length < 2) continue;
-            
-            const course = {
-                id: row[getIdx('id')] || '',
-                name: row[getIdx('name')] || '',
-                playlist: row[getIdx('playlist')] || '',
-                description: row[getIdx('description')] || '',
-                course_type: row[getIdx('course_type')] || '',
-                start_date: row[getIdx('start_date')] || '',
-                end_date: row[getIdx('end_date')] || '',
-                course_status: row[getIdx('course_status')] || 'OFF'
-            };
-            
-            if ((course.course_status || '').toUpperCase() === 'ON') {
-                courses.push(course);
-            }
-        }
-        
-        AppState.coursesMeta = courses;
-        console.log("Courses loaded from Sheet", AppState.coursesMeta);
-        
+async function loadCoursesMeta(){
+    if (!APP_CONFIG) return;
+    try{
+        const res = await fetch(APP_CONFIG.courses);
+        const data = await res.json();
+        AppState.coursesMeta = data.courses || [];
         if(ViewManager && typeof ViewManager.renderCurrentView === 'function'){
             ViewManager.renderCurrentView();
         }
-    } catch (e) {
-        console.error("Failed to load courses from sheet", e);
+        console.log("Courses loaded", AppState.coursesMeta);
+    }catch(e){
+        console.error("courses.json load failed", e);
     }
-}
-
-async function loadCoursesMeta() {
-    await loadCoursesFromSheet();
 }
 
 // ============================================
 // DATA MANAGEMENT
 // ============================================
-let activeFetches = 0;
-const MAX_FETCH_TIME = 15000; // 15 seconds
 const DataManager = {
     async loadData(options = {}) {
         if (!APP_CONFIG) return { success: false, updated: false };
         const { forceRefresh = false } = options;
-        const localUrl = 'links.txt';
-        const googleSheetUrl = APP_CONFIG.urls;
         
-        // Append timestamp to prevent caching
-        const sheetUrlWithCache = googleSheetUrl + '&t=' + new Date().getTime();
+        // JSON Data Sources
+        const localJsonUrl = APP_CONFIG.lessons_archive;
+        const remoteJsonUrl = APP_CONFIG.lessons_live;
 
         // 1. Check cache and load immediately (unless force refresh)
         let isCachedLoaded = false;
@@ -385,63 +255,53 @@ const DataManager = {
 
         // 2. Define fetch logic for background update
         const fetchFreshData = async () => {
-            activeFetches += 1;
-            if (activeFetches === 1) {
-                UIRenderer.showUpdatingBadge();
-            }
-            let timeoutFired = false;
-            const timeoutId = setTimeout(() => {
-                timeoutFired = true;
-                activeFetches = Math.max(0, activeFetches - 1);
-                if (activeFetches === 0) {
-                    UIRenderer.hideUpdatingBadge();
-                }
-            }, MAX_FETCH_TIME);
             try {
-                let primaryText = null;
-                try {
-                    const sheetRes = await fetch(sheetUrlWithCache);
-                    if (!sheetRes.ok) throw new Error('Failed to load Google Sheet');
-                    primaryText = await sheetRes.text();
-                } catch (sheetError) {
-                    console.warn('Google Sheets failed, falling back to local file:', sheetError);
-                    const localRes = await fetch(localUrl);
-                    if (!localRes.ok) throw new Error('Failed to load local file');
-                    primaryText = await localRes.text();
-                }
+                // Fetch both sources in parallel
+                const results = await Promise.allSettled([
+                    fetch(localJsonUrl).then(res => {
+                        if (!res.ok) throw new Error('Failed to load local JSON');
+                        return res.json();
+                    }),
+                    fetch(remoteJsonUrl).then(res => {
+                        if (!res.ok) throw new Error('Failed to load remote JSON');
+                        return res.json();
+                    })
+                ]);
 
                 const lessons = [];
                 const playlists = new Set();
-                let globalIndex = 0;
                 
-                const processCSV = (text) => {
-                    const rows = Utils.parseCSV(text);
-                    rows.forEach((parts, index) => {
-                        if (index === 0) {
-                            const header = (parts[0] || '').toLowerCase();
-                            if (header.includes('playlist')) return;
-                        }
-                        if (parts.length >= 3) {
-                            const [playlist, title, videoId, pdfLink] = parts;
-                            if (playlist && title) {
-                                playlists.add(playlist);
-                                lessons.push({
-                                    id: `lesson_${globalIndex++}`,
-                                    playlistId: playlist,
-                                    playlist: Utils.formatPlaylistName(playlist),
-                                    title,
-                                    videoId: videoId?.length === 11 ? videoId : null,
-                                    pdfLink: pdfLink && pdfLink !== 'none' ? pdfLink : null,
-                                    language: Utils.getLanguage(playlist),
-                                    thumbnail: videoId?.length === 11 ? Utils.getYouTubeThumbnail(videoId) : null,
-                                    hasNotes: pdfLink && pdfLink !== 'none'
-                                });
-                            }
+                const processJSON = (data) => {
+                    if (!data || !data.lessons || !Array.isArray(data.lessons)) return;
+                    
+                    data.lessons.forEach(item => {
+                        if (item.status === 'OFF') return;
+
+                        if (item.playlist && item.title) {
+                            playlists.add(item.playlist);
+                            lessons.push({
+                                id: item.id, // Using stable ID from JSON
+                                playlistId: item.playlist,
+                                playlist: Utils.formatPlaylistName(item.playlist),
+                                title: item.title,
+                                videoId: item.videoId,
+                                pdfLink: item.pdfLink && item.pdfLink !== 'none' ? item.pdfLink : null,
+                                language: Utils.getLanguage(item.playlist),
+                                thumbnail: item.thumbnail || (item.videoId ? Utils.getYouTubeThumbnail(item.videoId) : null),
+                                hasNotes: item.pdfLink && item.pdfLink !== 'none'
+                            });
                         }
                     });
                 };
                 
-                processCSV(primaryText);
+                // Process results from both sources
+                results.forEach((result, index) => {
+                    if (result.status === 'fulfilled') {
+                        processJSON(result.value);
+                    } else {
+                        console.warn(`Source ${index === 0 ? 'Local JSON' : 'Remote JSON'} failed:`, result.reason);
+                    }
+                });
 
                 if (lessons.length === 0) return { success: false, updated: false };
 
@@ -468,77 +328,37 @@ const DataManager = {
                         UIRenderer.populateDrawerCategories();
                         ViewManager.renderCurrentView();
                         UIRenderer.renderStats();
-                    } else {
-                        UIRenderer.populateFilters();
-                        UIRenderer.populateDrawerCategories();
-                        UIRenderer.renderQuickActions();
-                        UIRenderer.renderStats();
-                        ViewManager.renderCurrentView();
                     }
                 }
                 return { success: true, updated };
             } catch (error) {
                 console.error('Error loading fresh data:', error);
                 return { success: false, updated: false };
-            } finally {
-                if (!timeoutFired) {
-                    clearTimeout(timeoutId);
-                    activeFetches = Math.max(0, activeFetches - 1);
-                    if (activeFetches === 0) {
-                        UIRenderer.hideUpdatingBadge();
-                    }
-                }
             }
         };
 
-        const scheduleBackgroundFetch = () => {
-            const runFetch = () => {
-                fetchFreshData().catch((error) => {
-                    console.error('Error loading fresh data:', error);
-                });
-            };
-
-            // Defer until after current render cycle
-            if (typeof requestAnimationFrame === 'function') {
-                requestAnimationFrame(() => setTimeout(runFetch, 0));
-            } else {
-                setTimeout(runFetch, 0);
-            }
-        };
-
-        // 3. Force refresh should block; otherwise always return immediately
-        if (forceRefresh) {
+        // 3. Return immediately if cached, otherwise wait for fetch
+        if (isCachedLoaded) {
+            fetchFreshData(); // Run in background
+            return { success: true, updated: false };
+        } else {
             return await fetchFreshData();
         }
-
-        scheduleBackgroundFetch();
-        return { success: true, updated: false };
     },
 
     async loadResources() {
         if (!APP_CONFIG) return;
         const url = APP_CONFIG.app_urls;
         try {
-            const response = await fetch(url + '&t=' + Date.now());
+            // Use timestamp only if needed, but for local files it helps bust cache during dev
+            const response = await fetch(url);
             if (!response.ok) return;
-            const text = await response.text();
-            const rows = Utils.parseCSV(text);
+            const data = await response.json();
             
-            if (rows.length < 2) return;
-            
-            // Headers: Date, App_name, app_url, user_guide
-            const headers = rows[0].map(h => h.toLowerCase().trim());
-            const dateIdx = headers.indexOf('date');
-            const nameIdx = headers.indexOf('app_name');
-            const urlIdx = headers.indexOf('app_url');
-            const guideIdx = headers.indexOf('user_guide');
-            
-            if (nameIdx === -1) return;
+            if (!data || !data.resources || !Array.isArray(data.resources)) return;
 
-            const resources = rows.slice(1).map(row => {
-                if (!row[nameIdx]) return null;
-                
-                const dateStr = row[dateIdx] ? row[dateIdx].trim() : '';
+            const resources = data.resources.map(item => {
+                const dateStr = item.date ? item.date.trim() : '';
                 let timestamp = 0;
                 if (dateStr) {
                     // Parse DD-MM-YYYY
@@ -553,9 +373,9 @@ const DataManager = {
                 return {
                     date: dateStr,
                     timestamp: timestamp,
-                    name: row[nameIdx],
-                    url: row[urlIdx],
-                    guide: row[guideIdx]
+                    name: item.app_name,
+                    url: item.app_url,
+                    guide: item.user_guide
                 };
             }).filter(Boolean);
             
@@ -571,23 +391,19 @@ const DataManager = {
         if (!APP_CONFIG) return false;
         const url = APP_CONFIG.quiz;
         try {
-            const response = await fetch(url + '&t=' + Date.now());
+            const response = await fetch(url);
             if (!response.ok) throw new Error('Failed to load quiz');
-            const text = await response.text();
-            const rows = Utils.parseCSV(text);
+            const data = await response.json();
             
-            // Headers: Question, Option A, Option B, Option C, Option D, Answer, Explanation, QuizDate
-            // Assuming row 0 is header
-            const questions = rows.slice(1).map(row => {
-                if (row.length < 6) return null;
-                return {
-                    question: row[0],
-                    options: [row[1], row[2], row[3], row[4]],
-                    answer: row[5], // Can be 'A', 'B' or full text
-                    explanation: row[6] || '',
-                    date: row[7] || ''
-                };
-            }).filter(q => q && q.question);
+            if (!data || !data.quiz || !Array.isArray(data.quiz)) return false;
+
+            const questions = data.quiz.map(q => ({
+                question: q.question,
+                options: q.options,
+                answer: q.answer,
+                explanation: q.explanation,
+                date: q.date
+            }));
 
             if (questions.length > 0) {
                 AppState.quiz.questions = questions;
@@ -660,28 +476,14 @@ const DataManager = {
 
     // Backup User Data
     async backupData() {
-        // Helper to get data safely
-        const getLocal = (k) => localStorage.getItem(k);
-        const getLocalJSON = (k) => {
-            try { return JSON.parse(getLocal(k)); } catch(e){ return null; }
-        };
-
         const data = {
             favorites: AppState.favorites,
             completed: AppState.completed,
             recent: AppState.recentlyWatched,
-            
-            // Extended Data (v2.0)
-            enrolledCourse: getLocalJSON('epata_enrolled_course'),
-            videoPositions: getLocalJSON('epata_video_positions') || {},
-            theme: getLocal('epata_theme'),
-            quiz: {
-                score: getLocal('epata_quiz_score'),
-                date: getLocal('epata_quiz_date'),
-                completed: getLocal('epata_quiz_completed')
-            },
+            enrolledCourse: AppState.enrolledCourse,
+            videoProgress: AppState.videoProgress,
             timestamp: new Date().toISOString(),
-            version: '2.0'
+            version: '1.1'
         };
         
         const fileName = `epata_backup_${new Date().toISOString().slice(0,10)}.json`;
@@ -728,24 +530,17 @@ const DataManager = {
                 AppState.completed = data.completed;
                 Utils.saveToStorage('completed', data.completed);
             }
-
-            // Restore Extended Data (v2.0)
-            if (data.enrolledCourse != null) {
-                Utils.saveToStorage('enrolled_course', data.enrolledCourse);
+            if (data.recent && Array.isArray(data.recent)) {
+                AppState.recentlyWatched = data.recent;
+                Utils.saveToStorage('recent', data.recent);
             }
-
-            if (data.videoPositions) {
-                Utils.saveToStorage('video_positions', data.videoPositions);
+            if (data.enrolledCourse) {
+                AppState.enrolledCourse = data.enrolledCourse;
+                localStorage.setItem('epata_enrolled_course', JSON.stringify(data.enrolledCourse));
             }
-
-            if (data.theme) {
-                localStorage.setItem('epata_theme', data.theme);
-            }
-
-            if (data.quiz) {
-                if (data.quiz.score != null) localStorage.setItem('epata_quiz_score', data.quiz.score);
-                if (data.quiz.date != null) localStorage.setItem('epata_quiz_date', data.quiz.date);
-                if (data.quiz.completed != null) localStorage.setItem('epata_quiz_completed', data.quiz.completed);
+            if (data.videoProgress) {
+                AppState.videoProgress = data.videoProgress;
+                Utils.saveToStorage('video_progress', data.videoProgress);
             }
             
             Utils.showToast('Progress restored! Reloading...');
@@ -837,25 +632,6 @@ const DataManager = {
             completed,
             percent: lessons.length > 0 ? Math.round((completed / lessons.length) * 100) : 0
         };
-    },
-
-    getVideoPosition(lessonId) {
-        const positions = JSON.parse(localStorage.getItem('epata_video_positions') || '{}');
-        return positions[lessonId] || 0;
-    },
-
-    saveVideoPosition(lessonId, time) {
-        const positions = JSON.parse(localStorage.getItem('epata_video_positions') || '{}');
-        positions[lessonId] = Math.floor(time);
-        localStorage.setItem('epata_video_positions', JSON.stringify(positions));
-    },
-
-    removeVideoPosition(lessonId) {
-        const positions = JSON.parse(localStorage.getItem('epata_video_positions') || '{}');
-        if (positions[lessonId]) {
-            delete positions[lessonId];
-            localStorage.setItem('epata_video_positions', JSON.stringify(positions));
-        }
     },
 
     getContinueLesson() {
@@ -1195,8 +971,11 @@ const UIRenderer = {
     },
 
     renderProgressView() {
-        // 1. Get playlists defined in courses.json
-        const coursePlaylists = AppState.coursesMeta.map(c => c.playlist);
+        // 1. Get playlists defined in courses.json (Filtered by Active & Type=Lessons)
+        const validCourses = AppState.coursesMeta.filter(c => 
+            isCourseActive(c) && c.course_type === 'Lessons'
+        );
+        const coursePlaylists = validCourses.map(c => c.playlist);
         
         // 2. Filter lessons to only include those in the official courses
         const courseLessons = AppState.lessons.filter(l => coursePlaylists.includes(l.playlistId) && l.videoId);
@@ -1301,20 +1080,150 @@ const UIRenderer = {
     }
 };
 
+// ============================================
+// YOUTUBE PLAYER MANAGER (Resume Logic)
+// ============================================
+const YouTubeManager = {
+    player: null,
+    currentVideoId: null,
+    timer: null,
+
+    initAPI() {
+        if (!window.YT) {
+            const tag = document.createElement('script');
+            tag.src = "https://www.youtube.com/iframe_api";
+            const firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        }
+    },
+
+    loadVideo(videoId, containerId) {
+        this.currentVideoId = videoId;
+        const startTime = Utils.getVideoProgress(videoId);
+
+        if (window.YT && window.YT.Player) {
+            this.createPlayer(videoId, containerId, startTime);
+        } else {
+            // If API is not ready yet, wait for it
+            window.onYouTubeIframeAPIReady = () => {
+                this.createPlayer(videoId, containerId, startTime);
+            };
+            
+            // Fallback if API takes too long (load simple iframe with start time)
+            setTimeout(() => {
+                if (!this.player) {
+                    const container = document.getElementById(containerId);
+                    if(container) {
+                         container.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&start=${startTime}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width:100%; height:100%;"></iframe>`;
+                    }
+                }
+            }, 1500);
+        }
+    },
+
+    createPlayer(videoId, containerId, startTime) {
+        if (this.player) {
+            this.player.destroy();
+        }
+        
+        this.player = new YT.Player(containerId, {
+            height: '100%',
+            width: '100%',
+            videoId: videoId,
+            playerVars: {
+                'autoplay': 1,
+                'rel': 0,
+                'start': startTime,
+                'playsinline': 1
+            },
+            events: {
+                'onStateChange': (e) => this.onStateChange(e)
+            }
+        });
+    },
+
+    onStateChange(event) {
+        if (event.data === YT.PlayerState.PLAYING) {
+            this.startTracking();
+        } else {
+            this.stopTracking();
+            this.saveTime();
+        }
+    },
+
+    startTracking() {
+        this.stopTracking();
+        this.timer = setInterval(() => this.saveTime(), 5000);
+    },
+
+    stopTracking() {
+        if (this.timer) {
+            clearInterval(this.timer);
+            this.timer = null;
+        }
+    },
+
+    saveTime() {
+        if (this.player && this.player.getCurrentTime && this.currentVideoId) {
+            Utils.saveVideoProgress(this.currentVideoId, this.player.getCurrentTime());
+        }
+    },
+
+    cleanup() {
+        this.saveTime();
+        this.stopTracking();
+        if (this.player) {
+            try { this.player.destroy(); } catch(e){}
+            this.player = null;
+        }
+        this.currentVideoId = null;
+    }
+};
+
+function isCourseActive(course){
+    if(!course) return false;
+    if(course.course_status === 'OFF') return false;
+
+    const today = new Date();
+    today.setHours(0,0,0,0);
+
+    const parseDate = (dateStr) => {
+        if(!dateStr) return null;
+        const parts = dateStr.trim().split(/[-/.]/);
+        if(parts.length === 3){
+            return new Date(parts[2], parseInt(parts[1], 10)-1, parts[0]);
+        }
+        return null;
+    };
+
+    if(course.start_date){
+        const start = parseDate(course.start_date);
+        if(start && today < start) return false;
+    }
+
+    if(course.end_date){
+        const end = parseDate(course.end_date);
+        if(end && today > end) return false;
+    }
+
+    return true;
+}
+
 function renderEnrollCourses(){
     const container = document.getElementById('coursesContainer');
     if(!container) return;
 
-    const displayCourses = AppState.coursesMeta.filter(c => c.course_type === 'Lessons');
-
-    if(!displayCourses.length){
+    if(!AppState.coursesMeta.length){
         container.innerHTML = "<p>No courses available</p>";
         return;
     }
 
     container.innerHTML = '';
 
-    displayCourses.forEach(course=>{
+    AppState.coursesMeta.forEach(course=>{
+        if(!isCourseActive(course)) return;
+        if(course.course_type !== 'Lessons') return;
+
         const enrolled = AppState.enrolledCourse === course.id;
 
         const div = document.createElement('div');
@@ -1506,6 +1415,20 @@ const ViewManager = {
             case 'donate':
                 // Donate view is static, no dynamic rendering needed
                 break;
+            case 'feedback':
+                const frame = document.getElementById('feedbackFrame');
+                const placeholder = document.getElementById('feedbackPlaceholder');
+                if (APP_CONFIG && APP_CONFIG.feedback) {
+                    frame.style.display = 'block';
+                    placeholder.style.display = 'none';
+                    if (frame.getAttribute('src') !== APP_CONFIG.feedback) {
+                        frame.src = APP_CONFIG.feedback;
+                    }
+                } else {
+                    frame.style.display = 'none';
+                    placeholder.style.display = 'block';
+                }
+                break;
         }
     },
 
@@ -1671,27 +1594,45 @@ ViewManager.views.courses = function(){
     const container = document.getElementById('coursesView');
     container.innerHTML = '';
 
-    const now = Date.now();
-    const live = [];
-    const future = [];
-    const offline = [];
+    // Helper to parse date DD-MM-YYYY
+    const parseDate = (dateStr) => {
+        if(!dateStr) return null;
+        const parts = dateStr.trim().split(/[-/.]/);
+        if(parts.length === 3){
+            return new Date(parts[2], parseInt(parts[1], 10)-1, parts[0]);
+        }
+        return null;
+    };
 
-    AppState.coursesMeta.forEach(c => {
-        const start = parseFlexibleDate(c.start_date);
-        const end = parseFlexibleDate(c.end_date);
+    const today = new Date();
+    today.setHours(0,0,0,0);
+
+    const liveCourses = [];
+    const futureCourses = [];
+    const completedCourses = [];
+
+    AppState.coursesMeta.forEach(course => {
+        if(course.course_status === 'OFF') return;
+        if(course.course_type !== 'Lessons') return;
+
+        const start = parseDate(course.start_date);
+        const end = parseDate(course.end_date);
         
-        if (start && now < start) {
-            future.push(c);
-        } else if (end && now > end) {
-            offline.push(c);
+        const isFuture = start && today < start;
+        const isCompleted = end && today > end;
+
+        if (isFuture) {
+            futureCourses.push(course);
+        } else if (isCompleted) {
+            completedCourses.push(course);
         } else {
-            live.push(c);
+            liveCourses.push(course);
         }
     });
 
     const renderSection = (title, courses) => {
-        if (!courses.length) return;
-
+        if(courses.length === 0) return;
+        
         const header = document.createElement('h2');
         header.textContent = title;
         header.style.margin = "20px 16px 10px";
@@ -1706,14 +1647,10 @@ ViewManager.views.courses = function(){
             const card = document.createElement('div');
             card.className = "course-card";
 
-            let subText = "Tap to open lessons";
-            if (title === "Future Courses" && course.start_date) subText = `Starts: ${course.start_date}`;
-            if (title === "Completed Courses" && course.end_date) subText = `Ended: ${course.end_date}`;
-
             card.innerHTML = `
                 <div class="course-icon">🎓</div>
                 <div class="course-title">${course.name}</div>
-                <div class="course-sub">${subText}</div>
+                <div class="course-sub">${course.description || 'Tap to open lessons'}</div>
             `;
 
             card.onclick = () => {
@@ -1727,12 +1664,17 @@ ViewManager.views.courses = function(){
         container.appendChild(list);
     };
 
-    renderSection("Live Courses", live);
-    renderSection("Future Courses", future);
-    renderSection("Completed Courses", offline);
+    renderSection("LIVE Courses", liveCourses);
+    renderSection("Future Courses", futureCourses);
+    renderSection("Completed Courses", completedCourses);
 
-    if (!live.length && !future.length && !offline.length) {
-        container.innerHTML = '<div class="empty-state"><p>No courses available</p></div>';
+    if(liveCourses.length === 0 && futureCourses.length === 0 && completedCourses.length === 0){
+        container.innerHTML = `
+            <div class="empty-state">
+                <div class="empty-icon"><i class="fas fa-graduation-cap"></i></div>
+                <h3>No Courses Available</h3>
+            </div>
+        `;
     }
 };
 
@@ -1910,45 +1852,9 @@ const AppActions = {
         const markBtn = document.getElementById('markCompleteBtn');
         const favBtn = document.getElementById('addFavBtn');
         
-        // Dynamically create iframe to optimize performance
-        videoContainer.innerHTML = ''; // Clear any existing content
-        
-        // 1. Load YouTube API if missing
-        if (!window.YT) {
-            const tag = document.createElement('script');
-            tag.src = "https://www.youtube.com/iframe_api";
-            const firstScriptTag = document.getElementsByTagName('script')[0];
-            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-        }
-
-        const iframe = document.createElement('iframe');
-        iframe.id = 'epata-video-frame';
-        // 2. Enable JS API
-        iframe.src = `https://www.youtube.com/embed/${lesson.videoId}?autoplay=1&rel=0&enablejsapi=1`;
-        iframe.setAttribute('frameborder', '0');
-        iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
-        iframe.setAttribute('allowfullscreen', '');
-        videoContainer.appendChild(iframe);
-        
-        // 3. Initialize Player Wrapper
-        const initPlayer = () => {
-            if (!document.getElementById('epata-video-frame')) return; // Safety check if modal closed
-            this.player = new YT.Player('epata-video-frame', {
-                events: {
-                    'onReady': (e) => {
-                        this.player = e.target;
-                        this.hasResumed = false;
-                    },
-                    'onStateChange': (e) => this.handlePlayerState(e, lesson.id)
-                }
-            });
-        };
-
-        if (window.YT && window.YT.Player) {
-            initPlayer();
-        } else {
-            window.onYouTubeIframeAPIReady = initPlayer;
-        }
+        // Use YouTube Manager to load video with resume capability
+        videoContainer.innerHTML = '<div id="yt-player"></div>';
+        YouTubeManager.loadVideo(lesson.videoId, 'yt-player');
         
         title.textContent = lesson.title;
         playlist.innerHTML = `<i class="fas fa-list"></i> ${Utils.formatPlaylistName(lesson.playlist)}`;
@@ -2031,15 +1937,11 @@ const AppActions = {
     },
 
     closeVideoModal() {
-        this.stopSaveTimer(); // Stop saving
-        if (this.player && typeof this.player.destroy === 'function') {
-            this.player.destroy(); // Cleanup player
-            this.player = null;
-        }
-
         const modal = document.getElementById('videoModal');
         const videoContainer = document.getElementById('videoContainer');
         
+        YouTubeManager.cleanup(); // Save progress and destroy player
+
         // Remove iframe from DOM to stop video and free memory
         if (videoContainer) videoContainer.innerHTML = '';
         
@@ -2069,59 +1971,6 @@ const AppActions = {
             modal.classList.remove('active');
             if (frame) frame.src = ''; // Clear src to stop loading
             document.body.style.overflow = '';
-        }
-    },
-
-    // ============================================
-    // PLAYER HELPERS
-    // ============================================
-    resumeVideoPosition(lessonId) {
-        const pos = DataManager.getVideoPosition(lessonId);
-        if (pos > 10) {
-            setTimeout(() => {
-                if (this.player && typeof this.player.seekTo === 'function') {
-                    this.player.seekTo(pos, true);
-                    Utils.showToast('Resumed from ' + Math.floor(pos/60) + ':' + ('0'+Math.floor(pos%60)).slice(-2));
-                }
-            }, 1000);
-        }
-    },
-
-    handlePlayerState(event, lessonId) {
-        if (event.data === YT.PlayerState.PLAYING) {
-            if (!this.hasResumed) {
-                this.resumeVideoPosition(lessonId);
-                this.hasResumed = true;
-            }
-            this.startSaveTimer(lessonId);
-        } else {
-            this.stopSaveTimer();
-        }
-        if (event.data === YT.PlayerState.ENDED) {
-            DataManager.removeVideoPosition(lessonId);
-        }
-    },
-
-    startSaveTimer(lessonId) {
-        this.stopSaveTimer();
-        this.saveInterval = setInterval(() => {
-            if (this.player && typeof this.player.getCurrentTime === 'function') {
-                const time = this.player.getCurrentTime();
-                const duration = this.player.getDuration();
-                // Reset rule: > 90% complete
-                if (duration > 0 && (time / duration) >= 0.9) {
-                    DataManager.removeVideoPosition(lessonId);
-                } else {
-                    DataManager.saveVideoPosition(lessonId, time);
-                }
-            }
-        }, 5000); // Save every 5s
-    },
-
-    stopSaveTimer() {
-        if (this.saveInterval) {
-            clearInterval(this.saveInterval);
-            this.saveInterval = null;
         }
     },
 
@@ -2236,12 +2085,6 @@ const UIControllers = {
         const iosBtn = document.getElementById('installIOSBtn');
         const iosInstructions = document.getElementById('iosInstructions');
         const alreadyInstalledMsg = document.getElementById('alreadyInstalledMsg');
-
-        if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone) {
-            console.log("Running as installed app");
-            if (installBtnDesktop) installBtnDesktop.style.display = 'none';
-            if (installBtnMobile) installBtnMobile.style.display = 'none';
-        }
 
         // Detect iOS (iPhone, iPad, iPod) including iPads with OS 13+ (MacIntel)
         const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent) || 
@@ -2633,8 +2476,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('themeToggleMobile').addEventListener('click', AppActions.toggleTheme);
     
     // Close video modal
-    document.getElementById('closeVideoModal').addEventListener('click', () => AppActions.closeVideoModal());
-    document.getElementById('modalBack').addEventListener('click', () => AppActions.closeVideoModal());
+    document.getElementById('closeVideoModal').addEventListener('click', AppActions.closeVideoModal);
+    document.getElementById('modalBack').addEventListener('click', AppActions.closeVideoModal);
 
     // Close Course Complete Modal
     document.getElementById('closeCourseComplete')?.addEventListener('click', () => {
@@ -2697,6 +2540,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Load data
     await loadCoursesMeta();
     const result = await DataManager.loadData();
+    
+    // Init YouTube API
+    YouTubeManager.initAPI();
+
     DataManager.loadDailyMessage(); // Load the daily message
     DataManager.loadResources(); // Load resources
     
@@ -2734,9 +2581,6 @@ if ('serviceWorker' in navigator) {
             .then(reg => {
                 // Check for updates on load
                 reg.update();
-                if (reg.waiting) {
-                    reg.waiting.postMessage({ type: "SKIP_WAITING" });
-                }
                 console.log("Service Worker registered");
             })
             .catch(err => console.error('SW Registration failed:', err));

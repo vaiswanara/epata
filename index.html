@@ -1,13 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#8a6a2f">
-    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="apple-mobile-web-app-title" content="e-PATA">
     <meta name="description" content="e-PATA - Learn Vedic Astrology through interactive YouTube lessons">
     
     <title>e-PATA - Vedic Astrology Learning</title>
@@ -15,8 +13,8 @@
     <!-- Open Graph / Social Sharing -->
     <meta property="og:title" content="e-PATA - Vedic Astrology Learning">
     <meta property="og:description" content="Master Vedic Astrology with interactive lessons, tools, and resources. Free and accessible to all.">
-    <meta property="og:image" content="https://vaiswanara.github.io/epata/icons/icon-512.png">
-    <meta property="og:url" content="https://vaiswanara.github.io/epata/">
+    <meta property="og:image" content="https://vaiswanara.com/epata/icons/icon-512.png">
+    <meta property="og:url" content="https://vaiswanara.com/epata/">
     <meta property="og:type" content="website">
     
     <!-- PWA Manifest -->
@@ -35,13 +33,22 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <link rel="stylesheet" href="style.css">
+
+    <!-- Google Analytics (TODO: Replace G-G2SVPZR3XZ with your actual Measurement ID) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-G2SVPZR3XZ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-G2SVPZR3XZ');
+    </script>
 </head>
 <body>
     <!-- Loading Screen -->
     <div id="loadingScreen" class="loading-screen">
         <div class="loading-content">
             <div class="logo-pulse">
-                <img src="logo.png" alt="e-PATA" class="loading-logo">
+                <img src="icons/logo.png" alt="e-PATA" class="loading-logo">
             </div>
             <div class="loading-text">Loading Vedic Wisdom...</div>
             <div class="loading-bar">
@@ -64,7 +71,7 @@
             <i class="fas fa-bars"></i>
         </button>
         <div class="header-brand">
-            <img src="logo.png" alt="e-PATA" class="header-logo">
+            <img src="icons/logo.png" alt="e-PATA" class="header-logo">
             <span class="header-title">e-PATA</span>
         </div>
         <button class="search-toggle" id="searchToggle">
@@ -97,7 +104,7 @@
     <!-- Sidebar (Desktop & Tablet) -->
     <nav class="sidebar" id="sidebar">
         <div class="sidebar-header">
-            <img src="logo.png" alt="e-PATA Logo" class="sidebar-logo">
+            <img src="icons/logo.png" alt="e-PATA Logo" class="sidebar-logo">
             <h2 class="sidebar-title">e-PATA</h2>
             <p class="sidebar-subtitle">Learn Vedic Astrology</p>
         </div>
@@ -151,8 +158,12 @@
                     <span>About</span>
                 </li>
                 <li class="nav-item nav-item-donate" data-view="donate">
-                    <i class="fas fa-circle-dollar-to-slot"></i>
+                    <i class="fas fa-hands-helping"></i>
                     <span>Donate</span>
+                </li>
+                <li class="nav-item" data-view="feedback">
+                    <i class="fas fa-comment-dots"></i>
+                    <span>Feedback</span>
                 </li>
             </ul>
         </div>
@@ -187,7 +198,7 @@
     <!-- Mobile Drawer Menu -->
     <div class="mobile-drawer" id="mobileDrawer">
         <div class="drawer-header">
-            <img src="logo.png" alt="e-PATA" class="drawer-logo">
+            <img src="icons/logo.png" alt="e-PATA" class="drawer-logo">
             <div class="drawer-info">
                 <h3>e-PATA</h3>
                 <p>Vedic Astrology Learning</p>
@@ -246,8 +257,12 @@
                         <span>About</span>
                     </li>
                     <li class="drawer-item drawer-item-donate" data-view="donate">
-                        <i class="fas fa-circle-dollar-to-slot"></i>
+                        <i class="fas fa-hands-helping"></i>
                         <span>Donate</span>
+                    </li>
+                    <li class="drawer-item" data-view="feedback">
+                        <i class="fas fa-comment-dots"></i>
+                        <span>Feedback</span>
                     </li>
                 </ul>
             </div>
@@ -302,12 +317,6 @@
 
         <!-- Dashboard View -->
         <div class="view" id="dashboardView">
-            <div id="configErrorBox"
-                 style="display:none; margin:16px; padding:14px; border-radius:12px;
-                        background:#fff3cd; color:#856404; border:1px solid #ffeeba;
-                        font-size:14px;">
-              ⚠ Server syncing… please reopen the app after some time.
-            </div>
             <!-- Daily Message (Dynamic) -->
             <div class="daily-message-card" id="dailyMessageCard" style="display: none;">
                 <div class="daily-message-icon">
@@ -574,7 +583,7 @@
         <div class="view hidden" id="aboutView">
             <div class="about-hero">
                 <div class="about-profile-img">
-                    <i class="fas fa-user-tie"></i>
+                    <img src="icons/srik.png" alt="Srikanth Dharmavaram" style="width:100%; height:100%; border-radius:50%; object-fit:cover;" onerror="this.onerror=null; this.src='icons/logo.png';">
                 </div>
                 <h2>Srikanth Dharmavaram</h2>
                 <p class="subtitle">(Vaiswanara)</p>
@@ -658,7 +667,7 @@
                 <div class="optional-support-wrapper">
                     <div class="support-reveal-content">
                         <div class="support-qr-container">
-                            <img src="donate.png" alt="Voluntary Support Details" class="support-qr-image">
+                            <img src="icons/donate.png" alt="Voluntary Support Details" class="support-qr-image">
                         </div>
                     </div>
                 </div>
@@ -814,6 +823,18 @@
                             <p>మీవంతు సేవ చేయాలనే సంకల్పం కలిగితే దానిని కృతజ్ఞతతో స్వీకరించబడుతుంది. సేవ అందించకపోయినా పర్వాలేదు, నేర్చుకోవడం కొనసాగించవచ్చు. మీ నిజాయితీ గల అధ్యయనమే విలువైనది.</p>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Feedback View -->
+        <div class="view hidden" id="feedbackView">
+            <div style="height: calc(100vh - 140px); width: 100%; background: var(--bg-card);">
+                <iframe id="feedbackFrame" src="" style="width:100%; height:100%; border:none;" loading="lazy"></iframe>
+                <div id="feedbackPlaceholder" style="display:none; text-align:center; padding:40px;">
+                    <div class="empty-icon"><i class="fas fa-comment-alt"></i></div>
+                    <h3>We Value Your Feedback</h3>
+                    <p>Please configure the feedback form URL in config.json</p>
                 </div>
             </div>
         </div>

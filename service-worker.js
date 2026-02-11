@@ -1,16 +1,21 @@
-const CACHE_VERSION = "epata-v11";
+const CACHE_VERSION = "epata-v24";
 const STATIC_CACHE = "static-" + CACHE_VERSION;
 const DYNAMIC_CACHE = "dynamic-" + CACHE_VERSION;
 
 const STATIC_FILES = [
   "./",
-  "./index.html",
   "./style.css",
   "./script.js",
   "./config.json",
-  "./manifest.json",
+  "./data/lessons_archive.json",
+  "./data/app_urls.json",
+  "./data/courses.json",
+  "./data/quiz.json",
   "./icons/icon-192.png",
-  "./icons/icon-512.png"
+  "./icons/icon-512.png",
+  "./icons/logo.png",
+  "./icons/srik.png",
+  "./icons/donate.png"
 ];
 
 /* INSTALL */
@@ -40,47 +45,57 @@ self.addEventListener("activate", event => {
 
 /* FETCH */
 self.addEventListener("fetch", event => {
+    const { request } = event;
+    const url = new URL(request.url);
 
-  // 1️⃣ HTML pages → NETWORK FIRST (MOST IMPORTANT FIX)
-  if (event.request.mode === "navigate") {
+    // Strategy 1: Navigation requests (HTML)
+    // Network first, fallback to cache. Ensures users get the latest app shell.
+    if (request.mode === 'navigate') {
+        event.respondWith(
+            fetch(request).catch(() => caches.match('./'))
+        );
+        return;
+    }
+
+    // Strategy 2: Data files (local JSON)
+    // Stale-While-Revalidate. Serve from cache for speed, update in background.
+    if (url.pathname.endsWith('.json') && !url.hostname.includes('github')) {
+        event.respondWith(
+            caches.open(STATIC_CACHE).then(cache => {
+                return cache.match(request).then(cachedResponse => {
+                    const fetchPromise = fetch(request).then(networkResponse => {
+                        cache.put(request, networkResponse.clone());
+                        return networkResponse;
+                    });
+                    return cachedResponse || fetchPromise;
+                });
+            })
+        );
+        return;
+    }
+
+    // Strategy 3: Dynamic content (Google Sheets, GitHub, Analytics)
+    // Network only. Always fetch the latest version.
+    if (url.hostname.includes('google.com') || 
+        url.hostname.includes('githubusercontent') ||
+        url.hostname.includes('googletagmanager') || 
+        url.hostname.includes('google-analytics')) {
+        event.respondWith(fetch(request));
+        return;
+    }
+
+    // Strategy 4: Static assets (CSS, JS, images)
+    // Cache first, fallback to network. These files don't change often.
     event.respondWith(
-      fetch(event.request)
-        .then(res => {
-          if (!res.ok || res.status !== 200) return res;
-          return caches.open(DYNAMIC_CACHE).then(cache => {
-            cache.put(event.request, res.clone());
-            return res;
-          });
+        caches.match(request).then(response => {
+            return response || fetch(request).then(fetchResponse => {
+                return caches.open(DYNAMIC_CACHE).then(cache => {
+                    cache.put(request, fetchResponse.clone());
+                    return fetchResponse;
+                });
+            });
         })
-        .catch(() => caches.match("./index.html"))
     );
-    return;
-  }
-
-  const url = new URL(event.request.url);
-
-  // 🚫 NEVER CACHE: config.json & Google Sheets (Always Network)
-  if (
-    url.pathname.endsWith("config.json") || 
-    url.hostname.includes("docs.google.com") || 
-    url.hostname.includes("googleusercontent.com")
-  ) {
-    event.respondWith(fetch(event.request));
-    return;
-  }
-
-  // 2️⃣ CSS/JS/Images → CACHE FIRST
-  event.respondWith(
-    caches.match(event.request)
-      .then(cacheRes => {
-        return cacheRes || fetch(event.request).then(fetchRes => {
-          return caches.open(DYNAMIC_CACHE).then(cache => {
-            cache.put(event.request, fetchRes.clone());
-            return fetchRes;
-          });
-        });
-      })
-  );
 });
 
 self.addEventListener("message", event => {

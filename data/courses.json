@@ -1,0 +1,64 @@
+{
+  "courses": [
+    {
+      "id": "jyotisha_kn_2022",
+      "name": "Jyotisha 2022",
+      "playlist": "JYOTISHA(Kannada)-2022",
+      "description": "Foundation course in Vedic Astrology",
+      "course_type": "Videos",
+      "start_date": "21-08-2022",
+      "end_date": "29-06-2025",
+      "course_status": "OFF"
+    },
+    {
+      "id": "jyotisha_te_2024",
+      "name": "Prashna 2025",
+      "playlist": "Prashna(ಕನ್ನಡ)-2025",
+      "description": "Horary Astrology",
+      "course_type": "Videos",
+      "start_date": "05-07-2025",
+      "end_date": "22-11-2025",
+      "course_status": "OFF"
+    },
+    {
+      "id": "psychology_kn_2023",
+      "name": "Psychology",
+      "playlist": "MANA:SHASTRA(ಕನ್ನಡ)",
+      "description": "Psychology relevant to Astrology",
+      "course_type": "Videos",
+      "start_date": "08-07-2023",
+      "end_date": "31-12-2027",
+      "course_status": "ON"
+    },
+    {
+      "id": "jyotisha_kn_2025",
+      "name": "Jyotisha Kannada",
+      "playlist": "JYOTISHA(ಕನ್ನಡ)-2025",
+      "description": "Foundation course in Vedic Astrology",
+      "course_type": "Lessons",
+      "start_date": "18-01-2025",
+      "end_date": "31-12-2027",
+      "course_status": "ON"
+    },
+    {
+      "id": "jyotisha_te_2025",
+      "name": "Jyotisham Telugu",
+      "playlist": "JYOTISHA(తెలుగు)-2025",
+      "description": "Foundation course in Vedic Astrology",
+      "course_type": "Lessons",
+      "start_date": "19-01-2025",
+      "end_date": "31-12-2027",
+      "course_status": "ON"
+    },
+    {
+      "id": "jyotisha_kn_2026",
+      "name": "Kannada 2026",
+      "playlist": "JYOTISHA(ಕನ್ನಡ)-2026",
+      "description": "Foundation course in Vedic Astrology",
+      "course_type": "Lessons",
+      "start_date": "01-03-2026",
+      "end_date": "01-01-2027",
+      "course_status": "ON"
+    }
+  ]
+}
