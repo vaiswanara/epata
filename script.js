@@ -771,14 +771,16 @@ const UIRenderer = {
             // STUDY MODE → only enrolled course
             const course = AppState.coursesMeta.find(c => c.id === AppState.enrolledCourse);
 
-            if(course){
+            if(course && course.course_type === 'Lessons'){
                 syllabusLessons = AppState.lessons.filter(l => l.playlistId === course.playlist);
             }
 
         }else{
 
             // CURRICULUM MODE → all courses
-            const coursePlaylists = AppState.coursesMeta.map(c => c.playlist);
+            const coursePlaylists = AppState.coursesMeta
+                .filter(c => c.course_type === 'Lessons')
+                .map(c => c.playlist);
             syllabusLessons = AppState.lessons.filter(l => coursePlaylists.includes(l.playlistId));
 
         }
@@ -860,6 +862,7 @@ const UIRenderer = {
         
         container.querySelectorAll('.playlist-card').forEach(card => {
             card.addEventListener('click', () => {
+                AppState.selectedCourse = card.dataset.playlist;
                 AppState.filters.playlist = card.dataset.playlist;
                 document.getElementById('playlistFilter').value = card.dataset.playlist;
                 ViewManager.switchView('all');
@@ -1035,6 +1038,7 @@ const UIRenderer = {
         
         container.querySelectorAll('.drawer-item').forEach(item => {
             item.addEventListener('click', () => {
+                AppState.selectedCourse = item.dataset.playlist;
                 AppState.filters.playlist = item.dataset.playlist;
                 document.getElementById('playlistFilter').value = item.dataset.playlist;
                 ViewManager.switchView('all');
