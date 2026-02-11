@@ -1,8 +1,8 @@
 {
-  "quiz": "data/quiz.json",
-  "updates": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ6RStlHwy-jhwrGCg7JUrE8I3MZxukUqBGqdUxGywRof4WyItHEJZ0FP93GeB_ktBAXte3avGhYEVw/pub?gid=846401857&single=true&output=csv",
-  "welcome": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ6RStlHwy-jhwrGCg7JUrE8I3MZxukUqBGqdUxGywRof4WyItHEJZ0FP93GeB_ktBAXte3avGhYEVw/pub?gid=297150943&single=true&output=csv",
-  "app_urls": "data/app_urls.json",
+  "quiz": "https://raw.githubusercontent.com/vaiswanara/db/refs/heads/main/quiz.json",
+  "updates": "https://raw.githubusercontent.com/vaiswanara/db/main/updates.json",
+  "welcome": "https://raw.githubusercontent.com/vaiswanara/db/main/welcome.json",
+  "app_urls": "https://raw.githubusercontent.com/vaiswanara/db/main/app_urls.json",
   "lessons_live": "https://raw.githubusercontent.com/vaiswanara/db/main/lessons_live.json",
   "lessons_archive": "data/lessons_archive.json",
   "courses": "data/courses.json",

@@ -422,33 +422,23 @@ const DataManager = {
         if (!APP_CONFIG) return;
         const url = APP_CONFIG.welcome;
         try {
-            // Add timestamp to avoid caching
-            const response = await fetch(url + '&t=' + Date.now());
+            // Network First strategy handles caching (removed timestamp)
+            const response = await fetch(url);
             if (!response.ok) return;
-            const text = await response.text();
-            const rows = Utils.parseCSV(text);
+            const data = await response.json();
             
-            if (rows.length < 2) return;
-            
-            // Normalize headers to find columns
-            const headers = rows[0].map(h => h.toLowerCase().trim());
-            const dateIdx = headers.indexOf('date');
-            const msgIdx = headers.indexOf('message');
-            
-            if (dateIdx === -1 || msgIdx === -1) return;
+            if (!Array.isArray(data) || data.length === 0) return;
             
             let latestDate = -1;
             let latestMsg = null;
             let latestDateStr = '';
 
-            for (let i = 1; i < rows.length; i++) {
-                const row = rows[i];
-                if (row.length <= Math.max(dateIdx, msgIdx)) continue;
+            data.forEach(item => {
+                // Support both Title Case (from JSON) and lowercase keys
+                const dateStr = (item.Date || item.date || '').trim();
+                const msg = (item.Message || item.message || '').trim();
                 
-                const dateStr = row[dateIdx].trim();
-                const msg = row[msgIdx].trim();
-                
-                if (!dateStr || !msg) continue;
+                if (!dateStr || !msg) return;
                 
                 // Try parsing date (Handle DD-MM-YYYY or standard formats)
                 let timestamp = Date.parse(dateStr);
@@ -464,7 +454,7 @@ const DataManager = {
                     latestMsg = msg;
                     latestDateStr = dateStr;
                 }
-            }
+            });
             
             if (latestMsg) {
                 UIRenderer.renderDailyMessage(latestMsg, latestDateStr);
@@ -646,25 +636,21 @@ const DataManager = {
         container.innerHTML = '<p class="loading-text">Loading updates...</p>';
 
         try {
-            const res = await fetch(APP_CONFIG.updates + "&t=" + Date.now());
-            const text = await res.text();
-
-            // Use Utils.parseCSV for robust handling of quotes/commas
-            const rows = Utils.parseCSV(text).slice(1); // Skip header
+            const res = await fetch(APP_CONFIG.updates);
+            const data = await res.json();
 
             let html = "";
             const today = new Date();
 
-            rows.forEach(cols => {
-                if (cols.length < 5) return;
-
-                const status = cols[0]?.trim();
-                // const batch = cols[1]?.trim();
-                const date = cols[2]?.trim();
-                const title = cols[3]?.trim();
-                const message = cols[4]?.trim();
-                const link = cols[5]?.trim();
-                const expiry = cols[6]?.trim();
+            if (Array.isArray(data)) {
+                data.forEach(item => {
+                    // Support both Title Case and lowercase keys
+                    const status = (item.Status || item.status || '').trim();
+                    const date = (item.Date || item.date || '').trim();
+                    const title = (item.Title || item.title || '').trim();
+                    const message = (item.Message || item.message || '').trim();
+                    const link = (item.Link || item.link || '').trim();
+                    const expiry = (item.Expiry || item.expiry || '').trim();
 
                 if (status !== "ON") return;
 
@@ -681,7 +667,8 @@ const DataManager = {
                     ${link ? `<a class="update-link" href="${link}" target="_blank">Open Link <i class="fas fa-external-link-alt"></i></a>` : ``}
                 </div>
                 `;
-            });
+                });
+            }
 
             container.innerHTML = html || '<div class="empty-state"><p>No current updates.</p></div>';
 
