@@ -1,10 +1,27 @@
 {
-  "quiz": "https://raw.githubusercontent.com/vaiswanara/db/refs/heads/main/quiz.json",
-  "updates": "https://raw.githubusercontent.com/vaiswanara/db/main/updates.json",
-  "welcome": "https://raw.githubusercontent.com/vaiswanara/db/main/welcome.json",
-  "app_urls": "https://raw.githubusercontent.com/vaiswanara/db/main/app_urls.json",
-  "lessons_live": "https://raw.githubusercontent.com/vaiswanara/db/main/lessons_live.json",
+  "quiz": "https://raw.githubusercontent.com/vaiswanara/epata-db/main/quiz.json",
+  "updates": "https://raw.githubusercontent.com/vaiswanara/epata-db/main/updates.json",
+  "welcome": "https://raw.githubusercontent.com/vaiswanara/epata-db/main/welcome.json",
+  "app_urls": "https://raw.githubusercontent.com/vaiswanara/epata-db/main/app_urls.json",
+  "lessons_live": "https://raw.githubusercontent.com/vaiswanara/epata-db/main/lessons_live.json",
   "lessons_archive": "data/lessons_archive.json",
   "courses": "data/courses.json",
-  "feedback": "https://docs.google.com/forms/d/e/1FAIpQLSeBsxZiI3QLcHo-snc_U713dAtinGtjlHFYKB4CCEVhu8ZFmg/viewform?embedded=true"
+  "feedback": "https://docs.google.com/forms/d/e/1FAIpQLSeBsxZiI3QLcHo-snc_U713dAtinGtjlHFYKB4CCEVhu8ZFmg/viewform?embedded=true",
+   
+  "features": {
+    "dashboard": "ON",
+    "updates": "ON",
+    "courses": "ON",
+    "recent": "ON",
+    "favorites": "ON",
+    "all": "ON",
+    "progress": "ON",
+    "quiz": "ON",
+    "jyotisha": "ON",
+    "donate": "ON",
+    "about": "ON",
+    "resources": "ON",
+    "feedback": "ON",
+    "install": "ON"
+  }
 }

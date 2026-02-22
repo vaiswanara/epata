@@ -124,10 +124,6 @@
                     <i class="fas fa-graduation-cap"></i>
                     <span>Courses</span>
                 </li>
-                <li class="nav-item" data-view="all">
-                    <i class="fas fa-play-circle"></i>
-                    <span>All Videos</span>
-                </li>
                 <li class="nav-item" data-view="recent">
                     <i class="fas fa-clock"></i>
                     <span>Recent</span>
@@ -137,6 +133,10 @@
                     <span>Favorites</span>
                     <span class="badge" id="favCount">0</span>
                 </li>
+                <li class="nav-item" data-view="all">
+                    <i class="fas fa-play-circle"></i>
+                    <span>All Videos</span>
+                </li>
                 <li class="nav-item" data-view="progress">
                     <i class="fas fa-chart-line"></i>
                     <span>Progress</span>
@@ -145,25 +145,29 @@
                     <i class="fas fa-brain"></i>
                     <span>Quiz</span>
                 </li>
-                <li class="nav-item" data-view="resources">
-                    <i class="fas fa-tools"></i>
-                    <span>Resources</span>
-                </li>
-                <li class="nav-item" id="installAppBtnDesktop">
-                    <i class="fas fa-download"></i>
-                    <span>Install App</span>
-                </li>
-                <li class="nav-item" data-view="about">
-                    <i class="fas fa-info-circle"></i>
-                    <span>About</span>
+                <li class="nav-item" data-view="jyotisha">
+                    <i class="fas fa-sun"></i>
+                    <span>Jyotisha</span>
                 </li>
                 <li class="nav-item nav-item-donate" data-view="donate">
                     <i class="fas fa-hands-helping"></i>
                     <span>Donate</span>
                 </li>
+                <li class="nav-item" data-view="about">
+                    <i class="fas fa-info-circle"></i>
+                    <span>About</span>
+                </li>
+                <li class="nav-item" data-view="resources">
+                    <i class="fas fa-tools"></i>
+                    <span>Resources</span>
+                </li>
                 <li class="nav-item" data-view="feedback">
                     <i class="fas fa-comment-dots"></i>
                     <span>Feedback</span>
+                </li>
+                <li class="nav-item" id="installAppBtnDesktop">
+                    <i class="fas fa-download"></i>
+                    <span>Install App</span>
                 </li>
             </ul>
         </div>
@@ -184,6 +188,10 @@
                 <i class="fas fa-upload"></i>
                 <span>Restore Data</span>
             </button>
+            <a href="admin-epata/index.html" class="home-link">
+                <i class="fas fa-user-shield"></i>
+                <span>Admin Editor</span>
+            </a>
             <a href="https://vaiswanara.com" target="_blank" rel="noopener" class="home-link">
                 <i class="fas fa-external-link-alt"></i>
                 <span>vaiswanara.com</span>
@@ -223,10 +231,6 @@
                         <i class="fas fa-graduation-cap"></i>
                         <span>Courses</span>
                     </li>
-                    <li class="drawer-item" data-view="all">
-                        <i class="fas fa-play-circle"></i>
-                        <span>All Videos</span>
-                    </li>
                     <li class="drawer-item" data-view="recent">
                         <i class="fas fa-clock"></i>
                         <span>Recently Watched</span>
@@ -236,6 +240,10 @@
                         <span>Favorites</span>
                         <span class="drawer-badge" id="drawerFavCount">0</span>
                     </li>
+                    <li class="drawer-item" data-view="all">
+                        <i class="fas fa-play-circle"></i>
+                        <span>All Videos</span>
+                    </li>
                     <li class="drawer-item" data-view="progress">
                         <i class="fas fa-chart-line"></i>
                         <span>My Progress</span>
@@ -244,25 +252,29 @@
                         <i class="fas fa-brain"></i>
                         <span>Quiz</span>
                     </li>
-                    <li class="drawer-item" data-view="resources">
-                        <i class="fas fa-tools"></i>
-                        <span>Resources</span>
-                    </li>
-                    <li class="drawer-item" id="installAppBtnMobile">
-                        <i class="fas fa-download"></i>
-                        <span>Install App</span>
-                    </li>
-                    <li class="drawer-item" data-view="about">
-                        <i class="fas fa-info-circle"></i>
-                        <span>About</span>
+                    <li class="drawer-item" data-view="jyotisha">
+                        <i class="fas fa-sun"></i>
+                        <span>Jyotisha</span>
                     </li>
                     <li class="drawer-item drawer-item-donate" data-view="donate">
                         <i class="fas fa-hands-helping"></i>
                         <span>Donate</span>
                     </li>
+                    <li class="drawer-item" data-view="about">
+                        <i class="fas fa-info-circle"></i>
+                        <span>About</span>
+                    </li>
+                    <li class="drawer-item" data-view="resources">
+                        <i class="fas fa-tools"></i>
+                        <span>Resources</span>
+                    </li>
                     <li class="drawer-item" data-view="feedback">
                         <i class="fas fa-comment-dots"></i>
                         <span>Feedback</span>
+                    </li>
+                    <li class="drawer-item" id="installAppBtnMobile">
+                        <i class="fas fa-download"></i>
+                        <span>Install App</span>
                     </li>
                 </ul>
             </div>
@@ -281,6 +293,10 @@
                     <i class="fas fa-upload"></i>
                     <span>Restore Data</span>
                 </button>
+                <a href="admin-epata/index.html" class="drawer-link">
+                    <i class="fas fa-user-shield"></i>
+                    Admin Editor
+                </a>
                 <a href="https://vaiswanara.com" target="_blank" rel="noopener" class="drawer-link">
                     <i class="fas fa-external-link-alt"></i>
                     Visit vaiswanara.com
@@ -462,6 +478,30 @@
 
         <!-- Courses View (List of Courses) -->
         <div class="view hidden" id="coursesView"></div>
+
+        <!-- Jyotisha View -->
+        <div class="view hidden" id="jyotishaView">
+            <div class="page-header" style="padding: 20px 16px 0; display: flex; justify-content: space-between; align-items: center;">
+                <h2 style="font-size: 20px; font-weight: 700;">Jyotisha Profiles</h2>
+                <button id="addProfileBtn" style="background: var(--primary); color: white; border: none; padding: 8px 16px; border-radius: 8px; font-size: 14px; cursor: pointer;">
+                    <i class="fas fa-plus"></i> Add
+                </button>
+            </div>
+            
+            <div style="padding: 0 16px 16px;">
+                <select id="profileSelect" style="width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg-card); color: var(--text); font-size: 14px;">
+                    <option value="">Select Profile to View Chart</option>
+                </select>
+            </div>
+
+            <div id="chartContainer" style="padding: 0 16px 24px; display: none;">
+                <!-- South Indian Chart will be rendered here -->
+            </div>
+            
+            <div id="jyotishaProfilesList" class="lessons-container" style="padding-top: 20px;">
+                <!-- Profiles populated by JS -->
+            </div>
+        </div>
 
         <!-- All Videos View (List of Videos) -->
         <div class="view hidden" id="allView">
@@ -1078,6 +1118,44 @@
         </div>
     </div>
 
+    <!-- Jyotisha Profile Modal -->
+    <div class="modal" id="jyotishaModal">
+        <div class="modal-content" style="height: auto; max-height: 90vh; border-radius: 12px;">
+            <div class="modal-header">
+                <h3 id="jyotishaModalTitle">Add Profile</h3>
+                <button class="modal-close" id="closeJyotishaModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div style="padding: 20px; overflow-y: auto;">
+                <div style="margin-bottom: 16px;">
+                    <label style="display: block; font-size: 13px; color: var(--text-secondary); margin-bottom: 6px;">Name</label>
+                    <input type="text" id="jName" placeholder="Enter unique name" style="width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--text);">
+                </div>
+                
+                <div style="margin-bottom: 16px;">
+                    <label style="display: block; font-size: 13px; color: var(--text-secondary); margin-bottom: 6px;">Date of Birth</label>
+                    <input type="date" id="jDob" style="width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--text);">
+                </div>
+
+                <div style="margin-bottom: 16px;">
+                    <label style="display: block; font-size: 13px; color: var(--text-secondary); margin-bottom: 6px;">Natal Planets (Lg, Su, Ch, Ku, Bu, Gu, Sk, Sa, Ra, Ke)</label>
+                    <input type="text" id="jPlanets" placeholder="e.g. 2,11,8,6,10,7,10,6,3,9" style="width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--text);">
+                </div>
+
+                <div style="margin-bottom: 24px;">
+                    <label style="display: block; font-size: 13px; color: var(--text-secondary); margin-bottom: 6px;">Moon Longitude (Degree & Minutes)</label>
+                    <div style="display: flex; gap: 10px;">
+                        <input type="number" id="jMoonDeg" placeholder="Deg" style="flex: 1; padding: 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--text);">
+                        <input type="number" id="jMoonMin" placeholder="Min" style="flex: 1; padding: 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--text);">
+                    </div>
+                </div>
+
+                <button id="saveProfileBtn" style="width: 100%; padding: 14px; background: var(--primary); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">Save Profile</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Toast Notification -->
     <div class="toast" id="toast">
         <i class="fas fa-check-circle"></i>
@@ -1094,6 +1172,7 @@
     <input type="file" id="restoreInput" accept=".json" style="display: none;">
 
     <script src="script.js"></script>
+    <script src="jyotisha.js"></script>
 
     
 <div id="courseCompleteModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:9999; align-items:center; justify-content:center;">

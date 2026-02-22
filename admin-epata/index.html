@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>e-PATA Admin Editor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./admin-panel.css">
+</head>
+<body>
+  <div class="admin-app">
+    <aside class="admin-sidebar">
+      <div class="admin-brand">
+        <h1>e-PATA Admin</h1>
+        <p>JSON Editor Panel</p>
+      </div>
+
+      <div class="admin-section-title">Data Files</div>
+      <div id="datasetMenu" class="admin-dataset-menu"></div>
+
+      <div class="admin-sidebar-actions">
+        <button id="reloadAllBtn" class="admin-btn secondary" type="button">Reload From Source</button>
+        <button id="exportAllBtn" class="admin-btn warn" type="button">Export All (ZIP)</button>
+        <button id="exportAllCsvBtn" class="admin-btn muted" type="button">Export All CSV (ZIP)</button>
+        <button id="exportAllXlsxBtn" class="admin-btn muted" type="button">Export All (XLSX)</button>
+        <a class="admin-btn muted home-link" href="../index.html">Back To App</a>
+      </div>
+    </aside>
+
+    <main class="admin-main">
+      <header class="admin-header">
+        <div>
+          <h2 id="datasetTitle">Loading...</h2>
+          <p id="datasetPath" class="admin-header-sub"></p>
+        </div>
+        <div id="dirtyTag" class="admin-dirty-pill" style="display:none;">Unsaved draft changes</div>
+      </header>
+
+      <section class="admin-toolbar">
+        <div class="admin-search-wrap">
+          <input id="searchInput" type="text" placeholder="Search rows in current file...">
+        </div>
+        <div class="admin-toolbar-actions">
+          <button id="addRowBtn" class="admin-btn secondary" type="button">Add Row</button>
+          <button id="cloneRowBtn" class="admin-btn muted" type="button">Duplicate</button>
+          <button id="deleteRowBtn" class="admin-btn danger" type="button">Delete</button>
+          <button id="saveRowBtn" class="admin-btn primary" type="button">Save Row</button>
+        </div>
+      </section>
+
+      <section class="admin-grid-layout">
+        <div class="admin-panel">
+          <div class="admin-panel-head">
+            <h3>Rows</h3>
+            <span id="rowsCount" class="admin-pill">0</span>
+          </div>
+          <div id="rowList" class="admin-row-list"></div>
+        </div>
+
+        <div class="admin-panel">
+          <div class="admin-panel-head">
+            <h3>Row Editor</h3>
+            <span id="selectedKey" class="admin-pill">none</span>
+          </div>
+          <div class="admin-field">
+            <label id="rowFormLabel">Row data</label>
+            <div id="rowForm"></div>
+            <textarea id="rowJsonEditor" class="admin-json-editor" spellcheck="false" style="display:none;"></textarea>
+          </div>
+          <div id="rowError" class="admin-status error" style="display:none;"></div>
+        </div>
+      </section>
+
+      <section class="admin-section">
+        <details open>
+          <summary class="admin-collapsible-summary">Import + Export Current File</summary>
+          <div class="admin-grid" style="margin-top:10px;">
+            <div class="admin-field">
+              <label for="importFile">Import JSON / CSV / XLSX File</label>
+              <input id="importFile" type="file" accept=".json,.csv,.xlsx,.xls,application/json,text/csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel">
+            </div>
+            <div class="admin-field">
+              <label for="importMode">Conflict Strategy</label>
+              <select id="importMode">
+                <option value="merge">Merge (Recommended)</option>
+                <option value="replace">Replace Existing</option>
+                <option value="skip">Skip Existing</option>
+              </select>
+            </div>
+          </div>
+          <div class="admin-actions-row">
+            <button id="previewImportBtn" class="admin-btn secondary" type="button">Preview Import</button>
+            <button id="applyImportBtn" class="admin-btn primary" type="button">Apply Import</button>
+            <button id="clearImportBtn" class="admin-btn warn" type="button">Clear Import</button>
+            <button id="exportCurrentBtn" class="admin-btn muted" type="button">Export Current JSON</button>
+            <button id="exportCurrentCsvBtn" class="admin-btn muted" type="button">Export Current CSV</button>
+          </div>
+          <div id="importSummary" class="admin-note">Upload a JSON, CSV or XLSX file and preview impact before applying.</div>
+          <pre id="importPreviewBox" class="admin-import-preview-box"></pre>
+        </details>
+      </section>
+
+      <section class="admin-section">
+        <div class="admin-actions-row">
+          <button id="validateBtn" class="admin-btn secondary" type="button">Run Validation</button>
+          <button id="discardBtn" class="admin-btn warn" type="button">Discard Unsaved Changes</button>
+        </div>
+        <div id="statusLine" class="admin-status"></div>
+        <div id="validationList" class="admin-validation-list"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+  <!-- SheetJS for XLSX/CSV import-export -->
+  <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+  <script src="./admin-panel.js"></script>
+</body>
+</html>

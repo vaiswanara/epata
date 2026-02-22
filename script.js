@@ -13,9 +13,41 @@ async function loadAppConfig() {
         const res = await fetch('config.json');
         APP_CONFIG = await res.json();
         console.log("CONFIG LOADED", APP_CONFIG);
+        applyFeatureToggles();
     } catch (e) {
         console.error("Failed to load config.json", e);
     }
+}
+
+function applyFeatureToggles() {
+    if (!APP_CONFIG || !APP_CONFIG.features) return;
+    
+    const features = APP_CONFIG.features;
+    const toggle = (selector, isVisible) => {
+        document.querySelectorAll(selector).forEach(el => {
+            el.style.display = isVisible ? '' : 'none';
+        });
+    };
+
+    Object.keys(features).forEach(key => {
+        const status = features[key];
+        const isOn = String(status).toUpperCase() === 'ON' || status === true;
+        
+        // Toggle Menu Items (Sidebar & Drawer) & Bottom Nav
+        toggle(`.nav-item[data-view="${key}"]`, isOn);
+        toggle(`.drawer-item[data-view="${key}"]`, isOn);
+        toggle(`.bottom-nav-item[data-view="${key}"]`, isOn);
+        
+        // Toggle Dashboard Quick Actions & See All buttons
+        toggle(`.quick-action-btn[data-action="${key}"]`, isOn);
+        toggle(`.see-all-btn[data-view="${key}"]`, isOn);
+
+        // Special case for Install App buttons (ID based)
+        if (key === 'install') {
+            toggle('#installAppBtnDesktop', isOn);
+            toggle('#installAppBtnMobile', isOn);
+        }
+    });
 }
 
 // ============================================
@@ -361,12 +393,18 @@ const DataManager = {
                 const dateStr = item.date ? item.date.trim() : '';
                 let timestamp = 0;
                 if (dateStr) {
-                    // Parse DD-MM-YYYY
-                    const parts = dateStr.split(/[-/.]/);
-                    if (parts.length === 3) {
-                        timestamp = new Date(`${parts[2]}-${parts[1]}-${parts[0]}`).getTime();
+                    // Parse ISO 8601 (YYYY-MM-DD) format primarily; fallback to DD-MM-YYYY
+                    if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
+                        // ISO format: YYYY-MM-DD
+                        timestamp = new Date(dateStr).getTime();
                     } else {
-                        timestamp = Date.parse(dateStr) || 0;
+                        // Legacy format: try DD-MM-YYYY and others
+                        const parts = dateStr.split(/[-/.]/);
+                        if (parts.length === 3) {
+                            timestamp = new Date(`${parts[2]}-${parts[1]}-${parts[0]}`).getTime();
+                        } else {
+                            timestamp = Date.parse(dateStr) || 0;
+                        }
                     }
                 }
                 
@@ -472,11 +510,14 @@ const DataManager = {
             recent: AppState.recentlyWatched,
             enrolledCourse: AppState.enrolledCourse,
             videoProgress: AppState.videoProgress,
+            jyotishaProfiles: JSON.parse(localStorage.getItem('epata_jyotisha_profiles') || '[]'),
             timestamp: new Date().toISOString(),
-            version: '1.1'
+            version: '1.2'
         };
         
-        const fileName = `epata_backup_${new Date().toISOString().slice(0,10)}.json`;
+        const now = new Date();
+        const timestamp = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}_${String(now.getHours()).padStart(2, '0')}-${String(now.getMinutes()).padStart(2, '0')}-${String(now.getSeconds()).padStart(2, '0')}`;
+        const fileName = `epata_backup_${timestamp}.json`;
         const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
         
         // Try Web Share API first (Optimized for Android App/Mobile)
@@ -531,6 +572,9 @@ const DataManager = {
             if (data.videoProgress) {
                 AppState.videoProgress = data.videoProgress;
                 Utils.saveToStorage('video_progress', data.videoProgress);
+            }
+            if (data.jyotishaProfiles && Array.isArray(data.jyotishaProfiles)) {
+                localStorage.setItem('epata_jyotisha_profiles', JSON.stringify(data.jyotishaProfiles));
             }
             
             Utils.showToast('Progress restored! Reloading...');
@@ -655,8 +699,15 @@ const DataManager = {
                 if (status !== "ON") return;
 
                 if (expiry) {
-                    const expDate = new Date(expiry);
-                    if (!isNaN(expDate) && today > expDate) return;
+                    let expDate = new Date(expiry);
+                    // Handle DD-MM-YYYY if standard parse fails (returns Invalid Date)
+                    if (isNaN(expDate.getTime())) {
+                        const parts = expiry.split(/[-/.]/);
+                        if (parts.length === 3) {
+                            expDate = new Date(parts[2], parseInt(parts[1], 10)-1, parts[0]);
+                        }
+                    }
+                    if (!isNaN(expDate.getTime()) && today > expDate) return;
                 }
 
                 html += `
@@ -1182,6 +1233,10 @@ function isCourseActive(course){
         if(!dateStr) return null;
         const parts = dateStr.trim().split(/[-/.]/);
         if(parts.length === 3){
+            // Check if YYYY-MM-DD (ISO) or DD-MM-YYYY
+            if (parts[0].length === 4) {
+                return new Date(parts[0], parseInt(parts[1], 10)-1, parts[2]);
+            }
             return new Date(parts[2], parseInt(parts[1], 10)-1, parts[0]);
         }
         return null;
@@ -1348,6 +1403,7 @@ const ViewManager = {
             dashboard: 'Dashboard',
             courses: 'All Courses',
             all: 'All Videos',
+            jyotisha: 'Jyotisha',
             favorites: 'Favorites',
             progress: 'Progress',
             quiz: 'Daily Quiz',
@@ -1381,6 +1437,9 @@ const ViewManager = {
                 UIRenderer.renderRecentLessons();
                 renderEnrollCourses();
                 renderTodayLesson();
+                break;
+            case 'jyotisha':
+                JyotishaController.init();
                 break;
             case 'all':
                 this.renderCoursesView();
@@ -1590,6 +1649,10 @@ ViewManager.views.courses = function(){
         if(!dateStr) return null;
         const parts = dateStr.trim().split(/[-/.]/);
         if(parts.length === 3){
+            // Check if YYYY-MM-DD (ISO) or DD-MM-YYYY
+            if (parts[0].length === 4) {
+                return new Date(parts[0], parseInt(parts[1], 10)-1, parts[2]);
+            }
             return new Date(parts[2], parseInt(parts[1], 10)-1, parts[0]);
         }
         return null;

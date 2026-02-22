@@ -2,28 +2,28 @@
   {
     "status": "OFF",
     "batch": "ALL",
-    "date": "10 Mar 2026",
+    "date": "2026-03-10",
     "title": "Live Batch Enrollment",
     "message": "Registration open for Vedic Astrology Live Batch",
     "link": "https://forms.google.com/xxxxx",
-    "expiry": "25 Mar 2026"
+    "expiry": "2026-03-25"
   },
   {
     "status": "ON",
     "batch": "KANNADA",
-    "date": "15 Feb 2026",
+    "date": "2026-02-15",
     "title": "Live Kannada Class",
     "message": "Every Sunday at 07:30 AM IST",
     "link": "https://meet.google.com/yee-uppj-for",
-    "expiry": "1 Jan 2027"
+    "expiry": "2027-01-01"
   },
   {
     "status": "ON",
     "batch": "TELUGU",
-    "date": "15 Feb 2026",
+    "date": "2026-02-15",
     "title": "Live Telugu Class",
     "message": "Every Sunday at 08:00 PM IST",
     "link": "https://meet.google.com/yee-uppj-for",
-    "expiry": "1 Jan 2027"
+    "expiry": "2027-01-01"
   }
 ]
