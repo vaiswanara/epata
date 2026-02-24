@@ -1,4 +1,4 @@
-const CACHE_VERSION = "epata-v1.1.8";
+const CACHE_VERSION = "epata-v1.2.0";
 const STATIC_CACHE = "static-" + CACHE_VERSION;
 const DYNAMIC_CACHE = "dynamic-" + CACHE_VERSION;
 
@@ -7,7 +7,6 @@ const STATIC_FILES = [
   "./style.css",
   "./script.js",
   "./config.json",
-  "./data/lessons_archive.json",
   "./data/courses.json",
   "./icons/icon-192.png",
   "./icons/icon-512.png",
