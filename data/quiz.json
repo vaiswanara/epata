@@ -1,0 +1,124 @@
+{
+  "quiz": [
+    {
+      "question": "Śani is nīca in which Rāśi?",
+      "options": [
+        "Tulā",
+        "Meṣa",
+        "Karkaṭa",
+        "Siṃha"
+      ],
+      "answer": "B",
+      "explanation": "Śani is debilitated (nīca) in Meṣa Rāśi and exalted (uccha) in Tulā Rāśi.",
+      "date": "21/02/2026"
+    },
+    {
+      "question": "Guru attains uccha in which Rāśi?",
+      "options": [
+        "Dhanu",
+        "Mīna",
+        "Karkaṭa",
+        "Vṛṣabha"
+      ],
+      "answer": "C",
+      "explanation": "Guru is exalted (uccha) in Karkaṭa Rāśi and debilitated (nīca) in Makara Rāśi.",
+      "date": "21/02/2026"
+    },
+    {
+      "question": "Maṅgala has special dṛṣṭi on which bhāvas from its placement?",
+      "options": [
+        "5th and 9th",
+        "3rd and 10th",
+        "4th and 8th",
+        "2nd and 12th"
+      ],
+      "answer": "C",
+      "explanation": "Maṅgala has special aspects (dṛṣṭi) on the 4th and 8th bhāvas in addition to the 7th.",
+      "date": "21/02/2026"
+    },
+    {
+      "question": "Śukra attains uccha in which Rāśi?",
+      "options": [
+        "Mīna",
+        "Tulā",
+        "Vṛṣabha",
+        "Makara"
+      ],
+      "answer": "A",
+      "explanation": "Śukra is exalted in Mīna Rāśi and debilitated in Kanyā Rāśi.",
+      "date": "21/02/2026"
+    },
+    {
+      "question": "For Karkaṭa Lagna, which Graha is yogakāraka?",
+      "options": [
+        "Maṅgala",
+        "Śani",
+        "Guru",
+        "Budha"
+      ],
+      "answer": "A",
+      "explanation": "For Karkaṭa Lagna, Maṅgala rules the 5th and 10th bhāvas, making it a yogakāraka.",
+      "date": "21/02/2026"
+    },
+    {
+      "question": "Rāhu placed in Mithuna Rāśi generally behaves similar to which Graha?",
+      "options": [
+        "Maṅgala",
+        "Śani",
+        "Budha",
+        "Guru"
+      ],
+      "answer": "C",
+      "explanation": "Rāhu tends to behave like the lord of the Rāśi it occupies; in Mithuna, it acts similar to Budha.",
+      "date": "21/02/2026"
+    },
+    {
+      "question": "Sūrya is nīca in which Rāśi?",
+      "options": [
+        "Tulā",
+        "Meṣa",
+        "Karkaṭa",
+        "Kumbha"
+      ],
+      "answer": "A",
+      "explanation": "Sūrya is debilitated in Tulā Rāśi and exalted in Meṣa Rāśi.",
+      "date": "21/02/2026"
+    },
+    {
+      "question": "Guru–Candra Gaja Keśarī Yoga is strongest when placed in which bhāvas?",
+      "options": [
+        "6th, 8th, 12th",
+        "3rd and 11th",
+        "Kendras (1st, 4th, 7th, 10th)",
+        "Only in dual Rāśis"
+      ],
+      "answer": "C",
+      "explanation": "Gaja Keśarī Yoga gives strongest results when Guru and Candra are placed in Kendras.",
+      "date": "21/02/2026"
+    },
+    {
+      "question": "Śani has special dṛṣṭi on which bhāvas from its placement?",
+      "options": [
+        "4th and 8th",
+        "3rd and 10th",
+        "5th and 9th",
+        "2nd and 12th"
+      ],
+      "answer": "B",
+      "explanation": "Śani has special aspects on the 3rd and 10th bhāvas in addition to the 7th.",
+      "date": "21/02/2026"
+    },
+    {
+      "question": "Kuja is nīca in which Rāśi?",
+      "options": [
+        "Vṛścika",
+        "Karkaṭa",
+        "Mīna",
+        "Dhanu"
+      ],
+      "answer": "B",
+      "explanation": "Kuja is debilitated in Karka Rāśi and exalted in Makara Rāśi.",
+      "date": "21/02/2026"
+    }
+  ]
+}
